@@ -1,13 +1,15 @@
-export function configRoutes(navigation) {
-  return navigation.map((item) => {
-    const route = { ...item };
+import { ExtendedRouteObject } from '@/types/ExtendedRouteObject';
 
-    if (route.path === '/' && route.path === '') {
+export function configRoutes(navigation: ExtendedRouteObject[]): ExtendedRouteObject[] {
+  return navigation.map((item) => {
+    const route: ExtendedRouteObject = { ...item };
+
+    if (route.path === '/' || route.path === '') {
       route.index = true;
     }
 
     if (route.children) {
-      route.children = configRoutes(route.children);
+      route.children = configRoutes(route.children as ExtendedRouteObject[]);
     }
 
     delete route.text;

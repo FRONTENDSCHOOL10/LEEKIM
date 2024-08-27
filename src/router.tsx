@@ -1,11 +1,12 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, RouteObject } from 'react-router-dom';
 import { configRoutes, getNavigationItems } from '@/utils';
+import { ExtendedRouteObject } from './types/ExtendedRouteObject';
 import RootLayout from '@/components/RootLayout';
 
 import HomePage from '@/routes/Home';
 
-/**@type {import('react-router-dom').RouteObject[]} */
-const navigation = [
+/**@type {ExtendedRouteObject[]} */
+const navigation: ExtendedRouteObject[] = [
   {
     text: '홈',
     path: '',
@@ -35,8 +36,8 @@ const navigation = [
   },
 ];
 
-/**@type {import('react-router-dom').RouteObject[]} */
-export const routes = [
+/**@type {RouteObject[]} */
+export const routes: RouteObject[] = [
   {
     path: '/',
     element: <RootLayout />,
