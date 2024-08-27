@@ -4,6 +4,11 @@
 	"name": "vite-react",
 	"description": "JJ.com 개발 폴더",
 	"version": "0.1.0",
+	"scripts": {
+		"dev": "vite --host",
+		"build": "vite build",
+		"preview": "vite preview"
+	},
 	"devDependencies": {
 		"vite": "^5.4.2"
 	}
