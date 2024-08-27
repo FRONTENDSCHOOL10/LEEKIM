@@ -1,4 +1,9 @@
 {
+	"private": true,
+	"type": "module",
+	"name": "vite-react",
+	"description": "JJ.com 개발 폴더",
+	"version": "0.1.0",
 	"devDependencies": {
 		"vite": "^5.4.2"
 	}
