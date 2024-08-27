@@ -1,0 +1,7 @@
+__hooks__
+
+node_modules
+build
+dist
+
+.DS_Store
