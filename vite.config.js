@@ -9,7 +9,11 @@ const viteConfig = defineConfig({
     port: 3000,
     open: false,
   },
-  plugins: [react()],
+  plugins: [
+    react({
+      jsxRuntime: "automatic",
+    }),
+  ],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
