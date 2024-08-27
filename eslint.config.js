@@ -1,22 +1,22 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
-import pluginReact from "eslint-plugin-react";
-import pluginReactHooks from "eslint-plugin-react-hooks";
-import pluginReactRefresh from "eslint-plugin-react-refresh";
+import globals from 'globals';
+import pluginJs from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import pluginReact from 'eslint-plugin-react';
+import pluginReactHooks from 'eslint-plugin-react-hooks';
+import pluginReactRefresh from 'eslint-plugin-react-refresh';
 
 export default [
-  { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"] },
+  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
   {
     settings: {
       react: {
-        version: "detect",
+        version: 'detect',
       },
     },
     plugins: {
       react: pluginReact,
-      "react-hooks": pluginReactHooks,
-      "react-refresh": pluginReactRefresh,
+      'react-hooks': pluginReactHooks,
+      'react-refresh': pluginReactRefresh,
     },
   },
   {
@@ -38,8 +38,9 @@ export default [
   {
     rules: {
       ...pluginReactHooks.configs.recommended.rules,
-      "react-refresh/only-export-components": "warn",
-      "react/react-in-jsx-scope": "off",
+      'react-refresh/only-export-components': 'warn',
+      'react/react-in-jsx-scope': 'off',
+      endOfLine: 'auto',
     },
   },
 ];
