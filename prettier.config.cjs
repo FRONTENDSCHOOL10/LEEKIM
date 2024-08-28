@@ -26,4 +26,6 @@ module.exports = {
   trailingComma: 'es5',
   // 탭 사용 여부
   useTabs: false,
+  // 줄 끝 표현 방법 설정 ('lf' | 'crlf' | 'cr' | 'auto')
+  endOfLine: 'auto',
 };
