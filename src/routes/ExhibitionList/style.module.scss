@@ -1,2 +1,15 @@
 .component {
+  padding: 0 20px;
+
+  .listHeader {
+    border-bottom: 0.078125rem solid #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .infoContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
 }

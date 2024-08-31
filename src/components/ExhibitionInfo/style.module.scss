@@ -1,0 +1,14 @@
+.component {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+
+  .poster {
+    flex-direction: column;
+
+    img {
+      width: 15rem;
+      height: 20rem;
+    }
+  }
+}
