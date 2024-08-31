@@ -1,0 +1,12 @@
+<svg width="27" height="30" viewBox="0 0 27 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6.65527 1L6.65527 7.6545" stroke="black" stroke-width="1.25" stroke-linecap="round"/>
+<path d="M20.1851 1L20.1851 7.6545" stroke="black" stroke-width="1.25" stroke-linecap="round"/>
+<mask id="path-3-inside-1_210_1101" fill="white">
+<path d="M0 9.87244H27V29.8359H0V9.87244Z"/>
+</mask>
+<path d="M0 9.87244H27V29.8359H0V9.87244Z" fill="white"/>
+<path d="M0 9.87244V8.62244H-1.25V9.87244H0ZM27 9.87244H28.25V8.62244H27V9.87244ZM27 29.8359V31.0859H28.25V29.8359H27ZM0 29.8359H-1.25V31.0859H0V29.8359ZM0 11.1224H27V8.62244H0V11.1224ZM25.75 9.87244V29.8359H28.25V9.87244H25.75ZM27 28.5859H0V31.0859H27V28.5859ZM1.25 29.8359V9.87244H-1.25V29.8359H1.25Z" fill="black" mask="url(#path-3-inside-1_210_1101)"/>
+<rect x="0.625" y="3.53992" width="25.75" height="25.75" stroke="black" stroke-width="1.25" stroke-linecap="round"/>
+<path d="M7 16H20" stroke="black" stroke-linecap="round"/>
+<path d="M7 22H20" stroke="black" stroke-linecap="round"/>
+</svg>
