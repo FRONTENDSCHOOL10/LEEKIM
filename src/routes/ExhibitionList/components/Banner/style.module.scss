@@ -1,0 +1,42 @@
+.component {
+  width: 100%;
+  position: relative;
+  margin-bottom: 7.12rem;
+
+  .mainBanner {
+    background-color: #d9d9d9;
+    border-radius: 3.125rem;
+    height: 32rem;
+
+    .bannerTitle {
+      margin-top: 2rem;
+    }
+  }
+
+  .subBanner {
+    position: absolute;
+    bottom: -3.19rem;
+    border-radius: 40px;
+    background-color: #c4c4c4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 9.3125rem;
+    margin-left: 9.56rem;
+    p {
+      font-size: 1.875rem;
+      font-weight: 500;
+      line-height: 120%;
+      margin-left: 3.5rem;
+    }
+  }
+
+  .bannerButton {
+    background-color: #000;
+    width: 20rem;
+    height: 5rem;
+    border-radius: 1.87rem;
+    color: #fff;
+    margin-right: 3rem;
+  }
+}
