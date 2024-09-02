@@ -16,8 +16,16 @@
     }
   }
 
-  .HomeButton {
+  .HomeButtonContent {
     order: 1;
+
+    ul {
+      @include flex();
+    }
+  }
+
+  .HomeButtonLogin {
+    order: 0;
 
     ul {
       @include flex();
