@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 import S from './style.module.scss';
 import Banner from './components/Banner/Banner';
-import ExhibitionInfo from '@/components/ExhibitionInfo';
+import ExhibitionSlider from '@/components/ExhibitionSlider';
 
 // 전시 정보 나타내는 인터페이스 정의
 type Exhibition = {
@@ -31,10 +31,43 @@ export const Component: React.FC = () => {
   }, []);
 
   // 필터 조건에 따라 전시 목록 필터링
-  const filteredExhibitions = exhibitions
-    .filter((ex) => !onlineOnly || ex.isOnline) // onlineOnly가 true인 경우 온라인 전시만 포함
-    .filter((ex) => !inProgressOnly || ex.isInProgress);
+  // const filteredExhibitions = exhibitions
+  //   .filter((ex) => !onlineOnly || ex.isOnline) // onlineOnly가 true인 경우 온라인 전시만 포함
+  //   .filter((ex) => !inProgressOnly || ex.isInProgress);
   // 정렬 로직 필요
+
+  const filteredExhibitions = [
+    {
+      schoolName: '홍익대학교',
+      major: '건축학과',
+      posterUrl: 'src/components/ExhibitionSlider/assets/Poster.png',
+      exhiId: '156121615',
+    },
+    {
+      schoolName: '홍익대학교',
+      major: '건축학과',
+      posterUrl: 'src/components/ExhibitionSlider/assets/Poster.png',
+      exhiId: '156121615',
+    },
+    {
+      schoolName: '홍익대학교',
+      major: '건축학과',
+      posterUrl: 'src/components/ExhibitionSlider/assets/Poster.png',
+      exhiId: '156121615',
+    },
+    {
+      schoolName: '홍익대학교',
+      major: '건축학과',
+      posterUrl: 'src/components/ExhibitionSlider/assets/Poster.png',
+      exhiId: '156121615',
+    },
+    {
+      schoolName: '홍익대학교',
+      major: '건축학과',
+      posterUrl: 'src/components/ExhibitionSlider/assets/Poster.png',
+      exhiId: '156121615',
+    },
+  ];
 
   return (
     <main id="page" className={S.component}>
@@ -87,14 +120,15 @@ export const Component: React.FC = () => {
         {/* 전시 목록 */}
         <ul className={S.infoContainer}>
           {/* 필터링 된 전시 목록을 ExhibitionInfo 컴포넌트 통해 렌더링 */}
-          {filteredExhibitions.map((exhibition) => (
+          {/* {filteredExhibitions.map((exhibition) => (
             <ExhibitionInfo
               key={exhibition.id}
               schoolName={exhibition.schoolName}
               major={exhibition.major}
               posterUrl={exhibition.posterUrl}
             />
-          ))}
+          ))} */}
+          <ExhibitionSlider exhibitions={filteredExhibitions} />
         </ul>
       </section>
     </main>

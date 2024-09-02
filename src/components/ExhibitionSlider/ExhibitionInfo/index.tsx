@@ -8,21 +8,21 @@ type ExhibitionInfoProps = {
   posterUrl: string;
 };
 
-const ExhibitionInfo: React.FC<ExhibitionInfoProps> = ({ schoolName, major, posterUrl }) => {
+function ExhibitionInfo({ schoolName, major, posterUrl }: ExhibitionInfoProps) {
   return (
     <div className={S.component}>
       <li>
         {/* 전시 포스터, 학교, 학과 정보 */}
-        <figure className={S.poster}>
-          <NavLink to={`/exhibition/Detail/$${exhiId}`}>
+        <NavLink to={`/exhibition/Detail/`}>
+          <figure className={S.poster}>
             <img src={posterUrl} alt={`${schoolName} ${major} 포스터`} />
-          </NavLink>
-          <figcaption className={S.schoolName}>{schoolName}</figcaption>
-          <p>{major}</p>
-        </figure>
+            <figcaption className={S.schoolName}>{schoolName}</figcaption>
+            <p>{major}</p>
+          </figure>
+        </NavLink>
       </li>
     </div>
   );
-};
+}
 
 export default memo(ExhibitionInfo);

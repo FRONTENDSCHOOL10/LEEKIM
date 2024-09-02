@@ -1,12 +1,12 @@
 import S from './style.module.scss';
-import React from 'react';
+import { memo } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, A11y, Keyboard } from 'swiper/modules';
 import type { SwiperOptions } from 'swiper/types';
 import 'swiper/scss';
 import 'swiper/scss/pagination';
 import 'swiper/scss/navigation';
-import { NavLink } from 'react-router-dom';
+import ExhibitionInfo from './ExhibitionInfo';
 
 type ExhibitionInfo = {
   schoolName: string;
@@ -15,16 +15,16 @@ type ExhibitionInfo = {
   exhiId: string;
 };
 
-interface AppSwiperProps {
+interface ExhibitionSliderProps {
   exhibitions: ExhibitionInfo[];
 }
-const AppSwiper: React.FC<AppSwiperProps> = ({ exhibitions }) => {
+
+function ExhibitionSlider({ exhibitions }: ExhibitionSliderProps) {
   const swiperParams: SwiperOptions = {
     modules: [Pagination, A11y, Keyboard],
     spaceBetween: 30,
     loop: true,
     slidesPerView: 4,
-    slidesPerGroup: 4,
     keyboard: { enabled: true },
     pagination: { clickable: true },
   };
@@ -32,20 +32,14 @@ const AppSwiper: React.FC<AppSwiperProps> = ({ exhibitions }) => {
   return (
     <div className={S.exhibitContainer}>
       <Swiper {...swiperParams} className={S.swiper}>
-        {exhibitions.map((exhibition) => (
-          <SwiperSlide key={exhibition.exhiId} className={S.slide}>
-            <figure className={S.poster}>
-              <NavLink to={`/exhibition/Detail/${exhibition.exhiId}`}>
-                <img src={exhibition.posterUrl} alt={`${exhibition.schoolName} ${exhibition.major} 포스터`} />
-              </NavLink>
-              <figcaption className={S.schoolName}>{exhibition.schoolName}</figcaption>
-              <p>{exhibition.major}</p>
-            </figure>
+        {exhibitions.map(({ schoolName, major, posterUrl, exhiId }) => (
+          <SwiperSlide key={exhiId} className={S.slide}>
+            <ExhibitionInfo schoolName={schoolName} major={major} posterUrl={posterUrl} />
           </SwiperSlide>
         ))}
       </Swiper>
     </div>
   );
-};
+}
 
-export default AppSwiper;
+export default memo(ExhibitionSlider);
