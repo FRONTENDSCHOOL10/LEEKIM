@@ -10,7 +10,7 @@ import BoxButton from '../BoxButton';
 function GlobalNav() {
   const [navigationList] = useState<ExtendedRouteObject[]>(navigationItems);
   // 콘텐츠 페이지인지 확인하는 상태(로그인 관련 페이지가 아닌지 확인)
-  const [isContentPage, setIsContentPage] = useState(false);
+  const [isContentPage, setIsContentPage] = useState(true);
   // 로그인 했는지 확인하는 상태
   const [isAuth, setIsAuth] = useState(false);
 
