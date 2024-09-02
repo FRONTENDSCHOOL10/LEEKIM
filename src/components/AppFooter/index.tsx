@@ -57,7 +57,7 @@ function AppFooter() {
         </nav>
         <Divider />
         <div>
-          <p className={S.groupText}>멋쟁이사자처럼 프론트엔드스쿨 10기</p>
+          <p className={S.groupText}>TEAM.LEEKIM</p>
           <div className={S.profile}>
             <Profile name="김시원" email="rkdmf1306@gmail.com" link="https://github.com/chlyun" />
             <Profile name="김재림" email="jaerim1102@naver.com" link="https://github.com/jaerim1102" />
