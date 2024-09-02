@@ -1,0 +1,42 @@
+@mixin flex($direction: row, $wrap: nowrap, $jutify: space-between) {
+  display: flex;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+  justify-content: $jutify;
+}
+
+.component {
+  @include flex();
+
+  .menuButtonWrapper {
+    order: 0;
+
+    ul {
+      @include flex();
+    }
+  }
+
+  .HomeButtonContent {
+    order: 1;
+
+    ul {
+      @include flex();
+    }
+  }
+
+  .HomeButtonLogin {
+    order: 0;
+
+    ul {
+      @include flex();
+    }
+  }
+
+  .formWrapper {
+    order: 2;
+
+    ul {
+      @include flex();
+    }
+  }
+}
