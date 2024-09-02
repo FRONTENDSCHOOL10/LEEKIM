@@ -3,6 +3,7 @@ import useDocumentTitle from '@/hooks/useDocumentTitle';
 import S from './style.module.scss';
 import Banner from './components/Banner/Banner';
 import ExhibitionSlider from '@/components/ExhibitionSlider';
+import Filter from './components/Filter/Filter';
 
 // 전시 정보 나타내는 인터페이스 정의
 type Exhibition = {
@@ -41,25 +42,25 @@ export const Component: React.FC = () => {
       schoolName: '홍익대학교',
       major: '건축학과',
       posterUrl: 'src/components/ExhibitionSlider/assets/Poster.png',
-      exhiId: '156121615',
+      exhiId: '156121611',
     },
     {
       schoolName: '홍익대학교',
       major: '건축학과',
       posterUrl: 'src/components/ExhibitionSlider/assets/Poster.png',
-      exhiId: '156121615',
+      exhiId: '156121612',
     },
     {
       schoolName: '홍익대학교',
       major: '건축학과',
       posterUrl: 'src/components/ExhibitionSlider/assets/Poster.png',
-      exhiId: '156121615',
+      exhiId: '156121613',
     },
     {
       schoolName: '홍익대학교',
       major: '건축학과',
       posterUrl: 'src/components/ExhibitionSlider/assets/Poster.png',
-      exhiId: '156121615',
+      exhiId: '156121614',
     },
     {
       schoolName: '홍익대학교',
@@ -72,7 +73,7 @@ export const Component: React.FC = () => {
   return (
     <main id="page" className={S.component}>
       <Banner />
-
+      <Filter />
       {/* 졸업 전시 리스트 부분 */}
       <section>
         <div className={S.listHeader}>
