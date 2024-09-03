@@ -14,25 +14,61 @@ const navigation: ExtendedRouteObject[] = [
     element: <HomePage />,
   },
   {
-    text: '사이트 소개',
+    text: '프로젝트 소개',
     path: '/introduce',
     lazy: () => import('@/routes/Introduce'),
   },
   {
-    text: '전시 목록',
+    text: '졸업 전시',
     path: '/exhibition',
     lazy: () => import('@/routes/ExhibitionList'),
-  },
-  {
-    text: '로그인',
-    path: '/login',
-    lazy: () => import('@/routes/Login'),
   },
   {
     text: '전시 상세 정보',
     path: '/exhibition/Detail/:exhiId',
     display: false,
     lazy: () => import('@/routes/ExhibitionDetail'),
+  },
+  {
+    text: '로그인',
+    path: '/login',
+    display: false,
+    lazy: () => import('@/routes/Login'),
+  },
+  {
+    text: '회원가입',
+    path: '/join',
+    display: false,
+    lazy: () => import('@/routes/Join'),
+  },
+  {
+    text: '전시 등록',
+    path: '/registerExhi',
+    lazy: () => import('@/routes/RegisterExhibition'),
+  },
+  {
+    text: '마이페이지',
+    path: '/my/:userId',
+    display: false,
+    lazy: () => import('@/routes/MyPage'),
+  },
+  {
+    text: '프로필 편집',
+    path: '/editProfile/:userId',
+    display: false,
+    lazy: () => import('@/routes/EditProfile'),
+  },
+  {
+    text: '북마크',
+    path: '/bookmark/:userId',
+    display: false,
+    lazy: () => import('@/routes/Bookmark'),
+  },
+  {
+    text: '검색 결과',
+    path: '/searchResults/:searchWord',
+    display: false,
+    lazy: () => import('@/routes/SearchResults'),
   },
 ];
 
