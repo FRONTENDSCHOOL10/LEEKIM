@@ -9,9 +9,7 @@ interface descriptionProps {
 function Description({ title, description }: descriptionProps): ReactElement {
   return (
     <div className={S.descriptions}>
-      <div className={S.header}>
-        <h1 className={S.title}>{title}</h1>
-      </div>
+      <h1 className={S.title}>{title}</h1>
       <p className={S.description}>{description}</p>
     </div>
   );
