@@ -13,7 +13,7 @@ interface RenderSwiperProps {
 
 function Filter() {
   // 필터 태그 열림/닫힘 상태 관리
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   // 필터 카테고리 목록에 대한 ref
   const ulRef = useRef<HTMLUListElement>(null);
 
@@ -53,7 +53,7 @@ function Filter() {
       <Swiper
         slidesPerView={8}
         spaceBetween={10}
-        slidesOffsetAfter={10}
+        // slidesOffsetAfter={20} 적용이 안 돼서 보류
         scrollbar={{
           hide: true,
         }}
