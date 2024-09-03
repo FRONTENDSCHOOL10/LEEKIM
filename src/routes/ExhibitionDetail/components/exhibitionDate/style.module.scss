@@ -1,17 +1,10 @@
-.header {
-  display: flex;
-  flex-direction: row;
-  h2 {
-    margin: 0;
-    margin-left: 15px;
+.schedule {
+  .header {
+    display: flex;
+    flex-direction: row;
+    h2 {
+      margin: 0;
+      margin-left: 15px;
+    }
   }
-}
-.scheduleList {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin: 0;
-  padding: 0;
-  margin-top: 9px;
 }
