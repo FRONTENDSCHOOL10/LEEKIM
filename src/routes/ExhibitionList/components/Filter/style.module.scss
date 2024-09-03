@@ -21,8 +21,6 @@
 
   .filterCategory {
     list-style-type: none;
-    display: flex;
-    flex-direction: column;
 
     li {
       display: flex;
@@ -45,17 +43,15 @@
     }
   }
 }
-.swiperSlide {
+.tag {
   white-space: nowrap;
-  text-align: center;
+  height: 2rem;
+  border: none;
   background-color: #d9d9d9;
   border-radius: 6.25rem;
-  margin: 5px;
-  min-width: fit-content;
 }
-.tag {
-  height: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+.swiperSlide {
+  background-color: pink;
+  min-width: fit-content;
 }

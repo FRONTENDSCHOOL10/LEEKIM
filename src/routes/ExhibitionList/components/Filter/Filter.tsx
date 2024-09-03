@@ -13,7 +13,7 @@ interface RenderSwiperProps {
 
 function Filter() {
   // 필터 태그 열림/닫힘 상태 관리
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
   // 필터 카테고리 목록에 대한 ref
   const ulRef = useRef<HTMLUListElement>(null);
 
@@ -29,6 +29,8 @@ function Filter() {
     '영상콘텐츠',
     '디자인공학',
     '아니 TS진짜',
+    '모든 오류는 TS로부터',
+    '왜 속성 적용이 안 되니?',
   ];
   const yearTags = ['2024', '2023', '2022', '2021', '2020'];
   const regionTags = ['서울', '경기', '인천', '부산', '대구'];
@@ -51,6 +53,7 @@ function Filter() {
       <Swiper
         slidesPerView={8}
         spaceBetween={10}
+        slidesOffsetAfter={10}
         scrollbar={{
           hide: true,
         }}
@@ -59,7 +62,7 @@ function Filter() {
       >
         {tags.map((tag, index) => (
           <SwiperSlide key={index} className={S.swiperSlide}>
-            <div className={S.tag}>#{tag}</div>
+            <button className={S.tag}>#{tag}</button>
           </SwiperSlide>
         ))}
       </Swiper>
