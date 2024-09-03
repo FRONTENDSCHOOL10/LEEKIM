@@ -1,0 +1,14 @@
+.info {
+  display: flex;
+  flex-direction: row;
+  gap: 13px;
+  justify-content: center;
+}
+.poster {
+  cursor: pointer;
+  .posterImage {
+    border-radius: 50px;
+    width: 700px;
+    height: 1000px;
+  }
+}
