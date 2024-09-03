@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import useDocumentTitle from '@/hooks/useDocumentTitle';
 import S from './style.module.scss';
 import Title from './components/title';
 import Description from './components/description';
@@ -16,16 +15,25 @@ interface ExhibitionData {
   collectionId: string;
   id: string;
   Title: string;
-  School: string;
+  expand: {
+    School: {
+      Name: string;
+    };
+  };
   URL: string;
   Poster: string;
   Introduce: string;
   Contact: string;
   Address: string;
   subtitle: string;
+  Start: string;
+  End: string;
+  Time: {
+    time: string[];
+  };
 }
 
-const pocketbaseUrl = 'https://j-j.pockethost.io';
+const pocketbaseUrl = import.meta.env.VITE_DB_URL;
 
 export function Component() {
   const { exhiId } = useParams<{ exhiId: string }>();
@@ -37,7 +45,9 @@ export function Component() {
   useEffect(() => {
     const fetchExhibitionData = async () => {
       try {
-        const response = await axios.get(`${pocketbaseUrl}/api/collections/Exhibition/records/${exhiId}`);
+        const response = await axios.get(
+          `${pocketbaseUrl}/api/collections/Exhibition/records/${exhiId}?expand=School,Major`
+        );
         setExhibitionData(response.data);
       } catch (err) {
         console.error('Error fetching data:', err);
@@ -66,7 +76,7 @@ export function Component() {
             <img src={back} alt="" />
             뒤로가기
           </button>
-          <Title title={exhibitionData.School} subtitle={exhibitionData.subtitle} />
+          <Title title={exhibitionData.expand.School.Name} subtitle={exhibitionData.subtitle} />
           <div className={S.infoWrapper}>
             <div className={S.posterWrapper}>
               <Poster url={exhibitionData.URL} image={posterUrl} />
@@ -75,7 +85,7 @@ export function Component() {
               <Description title={exhibitionData.Title} description={exhibitionData.Introduce} />
               <ContactInfo tel={exhibitionData.Contact} />
               <div className={S.wrapper}>
-                <ExhibitionDate />
+                <ExhibitionDate start={exhibitionData.Start} end={exhibitionData.End} time={exhibitionData.Time.time} />
                 <LocationInfo address={exhibitionData.Address} />
               </div>
             </div>
