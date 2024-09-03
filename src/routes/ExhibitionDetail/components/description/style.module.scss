@@ -1,0 +1,19 @@
+.descriptions {
+  display: flex;
+  flex-direction: column;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    .title {
+      margin: 0;
+      margin-left: 3px;
+      height: 90px;
+      font-size: 60px;
+    }
+  }
+  .description {
+    max-width: 763px;
+    font-size: 23px;
+    margin: 0;
+  }
+}
