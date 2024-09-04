@@ -1,8 +1,8 @@
 ---
-name: 버그 발견 및 수정 요청 템플릿
-about: 코드에 버그를 발견했거나 수정을 요청하기 위한 템플릿
+name: 버그 발견 및 fix 요청 템플릿
+about: 코드에 버그를 발견했거나 fix를 요청하기 위한 템플릿
 title: ''
-labels: ''
+labels: "⚡Bug"
 assignees: ''
 
 ---
