@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import S from './style.module.scss';
-import web from '/icon/web.svg';
+import web from '/Icon/web.svg';
 
 interface PosterProps {
   url: string;

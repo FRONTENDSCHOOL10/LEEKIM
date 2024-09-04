@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import S from './style.module.scss';
-import calendar from '/icon/calendar.svg';
+import calendar from '/Icon/calendar.svg';
 import { format, parseISO, addHours } from 'date-fns';
 import { ko } from 'date-fns/locale';
 

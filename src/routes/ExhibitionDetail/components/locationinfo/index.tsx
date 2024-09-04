@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import S from './style.module.scss';
-import location from '/icon/location.svg';
+import location from '/Icon/location.svg';
 
 interface locationProps {
   address: string;

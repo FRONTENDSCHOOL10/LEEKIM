@@ -1,6 +1,6 @@
 import React from 'react';
 import S from './style.module.scss';
-import home from '/icon/home.svg';
+import home from '/Icon/home.svg';
 
 interface contactProps {
   tel: string;
