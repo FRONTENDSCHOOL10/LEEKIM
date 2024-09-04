@@ -19,6 +19,9 @@ interface ExhibitionData {
     School: {
       Name: string;
     };
+    Major: {
+      Name: string;
+    };
   };
   URL: string;
   Poster: string;
@@ -50,7 +53,6 @@ export function Component() {
         );
         setExhibitionData(response.data);
       } catch (err) {
-        console.error('Error fetching data:', err);
         setError('데이터를 불러오는 데 실패했습니다.');
       }
     };
@@ -76,7 +78,7 @@ export function Component() {
             <img src={back} alt="" />
             뒤로가기
           </button>
-          <Title title={exhibitionData.expand.School.Name} subtitle={exhibitionData.subtitle} />
+          <Title title={exhibitionData.expand.School.Name} subtitle={exhibitionData.expand.Major.Name} />
           <div className={S.infoWrapper}>
             <div className={S.posterWrapper}>
               <Poster url={exhibitionData.URL} image={posterUrl} />
