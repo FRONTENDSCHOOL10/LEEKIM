@@ -1,18 +1,21 @@
-import { ReactElement } from 'react';
+import React from 'react';
 import S from './style.module.scss';
 import Tag from '../tag';
+import { TagItem } from '@/types/ExtendedRouteObject';
 
 interface TagListProps {
-  tags: string[];
+  location: TagItem[];
+  departments: TagItem[];
 }
 
-function TagList(props: TagListProps): ReactElement {
-  const { tags } = props;
-
+function TagList({ location, departments }: TagListProps): React.ReactElement {
   return (
     <div className={S.tagList}>
-      {tags.map((tag, index) => (
-        <Tag key={index} text={tag} />
+      {location.map((locationTag) => (
+        <Tag key={locationTag.id} text={locationTag.Name} />
+      ))}
+      {departments.map((departmentTag) => (
+        <Tag key={departmentTag.id} text={departmentTag.Name} />
       ))}
     </div>
   );

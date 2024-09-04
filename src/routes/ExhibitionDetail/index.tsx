@@ -10,31 +10,8 @@ import LocationInfo from './components/locationinfo';
 import Poster from './components/imagesection';
 import back from '/icon/back.svg';
 import getImageURL from '@/utils/getImageURL';
-
-interface ExhibitionData {
-  collectionId: string;
-  id: string;
-  Title: string;
-  expand: {
-    School: {
-      Name: string;
-    };
-    Major: {
-      Name: string;
-    };
-  };
-  URL: string;
-  Poster: string;
-  Introduce: string;
-  Contact: string;
-  Address: string;
-  subtitle: string;
-  Start: string;
-  End: string;
-  Time: {
-    time: string[];
-  };
-}
+import TagList from './components/taglist';
+import { ExhibitionData } from '@/types/ExtendedRouteObject';
 
 const pocketbaseUrl = import.meta.env.VITE_DB_URL;
 
@@ -43,17 +20,15 @@ export function Component() {
   const navigate = useNavigate();
   const [exhibitionData, setExhibitionData] = useState<ExhibitionData | null>(null);
 
-  const [error, setError] = useState<string | null>(null);
-
   useEffect(() => {
     const fetchExhibitionData = async () => {
       try {
         const response = await axios.get(
-          `${pocketbaseUrl}/api/collections/Exhibition/records/${exhiId}?expand=School,Major`
+          `${pocketbaseUrl}/api/collections/Exhibition/records/${exhiId}?expand=School,Major,TagLocation,TagDepartment`
         );
         setExhibitionData(response.data);
       } catch (err) {
-        setError('데이터를 불러오는 데 실패했습니다.');
+        console.log('에러확인용으로남겨둔것');
       }
     };
 
@@ -62,7 +37,6 @@ export function Component() {
     }
   }, [exhiId]);
 
-  if (error) return <div>{error}</div>;
   if (!exhibitionData) return <div>로딩 중입니당</div>;
 
   function handleGoBack() {
@@ -78,6 +52,7 @@ export function Component() {
             <img src={back} alt="" />
             뒤로가기
           </button>
+          <TagList location={exhibitionData.expand.TagLocation} departments={exhibitionData.expand.TagDepartment} />
           <Title title={exhibitionData.expand.School.Name} subtitle={exhibitionData.expand.Major.Name} />
           <div className={S.infoWrapper}>
             <div className={S.posterWrapper}>
