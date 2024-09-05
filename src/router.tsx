@@ -70,6 +70,12 @@ const navigation: ExtendedRouteObject[] = [
     display: false,
     lazy: () => import('@/routes/SearchResults'),
   },
+  {
+    text: '이용 약관',
+    path: '/termsOfUse',
+    display: false,
+    lazy: () => import('@/routes/TermsOfUse'),
+  },
 ];
 
 /**@type {RouteObject[]} */

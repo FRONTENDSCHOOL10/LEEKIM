@@ -27,7 +27,7 @@ function AppFooter() {
       menu: [
         { text: '마이페이지', path: '/my/:userId' },
         { text: '전시 등록', path: '/registerExhi' },
-        { text: '이용 약관', path: '/TermsOfUse' },
+        { text: '이용 약관', path: '/termsOfUse' },
       ],
     },
   };
