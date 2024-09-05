@@ -19,29 +19,43 @@ export function Component() {
   const { exhiId } = useParams<{ exhiId: string }>();
   const navigate = useNavigate();
   const [exhibitionData, setExhibitionData] = useState<ExhibitionData | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [isApprove, setisApprove] = useState(true);
 
   useEffect(() => {
     const fetchExhibitionData = async () => {
+      if (!exhiId) return;
+
       try {
         const response = await axios.get(
           `${pocketbaseUrl}/api/collections/Exhibition/records/${exhiId}?expand=School,Major,TagLocation,TagDepartment`
         );
         setExhibitionData(response.data);
+
+        if (!response.data.IsApprove) {
+          navigate('/', {
+            replace: true,
+          });
+        }
       } catch (err) {
-        console.log('에러확인용으로남겨둔것');
+        console.error('에러로그', err);
+        setError('전시회 데이터를 불러오는 데 실패했습니다. 잠시 후 다시 시도해 주세요.');
+      } finally {
+        setisApprove(false);
       }
     };
 
-    if (exhiId) {
-      fetchExhibitionData();
-    }
-  }, [exhiId]);
-
-  if (!exhibitionData) return <div>로딩 중입니당</div>;
+    fetchExhibitionData();
+  }, [exhiId, navigate]);
 
   function handleGoBack() {
     navigate(-1);
   }
+
+  if (isApprove) return <div className={S.loading}>로딩 중입니당</div>;
+  if (error) return <div className={S.error}>{error}</div>;
+  if (!exhibitionData) return null;
+
   const posterUrl = getImageURL(exhibitionData, 'Poster');
 
   return (
@@ -53,7 +67,11 @@ export function Component() {
             뒤로가기
           </button>
           <TagList location={exhibitionData.expand.TagLocation} departments={exhibitionData.expand.TagDepartment} />
-          <Title title={exhibitionData.expand.School.Name} subtitle={exhibitionData.expand.Major.Name} />
+          <Title
+            title={exhibitionData.expand.School.Name}
+            subtitle={exhibitionData.SubTitle}
+            major={exhibitionData.expand.Major.Name}
+          />
           <div className={S.infoWrapper}>
             <div className={S.posterWrapper}>
               <Poster url={exhibitionData.URL} image={posterUrl} />
