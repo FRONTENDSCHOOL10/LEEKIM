@@ -4,13 +4,16 @@ import S from './style.module.scss';
 interface TitleProps {
   title: string;
   subtitle: string;
+  major: string;
 }
 
-function Title({ title, subtitle }: TitleProps): ReactElement {
+function Title({ title, subtitle, major }: TitleProps): ReactElement {
   return (
     <div className={S.header}>
       <h1 className={S.title}>{title}</h1>
-      <p className={S.subtitle}>{subtitle} 졸업전시회</p>
+      <p className={S.subtitle}>
+        {major} {subtitle} 졸업전시회
+      </p>
     </div>
   );
 }
