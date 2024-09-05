@@ -1,7 +1,7 @@
 import React from 'react';
 import S from './style.module.scss';
 import Tag from '../tag';
-import { TagItem } from '@/types/ExtendedRouteObject';
+import { TagItem } from '@/types/ExhibitionData';
 
 interface TagListProps {
   location: TagItem[];

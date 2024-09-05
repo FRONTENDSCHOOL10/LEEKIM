@@ -11,7 +11,7 @@ import Poster from './components/imagesection';
 import back from '/Icon/back.svg';
 import getImageURL from '@/utils/getImageURL';
 import TagList from './components/taglist';
-import { ExhibitionData } from '@/types/ExtendedRouteObject';
+import { ExhibitionData } from '@/types/ExhibitionData';
 
 const pocketbaseUrl = import.meta.env.VITE_DB_URL;
 
