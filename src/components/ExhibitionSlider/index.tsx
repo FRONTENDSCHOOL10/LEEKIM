@@ -7,19 +7,14 @@ import 'swiper/scss';
 import 'swiper/scss/pagination';
 import 'swiper/scss/navigation';
 import ExhibitionInfo from './ExhibitionInfo';
+import { ExhibitionData } from '@/types/ExhibitionData';
+import getImageURL from '@/utils/getImageURL';
 
-type ExhibitionInfo = {
-  schoolName: string;
-  major: string;
-  posterUrl: string;
-  exhiId: string;
-};
-
-interface ExhibitionSliderProps {
-  exhibitions: ExhibitionInfo[];
+interface ExhibitionDataList {
+  items: ExhibitionData[];
 }
 
-function ExhibitionSlider({ exhibitions }: ExhibitionSliderProps) {
+function ExhibitionSlider({ exhibitions }: any) {
   const swiperParams: SwiperOptions = {
     modules: [Pagination, A11y, Keyboard],
     spaceBetween: 30,
@@ -32,9 +27,13 @@ function ExhibitionSlider({ exhibitions }: ExhibitionSliderProps) {
   return (
     <div className={S.exhibitContainer}>
       <Swiper {...swiperParams} className={S.swiper}>
-        {exhibitions.map(({ schoolName, major, posterUrl, exhiId }) => (
-          <SwiperSlide key={exhiId} className={S.slide}>
-            <ExhibitionInfo schoolName={schoolName} major={major} posterUrl={posterUrl} />
+        {exhibitions.map((item) => (
+          <SwiperSlide key={item.id} className={S.slide}>
+            <ExhibitionInfo
+              schoolName={item.expand.School.Name}
+              major={item.expand.Major.Name}
+              posterUrl={getImageURL(item)}
+            />
           </SwiperSlide>
         ))}
       </Swiper>
