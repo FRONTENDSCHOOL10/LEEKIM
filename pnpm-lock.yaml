@@ -87,6 +87,9 @@ importers:
       globals:
         specifier: ^15.9.0
         version: 15.9.0
+      kakao.maps.d.ts:
+        specifier: ^0.1.40
+        version: 0.1.40
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
