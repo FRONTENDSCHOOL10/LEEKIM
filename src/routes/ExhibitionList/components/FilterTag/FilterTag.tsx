@@ -11,7 +11,7 @@ interface RenderSwiperProps {
   tags: string[];
 }
 
-function Filter() {
+function FilterTag() {
   // 필터 태그 열림/닫힘 상태 관리
   const [isOpen, setIsOpen] = useState<boolean>(false);
   // 필터 카테고리 목록에 대한 ref
@@ -104,4 +104,4 @@ function Filter() {
     </section>
   );
 }
-export default memo(Filter);
+export default memo(FilterTag);

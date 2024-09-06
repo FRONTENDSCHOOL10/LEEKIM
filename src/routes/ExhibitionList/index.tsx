@@ -3,7 +3,7 @@ import useDocumentTitle from '@/hooks/useDocumentTitle';
 import S from './style.module.scss';
 import Banner from './components/Banner/Banner';
 import ExhibitionSlider from '@/components/ExhibitionSlider';
-import Filter from './components/Filter/Filter';
+import FilterTag from './components/FilterTag/FilterTag';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { ExhibitionData } from '@/types/ExhibitionData';
@@ -42,7 +42,7 @@ export const Component: React.FC = () => {
   return (
     <main id="page" className={S.component}>
       <Banner />
-      <Filter />
+      <FilterTag />
       {/* 졸업 전시 리스트 부분 */}
       <section>
         <div className={S.listHeader}>
