@@ -6,7 +6,6 @@ import ExhibitionSlider from '@/components/ExhibitionSlider';
 import FilterTag from './components/FilterTag/FilterTag';
 import axios from 'axios';
 import { ExhibitionData } from '@/types/ExhibitionData';
-import { useNavigate } from 'react-router-dom';
 
 const pocketbaseUrl = import.meta.env.VITE_DB_URL;
 
@@ -28,11 +27,10 @@ export const Component: React.FC = () => {
           filters.push('(IsOnline=true)');
         }
         if (inProgress) {
-          filters.push(`(Start<'${today}'&&End>'${today}')`);
+          filters.push(`(Start<'${today}'%26%26End>'${today}')`);
         }
-
         if (filters.length > 0) {
-          url += `&filter=${filters.join('&filter=')}`;
+          url += `&filter=${filters.join('%26%26')}`;
         }
         console.log('Final URL:', url);
 
@@ -43,7 +41,6 @@ export const Component: React.FC = () => {
         setError('문제 발생');
       }
     };
-
     fetchData();
   }, [isOnline, inProgress, today]);
 
