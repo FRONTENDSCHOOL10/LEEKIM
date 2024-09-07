@@ -22,7 +22,7 @@ export const Component: React.FC = () => {
     const fetchData = async () => {
       try {
         let url = `${pocketbaseUrl}/api/collections/Exhibition/records?expand=School,Major`;
-        const filters = [];
+        const filters = ['(IsApprove=true)'];
         let sort = '';
 
         // checkbox 필터링
@@ -40,8 +40,6 @@ export const Component: React.FC = () => {
 
         if (filters.length > 0) url += `&filter=${filters.join('%26%26')}`;
         if (sort) url += `&sort=${sort}`;
-
-        console.log('Final URL:', url);
 
         const response = await axios.get(url);
         setExhibitions(response.data.items);
