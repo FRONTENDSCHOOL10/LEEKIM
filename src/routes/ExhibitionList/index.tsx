@@ -38,12 +38,8 @@ export const Component: React.FC = () => {
           // 북마크 순 정렬 로직
         }
 
-        if (filters.length > 0) {
-          url += `&filter=${filters.join('%26%26')}`;
-        }
-        if (sort) {
-          url += `&sort=${sort}`;
-        }
+        if (filters.length > 0) url += `&filter=${filters.join('%26%26')}`;
+        if (sort) url += `&sort=${sort}`;
 
         console.log('Final URL:', url);
 
