@@ -1,0 +1,113 @@
+.component {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 2%;
+
+  height: 500px;
+  border: 1px solid black;
+
+  .leftSide {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 2%;
+
+    height: 100%;
+    width: 50%;
+
+    figure {
+      position: relative;
+      margin: 0;
+    }
+
+    .top {
+      height: 74%;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        filter: brightness(50%);
+      }
+
+      figcaption {
+        position: absolute;
+        left: 10%;
+        bottom: 10%;
+        color: white;
+        font-weight: bolder;
+        font-size: x-large;
+      }
+    }
+
+    .bottom {
+      height: 24%;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        filter: brightness(50%);
+      }
+
+      figcaption {
+        position: absolute;
+        left: 10%;
+        bottom: 10%;
+        color: white;
+        font-weight: bolder;
+        font-size: x-large;
+      }
+    }
+  }
+
+  .rightSide {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 2%;
+
+    height: 100%;
+    width: 50%;
+
+    figure {
+      position: relative;
+      margin: 0;
+    }
+
+    .top {
+      height: 44%;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        filter: brightness(50%);
+      }
+
+      figcaption {
+        position: absolute;
+        right: 10%;
+        bottom: 10%;
+        color: white;
+        font-weight: bolder;
+        font-size: x-large;
+        text-align: right;
+      }
+    }
+
+    .bottom {
+      height: 54%;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        filter: brightness(50%);
+      }
+
+      figcaption {
+        position: absolute;
+        left: 10%;
+        bottom: 10%;
+        color: white;
+        font-weight: bolder;
+        font-size: x-large;
+      }
+    }
+  }
+}
