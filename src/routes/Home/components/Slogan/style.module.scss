@@ -1,0 +1,33 @@
+.component {
+  .bigSlogan {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    font-size: 50px;
+    width: 1200px;
+
+    .lineWrapper {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+
+      width: 100%;
+    }
+  }
+
+  .smallSlogan {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    font-size: 20px;
+  }
+}
+
+.sloganRec {
+  overflow: hidden;
+  width: 200px;
+  border-radius: 100px;
+}
