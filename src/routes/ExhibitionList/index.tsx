@@ -15,6 +15,7 @@ export const Component: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isOnline, setIsOnline] = useState<boolean>(false);
   const [inProgress, setInProgress] = useState<boolean>(false);
+  const [sortOrder, setSortOrder] = useState<string>('recent');
   const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
 
   useEffect(() => {
@@ -22,16 +23,28 @@ export const Component: React.FC = () => {
       try {
         let url = `${pocketbaseUrl}/api/collections/Exhibition/records?expand=School,Major`;
         const filters = [];
+        let sort = '';
 
-        if (isOnline) {
-          filters.push('(IsOnline=true)');
+        // checkbox 필터링
+        if (isOnline) filters.push('(IsOnline=true)');
+        if (inProgress) filters.push(`(Start<'${today}'%26%26End>'${today}')`);
+
+        // dropdown 필터링
+        if (sortOrder === 'recent') {
+          sort = '-Start';
+        } else if (sortOrder === 'oldest') {
+          sort = 'Start';
+        } else if (sortOrder === 'popular') {
+          // 북마크 순 정렬 로직
         }
-        if (inProgress) {
-          filters.push(`(Start<'${today}'%26%26End>'${today}')`);
-        }
+
         if (filters.length > 0) {
           url += `&filter=${filters.join('%26%26')}`;
         }
+        if (sort) {
+          url += `&sort=${sort}`;
+        }
+
         console.log('Final URL:', url);
 
         const response = await axios.get(url);
@@ -42,7 +55,7 @@ export const Component: React.FC = () => {
       }
     };
     fetchData();
-  }, [isOnline, inProgress, today]);
+  }, [isOnline, inProgress, today, sortOrder]);
 
   if (error) return <div>{error}</div>;
   if (exhibitions.length === 0) return <div>로딩 중</div>;
@@ -57,7 +70,7 @@ export const Component: React.FC = () => {
           <div>
             <label htmlFor="online">
               온라인 전시만 보기
-              <input type="checkbox" id="online" checked={isOnline} onChange={() => setIsOnline(!isOnline)} />
+              <input type="checkbox" id="online" checked={isOnline} onChange={() => setIsOnline((prev) => !prev)} />
             </label>
             <label htmlFor="in-progress">
               진행 중인 전시만 보기
@@ -65,11 +78,16 @@ export const Component: React.FC = () => {
                 type="checkbox"
                 id="in-progress"
                 checked={inProgress}
-                onChange={() => setInProgress(!inProgress)}
+                onChange={() => setInProgress((prev) => !prev)}
               />
             </label>
             <label htmlFor="exhibition-filter">
-              <select name="exhibition-filter" id="exhibition-filter">
+              <select
+                name="exhibition-filter"
+                id="exhibition-filter"
+                value={sortOrder}
+                onChange={(e) => setSortOrder(e.target.value)}
+              >
                 <option value="recent">최신순</option>
                 <option value="oldest">오래된순</option>
                 <option value="popular">인기순</option>

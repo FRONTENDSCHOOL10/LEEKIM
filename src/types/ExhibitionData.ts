@@ -7,6 +7,7 @@ export interface ExhibitionData {
   collectionId: string;
   id: string;
   Title: string;
+  SubTitle: string;
   expand: {
     School: {
       Name: string;
@@ -22,7 +23,7 @@ export interface ExhibitionData {
   Introduce: string;
   Contact: string;
   Address: string;
-  subtitle: string;
+
   Start: string;
   End: string;
   Time: {
