@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  h2 {
+    margin: 0;
+    margin-left: 15px;
+  }
+}
+.address {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  margin-top: 5px;
+  width: 335px;
+}
+
+.map {
+  margin-top: 8px;
+  flex-shrink: 0;
+  border-radius: 30px;
+}

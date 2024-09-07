@@ -1,0 +1,18 @@
+.descriptions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .title {
+    max-width: 763px;
+    margin: 0;
+    margin-left: 3px;
+    font-size: 60px;
+  }
+
+  .description {
+    max-width: 763px;
+    font-size: 23px;
+    margin: 0;
+  }
+}
