@@ -100,6 +100,7 @@ function FilterTag() {
           <img src="/Icon/IconArrow.svg" alt="" />
         </li>
         {renderSwiper({ tags: regionTags })}
+        <button>초기화</button>
       </ul>
     </section>
   );
