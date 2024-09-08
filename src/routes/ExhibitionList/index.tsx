@@ -8,6 +8,7 @@ import axios from 'axios';
 import { ExhibitionData } from '@/types/ExhibitionData';
 import ExhibitionInfo from '@/components/ExhibitionSlider/ExhibitionInfo';
 import getImageURL from '@/utils/getImageURL';
+import FilterOptions from './components/FilterOptions/FilterOptions';
 
 const pocketbaseUrl = import.meta.env.VITE_DB_URL;
 
@@ -42,7 +43,7 @@ export const Component: React.FC = () => {
         } else if (sortOrder === 'oldest') {
           sort = 'Start';
         } else if (sortOrder === 'popular') {
-          // 북마크 순 정렬 로직 필요
+          /* 북마크 순 정렬 로직 필요 */
         }
 
         // URL에 필터와 정렬 옵션 추가
@@ -84,35 +85,14 @@ export const Component: React.FC = () => {
       <section>
         <div className={S.listHeader}>
           <h2>졸업 전시 리스트</h2>
-          <div>
-            {/* 체크박스 필터 */}
-            <label htmlFor="online">
-              온라인 전시만 보기
-              <input type="checkbox" id="online" checked={isOnline} onChange={() => setIsOnline((prev) => !prev)} />
-            </label>
-            <label htmlFor="in-progress">
-              진행 중인 전시만 보기
-              <input
-                type="checkbox"
-                id="in-progress"
-                checked={inProgress}
-                onChange={() => setInProgress((prev) => !prev)}
-              />
-            </label>
-            {/* 정렬 옵션 드롭다운 */}
-            <label htmlFor="exhibition-filter">
-              <select
-                name="exhibition-filter"
-                id="exhibition-filter"
-                value={sortOrder}
-                onChange={(e) => setSortOrder(e.target.value)}
-              >
-                <option value="recent">최신순</option>
-                <option value="oldest">오래된순</option>
-                <option value="popular">인기순</option>
-              </select>
-            </label>
-          </div>
+          <FilterOptions
+            isOnline={isOnline}
+            setIsOnline={setIsOnline}
+            inProgress={inProgress}
+            setInProgress={setInProgress}
+            sortOrder={sortOrder}
+            setSortOrder={setSortOrder}
+          />
         </div>
         {/* 전시 정보 목록 */}
         <ul className={S.infoContainer}>
