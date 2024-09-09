@@ -1,2 +1,29 @@
 .component {
+  background-color: #02081a;
+  margin: 0;
+  padding: 0;
+
+  div {
+    margin-left: 180px;
+    margin-right: 180px;
+    color: #fff;
+
+    hr {
+      border: 0.75px solid;
+      margin-bottom: 155px;
+    }
+
+    h1 {
+      margin-bottom: 84px;
+    }
+
+    h2 {
+      margin-bottom: 42px;
+    }
+
+    ol,
+    p {
+      margin-bottom: 140px;
+    }
+  }
 }
