@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { navigationItems } from '@/router';
 import { ExtendedRouteObject } from '@/types/ExtendedRouteObject';
@@ -12,18 +12,13 @@ import { useIsContentPage } from '@/stores/isContentPage';
 function GlobalNav() {
   const [navigationList] = useState<ExtendedRouteObject[]>(navigationItems);
   // 콘텐츠 페이지인지 확인하는 상태(로그인 관련 페이지가 아닌지 확인)
-  const { isContentPage, enterContentPage } = useIsContentPage(({ isContentPage, enterContentPage }) => ({
+  const { isContentPage } = useIsContentPage(({ isContentPage }) => ({
     isContentPage,
-    enterContentPage,
   }));
   // 로그인 했는지 확인하는 상태
   const { isLogin } = useIsLogin(({ isLogin }) => ({
     isLogin,
   }));
-
-  useEffect(() => {
-    enterContentPage();
-  }, []);
 
   return (
     <nav>
@@ -66,7 +61,7 @@ function GlobalNav() {
                 <SearchBox />
               </li>
               <li>
-                <BoxButton text={'마이페이지'} />
+                <BoxButton text={'내 정보'} />
               </li>
             </ul>
           </li>

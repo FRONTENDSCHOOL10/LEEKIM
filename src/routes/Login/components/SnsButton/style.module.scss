@@ -1,0 +1,46 @@
+.component {
+  border: 1px solid black;
+  margin: 60px;
+  padding: 20px;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+
+  .leftSide {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 50px;
+
+    img {
+      width: 200px;
+    }
+  }
+
+  .rightSide {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 20px;
+    align-items: end;
+
+    .navigation {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 30px;
+    }
+
+    .groupText {
+      text-align: end;
+    }
+
+    .profile {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 10px;
+    }
+
+    .rightText {
+      text-align: end;
+    }
+  }
+}

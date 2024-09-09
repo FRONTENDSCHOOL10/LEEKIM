@@ -8,14 +8,14 @@ export interface ExhibitionData {
   id: string;
   Title: string;
   SubTitle: string;
-  expand: {
-    School: {
+  expand?: {
+    School?: {
       Name: string;
     };
-    Major: {
+    Major?: {
       Name: string;
     };
-    TagLocation: TagItem[];
+    TagLocation?: TagItem[];
     TagDepartment: TagItem[];
   };
   URL: string;
