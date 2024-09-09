@@ -1,0 +1,36 @@
+.component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #3a39ff;
+  border-radius: 100px 100px 0px 0px;
+  width: 100%;
+  min-height: 2433px;
+  gap: 92px;
+  font-family: Pretendard;
+
+  .text {
+    width: 1555px;
+    margin-top: 314px;
+    font-size: 50px;
+    font-weight: 800;
+    color: #fff;
+    text-align: left;
+  }
+  .wrapper {
+    display: flex;
+    align-items: center;
+    width: 1555px;
+    height: 412px;
+    border-radius: 50px;
+    background-color: #fff;
+    gap: 82px;
+    img {
+      margin-left: 46px;
+      border-radius: 50px;
+      background-color: blue;
+      width: 328px;
+      height: 328px;
+    }
+  }
+}

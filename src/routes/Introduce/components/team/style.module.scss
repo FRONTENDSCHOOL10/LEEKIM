@@ -1,0 +1,45 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  gap: 154px;
+  margin-bottom: 443px;
+  font-family: Pretendard;
+
+  .logo {
+    display: flex;
+    gap: 10px;
+    margin-top: 403px;
+    height: 80px;
+    align-items: center;
+    fill: #fff;
+
+    span {
+      margin-left: 39px;
+      font-size: 50px;
+      font-weight: 800;
+    }
+  }
+
+  .profileui {
+    min-width: 1555px;
+    display: flex;
+    flex-direction: row;
+    gap: 209px;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .profileWapper {
+    display: flex;
+    width: 658px;
+    height: 394px;
+    gap: 40px;
+    .profileimage {
+      width: 340px;
+      height: 392px;
+      border-radius: 50px;
+    }
+  }
+}

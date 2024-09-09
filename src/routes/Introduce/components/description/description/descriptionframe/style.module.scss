@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  .title {
+    margin: 0;
+    color: #3a39ff;
+    font-size: 40px;
+  }
+  .textwrapper {
+    margin-top: 27px;
+    .text {
+      margin: 0;
+      font-size: 25px;
+      font-weight: 500;
+      color: #222;
+      line-height: 150%;
+    }
+  }
+}

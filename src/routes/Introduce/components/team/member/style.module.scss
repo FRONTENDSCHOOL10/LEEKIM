@@ -1,0 +1,23 @@
+.profile {
+  max-width: 658px;
+  max-height: 392px;
+  .text {
+    display: flex;
+    height: 100%;
+
+    flex-direction: column;
+    justify-content: space-between;
+    .name {
+      font-size: 40px;
+      font-weight: 700;
+    }
+    .job {
+      margin-left: 6px;
+      font-size: 25px;
+      font-weight: 500;
+    }
+    .description {
+      margin-left: 6px;
+    }
+  }
+}
