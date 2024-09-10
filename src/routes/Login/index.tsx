@@ -3,7 +3,7 @@ import { useIsContentPage } from '@/stores/isContentPage';
 import { useIsLogin } from '@/stores/isLogin';
 import { FormEvent, useEffect, useId, useRef, useState } from 'react';
 import S from './style.module.scss';
-import SnsButton from './components/SnsButton';
+import SnsLoginButton from './components/SnsLoginButton';
 import Divider from './components/Divider';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -23,8 +23,8 @@ export function Component() {
 
   const navigate = useNavigate();
 
-  const emailFormId = useId();
-  const pwFormId = useId();
+  const emailInputId = useId();
+  const pwInputId = useId();
 
   const { exitContentPage } = useIsContentPage(({ exitContentPage }) => ({
     exitContentPage,
@@ -97,22 +97,22 @@ export function Component() {
   };
 
   return (
-    <>
-      <section className={S.component}>
+    <section className={S.component}>
+      <div role="presentation">
         <h2>로그인</h2>
         <p>효율적인 서비스 이용을 위해 로그인해 주세요.</p>
-        <SnsButton>Google 계정으로 로그인</SnsButton>
-        <SnsButton>KAKAO 계정으로 로그인</SnsButton>
+        <SnsLoginButton>Google 계정으로 로그인</SnsLoginButton>
+        <SnsLoginButton>KAKAO 계정으로 로그인</SnsLoginButton>
         <div role="presentation">
           <Divider />
           <span>or</span>
           <Divider />
         </div>
         <form onSubmit={handleLoginButton}>
-          <label htmlFor={emailFormId}>Email</label>
-          <input id={emailFormId} type="email" placeholder="email@joljeon.com" ref={emailInput} />
-          <label htmlFor={pwFormId}>비밀번호</label>
-          <input id={pwFormId} type="password" placeholder="비밀번호를 입력해 주세요" ref={pwInput} />
+          <label htmlFor={emailInputId}>Email</label>
+          <input id={emailInputId} type="email" placeholder="email@joljeon.com" ref={emailInput} />
+          <label htmlFor={pwInputId}>비밀번호</label>
+          <input id={pwInputId} type="password" placeholder="비밀번호를 입력해 주세요" ref={pwInput} />
           <button type="submit">로그인</button>
           <Toaster
             position="top-center"
@@ -138,7 +138,7 @@ export function Component() {
         </form>
         <p>계정이 없으신가요?</p>
         <NavLink to={'/join'}>회원가입</NavLink>
-      </section>
+      </div>
       {exhibitionItem && (
         <NavLink to={`/exhibition/Detail/${exhibitionItem.id}`}>
           <img
@@ -147,6 +147,6 @@ export function Component() {
           />
         </NavLink>
       )}
-    </>
+    </section>
   );
 }
