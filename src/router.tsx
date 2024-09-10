@@ -76,6 +76,18 @@ const navigation: ExtendedRouteObject[] = [
     display: false,
     lazy: () => import('@/routes/TermsOfUse'),
   },
+  {
+    text: '전시 등록 관리',
+    path: '/manageExhibition',
+    display: false,
+    lazy: () => import('@/routes/ManageExhibition'),
+  },
+  {
+    text: '전시 등록 관리 상세',
+    path: '/manageExhibition/detail/:exhiId',
+    display: false,
+    lazy: () => import('@/routes/ManageExhibitionDetail'),
+  },
 ];
 
 /**@type {RouteObject[]} */
