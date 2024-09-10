@@ -11,25 +11,22 @@
   }
 
   .regListHeader {
-    list-style: none;
-    border-bottom: 1.25px solid #fff;
-    font-size: 1.5rem;
-    padding-bottom: 1.69rem;
     display: grid;
-    margin-bottom: 4.75rem;
     grid-template-columns: repeat(3, 1fr);
     width: 97.375rem;
+    list-style: none;
+    font-size: 1.5rem;
+    border-bottom: 1.25px solid #fff;
     padding-left: 0;
-  }
-
-  .regListItem {
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    padding-bottom: 1.69rem;
+    margin-left: 2rem;
+    margin-bottom: 4.75rem;
   }
 
   .loadMoreButton {
     display: flex;
     justify-content: center;
+    padding-bottom: 11.69rem;
 
     button {
       width: 18.375rem;
@@ -43,6 +40,6 @@
   }
 
   .regListItem {
-    height: 89.31rem;
+    min-height: 89.31rem;
   }
 }

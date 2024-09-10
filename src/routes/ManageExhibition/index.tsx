@@ -16,7 +16,6 @@ export function Component() {
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState<number>(1);
   const navigate = useNavigate();
-  const [hasMoreData, setHasMoreData] = useState<boolean>(false);
 
   // 관리자 권한 확인
   useEffect(() => {
@@ -28,11 +27,9 @@ export function Component() {
         const userData = response.data;
 
         if (!userData.Admin) {
-          navigate('/login', {
+          navigate('/', {
             replace: true,
           });
-          // 😭
-          toast.error('허용되지 않은 접근입니다.');
         }
       } catch (err) {
         console.error('Error fetching checking admin status: ', err);
@@ -51,8 +48,7 @@ export function Component() {
         if (page === 1) setExhibitions(response.data.items);
         else setExhibitions((prevData) => [...prevData, ...response.data.items]);
 
-        if (response.data.items.length > 0) setHasMoreData(true);
-        else toast.error('더이상 데이터가 없습니다.');
+        if (response.data.items.length === 0) toast.error('더이상 데이터가 없습니다.');
       } catch (err) {
         console.error('Error fetching data: ', err);
         setError('문제 발생');
