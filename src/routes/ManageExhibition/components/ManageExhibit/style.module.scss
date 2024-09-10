@@ -1,0 +1,27 @@
+.component {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 4.19rem;
+  font-weight: 500;
+  text-overflow: ellipsis;
+
+  .listIcon {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  img {
+    width: 2.25rem;
+    height: 1.375rem;
+  }
+  li {
+    font-size: 1.5625rem;
+    line-height: 150%;
+  }
+}
+
+.link {
+  text-decoration-line: none;
+  color: #fff;
+}
