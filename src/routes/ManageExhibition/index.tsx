@@ -80,8 +80,8 @@ export function Component() {
             <ManageExhibit
               key={item.id}
               id={item.id}
-              schoolName={item.expand.School.Name}
-              major={item.expand.Major.Name}
+              schoolName={item.expand?.School?.Name}
+              major={item.expand?.Major?.Name}
               title={item.Title}
             />
           ))}

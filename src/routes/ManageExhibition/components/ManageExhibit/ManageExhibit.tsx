@@ -4,8 +4,8 @@ import { ReactElement } from 'react';
 
 type ExhibitionInfoProps = {
   id: string;
-  schoolName: string;
-  major: string;
+  schoolName?: string;
+  major?: string;
   title: string;
 };
 
