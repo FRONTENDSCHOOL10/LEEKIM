@@ -1,5 +1,9 @@
 .component {
   display: inline-block;
-  background-color: black;
-  color: white;
+  align-items: center;
+
+  padding: 0.4rem 2.5rem;
+
+  background-color: var(--mainblue);
+  border-radius: 999rem;
 }

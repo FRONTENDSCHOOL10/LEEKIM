@@ -1,42 +1,72 @@
-@mixin flex($direction: row, $wrap: nowrap, $jutify: space-between) {
-  display: flex;
-  flex-direction: $direction;
-  flex-wrap: $wrap;
-  justify-content: $jutify;
-}
-
 .component {
-  @include flex();
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 100%;
 
-  .menuButtonWrapper {
-    order: 0;
+  .navigationWrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
 
-    ul {
-      @include flex();
+    width: 90%;
+    max-width: 90rem;
+    min-width: 67.5rem;
+
+    .menuButtonWrapper {
+      width: 25rem;
+      order: 0;
+
+      ul {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+
+        font-size: 1.2rem;
+
+        li {
+          a {
+            display: inline-block;
+            padding: 1rem 1.5rem;
+            align-items: center;
+          }
+        }
+      }
     }
-  }
 
-  .HomeButtonContent {
-    order: 1;
+    .HomeButtonContent {
+      order: 1;
 
-    ul {
-      @include flex();
+      ul {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+      }
     }
-  }
 
-  .HomeButtonLogin {
-    order: 0;
+    .HomeButtonLogin {
+      order: 0;
 
-    ul {
-      @include flex();
+      ul {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+      }
     }
-  }
 
-  .formWrapper {
-    order: 2;
+    .formWrapper {
+      width: 25rem;
+      order: 2;
 
-    ul {
-      @include flex();
+      ul {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+
+        font-size: 1.2rem;
+      }
     }
   }
 }
