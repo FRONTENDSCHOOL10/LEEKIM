@@ -1,0 +1,30 @@
+.formrow {
+  display: flex;
+  gap: 25px;
+}
+
+.formgroup {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+  label {
+    position: absolute;
+    top: 15px;
+    left: 30px;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  input {
+    min-height: 87px;
+    border-radius: 30px;
+    background: #333642;
+    border: none;
+    padding-top: 15px;
+    padding-left: 30px;
+    padding-right: 26px;
+    color: #ffffff;
+    font-size: 20px;
+  }
+}
