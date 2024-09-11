@@ -41,7 +41,7 @@ function MainPosterCard() {
           {posterCardData.map((item, index) =>
             item ? (
               <li key={index} className={S.posterCardList}>
-                <NavLink to={`/exhibition/Detail/${item.id}`}>
+                <NavLink to={`/exhibition/detail/${item.id}`}>
                   <motion.div variants={button} initial="rest" whileHover="hover" whileTap="pressed">
                     <img src={getImageURL(item)} alt="" className={S.posterCard} />
                   </motion.div>

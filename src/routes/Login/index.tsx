@@ -140,7 +140,7 @@ export function Component() {
         <NavLink to={'/join'}>회원가입</NavLink>
       </div>
       {exhibitionItem && (
-        <NavLink to={`/exhibition/Detail/${exhibitionItem.id}`}>
+        <NavLink to={`/exhibition/detail/${exhibitionItem.id}`}>
           <img
             src={getImageURL(exhibitionItem)}
             alt={`${exhibitionItem.expand?.School?.Name} ${exhibitionItem.SubTitle} 졸업전시회 포스터`}

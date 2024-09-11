@@ -14,7 +14,7 @@ function ExhibitionInfo({ schoolName, major, posterUrl, exhiId }: ExhibitionInfo
     <div className={S.component}>
       <li>
         {/* 전시 포스터, 학교, 학과 정보 */}
-        <NavLink to={`/exhibition/Detail/${exhiId}`}>
+        <NavLink to={`/exhibition/detail/${exhiId}`}>
           <figure className={S.poster}>
             <img src={posterUrl} alt={`${schoolName} ${major} 포스터`} />
             <figcaption className={S.schoolName}>{schoolName}</figcaption>

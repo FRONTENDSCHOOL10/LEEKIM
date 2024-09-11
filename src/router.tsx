@@ -25,7 +25,7 @@ const navigation: ExtendedRouteObject[] = [
   },
   {
     text: '전시 상세 정보',
-    path: '/exhibition/Detail/:exhiId',
+    path: '/exhibition/detail/:exhiId',
     display: false,
     lazy: () => import('@/routes/ExhibitionDetail'),
   },
