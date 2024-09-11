@@ -53,12 +53,13 @@ function AppFooter() {
       </div>
       <div className={S.rightSide}>
         <nav className={S.navigation}>
+          <h3 className="sr-only">메뉴 내비게이션</h3>
           <FooterNavigation element={navigation.com} />
           <FooterNavigation element={navigation.info} />
           <FooterNavigation element={navigation.client} />
         </nav>
         <Divider />
-        <div>
+        <div role="presentation">
           <p className={S.groupText}>TEAM.LEEKIM</p>
           <div className={S.profile}>
             <Profile name="김시원" email="rkdmf1306@gmail.com" link="https://github.com/chlyun" />
