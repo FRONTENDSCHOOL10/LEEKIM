@@ -1,7 +1,4 @@
-declare module '*.scss' {
-  const content: { [className: string]: string };
-  export = content;
-}
+/// <reference types="vite/client" />
 
 interface ImportMetaEnv {
   readonly VITE_PB_API: string;
