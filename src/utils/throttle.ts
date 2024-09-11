@@ -1,12 +1,11 @@
-type ThrottleCallback = (...args: any[]) => void;
+type ThrottleCallback = (...args: unknown[]) => void;
 
-/** @type {(callback: () => void, timeout: number) => (...args: any[]) => void} */
 export function throttle(callback: ThrottleCallback, timeout = 300): ThrottleCallback {
   let timer: ReturnType<typeof setTimeout> | null = null;
-  return (...args) => {
+  return (...args: unknown[]) => {
     if (!timer) {
       timer = setTimeout(() => {
-        callback.apply(null, args);
+        callback(...args);
         timer = null;
       }, timeout);
     }
