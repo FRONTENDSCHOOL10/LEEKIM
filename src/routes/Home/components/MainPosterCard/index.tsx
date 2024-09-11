@@ -3,7 +3,7 @@ import S from './style.module.scss';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
-import getImageURL from '@/utils/getImageURL';
+import { getImageURL } from '@/utils';
 
 const button = {
   rest: { opacity: 1, scale: 1 },

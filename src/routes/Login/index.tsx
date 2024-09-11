@@ -8,8 +8,8 @@ import Divider from './components/Divider';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
-import getImageURL from '@/utils/getImageURL';
 import { ExhibitionData } from '@/types/ExhibitionData';
+import { getImageURL } from '@/utils';
 
 const dbApiUrl = import.meta.env.VITE_DB_API;
 
