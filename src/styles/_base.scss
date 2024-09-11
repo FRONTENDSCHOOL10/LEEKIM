@@ -24,6 +24,8 @@ body {
     'Segoe UI Symbol',
     sans-serif;
   -webkit-font-smoothing: antialiased;
+  background-color: var(--background);
+  color: var(--white);
 }
 *,
 *::before,
