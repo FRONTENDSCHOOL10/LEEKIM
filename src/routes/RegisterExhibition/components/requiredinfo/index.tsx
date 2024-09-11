@@ -38,7 +38,7 @@ function RequireInfo(): ReactElement {
       </div>
       <div className={S.formgroup}>
         <label htmlFor="Introduce">전시 설명</label>
-        <textarea id="Introduce" name="Introduce" className={S.input} required />
+        <textarea id="Introduce" name="Introduce" required />
       </div>
     </div>
   );
