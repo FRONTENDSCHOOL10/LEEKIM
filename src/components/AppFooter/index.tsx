@@ -36,38 +36,40 @@ function AppFooter() {
 
   return (
     <footer className={S.component}>
-      <div className={S.leftSide}>
-        <form action="">
-          <label htmlFor={subscribeInputId}>
-            이메일을 등록하여
+      <div role="presentation" className={S.wrapperBox}>
+        <div className={S.leftSide}>
+          <form action="">
+            <label htmlFor={subscribeInputId}>
+              이메일을 등록하여
+              <br />
+              새로운 졸업 전시 알림을 받아보세요!
+            </label>
             <br />
-            새로운 졸업 전시 알림을 받아보세요!
-          </label>
-          <br />
-          {/* 구독하기 처리 로직 필요, 현재는 아무 기능없이 마크업만 완료된 상태 */}
-          <input id={subscribeInputId} type="email" placeholder="email@gmail.com" />
-          <br />
-          <button type="submit">구독하기</button>
-        </form>
-        <img src="/Icon/TextLogo.svg" alt="졸전닷컴 글자 로고" />
-      </div>
-      <div className={S.rightSide}>
-        <nav className={S.navigation}>
-          <h3 className="sr-only">메뉴 내비게이션</h3>
-          <FooterNavigation element={navigation.com} />
-          <FooterNavigation element={navigation.info} />
-          <FooterNavigation element={navigation.client} />
-        </nav>
-        <Divider />
-        <div role="presentation">
-          <p className={S.groupText}>TEAM.LEEKIM</p>
-          <div className={S.profile}>
-            <Profile name="김시원" email="rkdmf1306@gmail.com" link="https://github.com/chlyun" />
-            <Profile name="김재림" email="jaerim1102@naver.com" link="https://github.com/jaerim1102" />
-            <Profile name="이지수" email="szjslee@gmail.com" link="https://github.com/Jisoo0907" />
-            <Profile name="이진용" email="yjy1480@gmail.com" link="https://github.com/Lee-Jinyong" />
+            {/* 구독하기 처리 로직 필요, 현재는 아무 기능없이 마크업만 완료된 상태 */}
+            <input id={subscribeInputId} type="email" placeholder="email@joljeon.com" />
+            <br />
+            <button type="submit">구독하기</button>
+          </form>
+          <img src="/Icon/TextLogo.svg" alt="졸전닷컴 글자 로고" />
+        </div>
+        <div className={S.rightSide}>
+          <nav className={S.navigation}>
+            <h2 className="sr-only">푸터 메뉴 내비게이션</h2>
+            <FooterNavigation element={navigation.com} />
+            <FooterNavigation element={navigation.info} />
+            <FooterNavigation element={navigation.client} />
+          </nav>
+          <Divider />
+          <div role="presentation">
+            <p className={S.groupText}>TEAM.LEEKIM</p>
+            <div className={S.profile}>
+              <Profile name="김시원" email="rkdmf1306@gmail.com" link="https://github.com/chlyun" />
+              <Profile name="김재림" email="jaerim1102@naver.com" link="https://github.com/jaerim1102" />
+              <Profile name="이지수" email="szjslee@gmail.com" link="https://github.com/Jisoo0907" />
+              <Profile name="이진용" email="yjy1480@gmail.com" link="https://github.com/Lee-Jinyong" />
+            </div>
+            <p className={S.rightText}>ⓒ 2024 JJ.COM of Korea Co., Ltd. All Rights Reserved. </p>
           </div>
-          <p className={S.rightText}>ⓒ 2024 JJ.COM of Korea Co., Ltd. All Rights Reserved. </p>
         </div>
       </div>
     </footer>

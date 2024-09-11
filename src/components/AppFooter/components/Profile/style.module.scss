@@ -1,2 +1,28 @@
 .component {
+  p {
+    margin: 0;
+  }
+
+  .name {
+    margin-bottom: 0.5rem;
+
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  .email {
+    font-size: 0.8rem;
+    font-weight: 300;
+  }
+
+  .githubLink {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--white);
+    text-decoration: none;
+
+    &:visited {
+      color: var(--white); /* 원하는 색상으로 변경 */
+    }
+  }
 }

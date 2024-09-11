@@ -1,2 +1,16 @@
 .component {
+  p {
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 1.2rem;
+  }
+
+  ul {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1.6rem;
+
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
 }
