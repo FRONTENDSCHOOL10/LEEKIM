@@ -47,7 +47,7 @@ function AppFooter() {
           {/* 구독하기 처리 로직 필요, 현재는 아무 기능없이 마크업만 완료된 상태 */}
           <input id={subscribeInputId} type="email" placeholder="email@gmail.com" />
           <br />
-          <button type="button">구독하기</button>
+          <button type="submit">구독하기</button>
         </form>
         <img src="/Icon/TextLogo.svg" alt="졸전닷컴 글자 로고" />
       </div>
