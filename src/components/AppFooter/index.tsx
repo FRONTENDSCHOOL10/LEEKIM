@@ -1,8 +1,8 @@
 import { memo } from 'react';
 import S from './style.module.scss';
-import Divider from './Divider';
-import Profile from './Profile';
-import FooterNavigation from './FooterNavigation';
+import Divider from './components/Divider';
+import Profile from './components/Profile';
+import FooterNavigation from './components/FooterNavigation';
 
 function AppFooter() {
   const navigation = {
