@@ -26,7 +26,7 @@
       z-index: 10;
     }
 
-    input {
+    .input {
       min-height: 87px;
       border-radius: 30px;
       background: #333642;
@@ -57,10 +57,18 @@
   }
 }
 
-input[type='date'] {
+.date {
+  min-height: 77px;
   position: relative;
-  background: url(../../assets/calender.svg) no-repeat;
-  text-align: center;
+  border: none;
+  border-radius: 30px;
+  padding-top: 25px;
+  font-size: 20px;
+  color: #fff;
+  padding-left: 30px;
+  padding-right: 26px;
+  background: url(../../assets/calender.svg) no-repeat right 30px center / 25px auto #333642;
+
   &::-webkit-calendar-picker-indicator {
     position: absolute;
     width: 100%;
@@ -68,5 +76,34 @@ input[type='date'] {
     background: transparent;
     color: transparent;
     cursor: pointer;
+  }
+  &:not(:focus):invalid {
+    &::-webkit-datetime-edit-text,
+    &::-webkit-datetime-edit-month-field,
+    &::-webkit-datetime-edit-day-field,
+    &::-webkit-datetime-edit-year-field {
+      -webkit-appearance: none;
+      display: none;
+    }
+    &::before {
+      content: attr(placeholder);
+      width: 100%;
+      height: 100%;
+      line-height: 2;
+      color: gray;
+      text-align: left;
+    }
+
+    &:focus::before,
+    &:valid::before {
+      display: none;
+      &::-webkit-datetime-edit-text,
+      &::-webkit-datetime-edit-month-field,
+      &::-webkit-datetime-edit-day-field,
+      &::-webkit-datetime-edit-year-field {
+        -webkit-appearance: none;
+        display: none;
+      }
+    }
   }
 }
