@@ -1,2 +1,44 @@
 .component {
+  background-color: #02081a;
+  color: #fff;
+  margin: 0;
+  padding: 0 11.31rem;
+
+  .regList {
+    font-size: 3.125rem;
+    padding: 0 2rem;
+    margin-bottom: 6.56rem;
+  }
+
+  .regListHeader {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    list-style: none;
+    font-size: 1.5rem;
+    border-bottom: 1.25px solid #fff;
+    padding: 0;
+    padding-bottom: 1.69rem;
+    margin-left: 2rem;
+    margin-bottom: 4.75rem;
+  }
+
+  .loadMoreButton {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 11.69rem;
+
+    button {
+      width: 18.375rem;
+      height: 5.625rem;
+      border-radius: 3.125rem;
+      background: #3a39ff;
+      border: none;
+      color: #fff;
+      font-size: 1.5625rem;
+    }
+  }
+
+  .regListItem {
+    min-height: 89.31rem;
+  }
 }
