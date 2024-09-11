@@ -1,10 +1,12 @@
-import { memo } from 'react';
+import { memo, useId } from 'react';
 import S from './style.module.scss';
 import Divider from './components/Divider';
 import Profile from './components/Profile';
 import FooterNavigation from './components/FooterNavigation';
 
 function AppFooter() {
+  const subscribeInputId = useId();
+
   const navigation = {
     com: {
       title: '졸전.COM',
@@ -36,14 +38,14 @@ function AppFooter() {
     <footer className={S.component}>
       <div className={S.leftSide}>
         <form action="">
-          <label htmlFor="subscribe">
+          <label htmlFor={subscribeInputId}>
             이메일을 등록하여
             <br />
             새로운 졸업 전시 알림을 받아보세요!
           </label>
           <br />
           {/* 구독하기 처리 로직 필요, 현재는 아무 기능없이 마크업만 완료된 상태 */}
-          <input id="subscribe" type="email" placeholder="email@gmail.com" />
+          <input id={subscribeInputId} type="email" placeholder="email@gmail.com" />
           <br />
           <button type="button">구독하기</button>
         </form>
