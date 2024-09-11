@@ -5,7 +5,7 @@ import Banner from './components/Banner/Banner';
 import FilterTag from './components/FilterTag/FilterTag';
 import axios from 'axios';
 import { ExhibitionData } from '@/types/ExhibitionData';
-import ExhibitionInfo from '@/components/ExhibitionSlider/conponents/ExhibitionInfo';
+import ExhibitionInfo from '@/components/ExhibitionSlider/components/ExhibitionInfo';
 import getImageURL from '@/utils/getImageURL';
 import FilterOptions from './components/FilterOptions/FilterOptions';
 
