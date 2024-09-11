@@ -8,7 +8,7 @@ import 'swiper/scss/pagination';
 import 'swiper/scss/navigation';
 import ExhibitionInfo from './components/ExhibitionInfo';
 import { ExhibitionData } from '@/types/ExhibitionData';
-import getImageURL from '@/utils/getImageURL';
+import { getImageURL } from '@/utils';
 
 interface ExhibitionDataList {
   items: ExhibitionData[];

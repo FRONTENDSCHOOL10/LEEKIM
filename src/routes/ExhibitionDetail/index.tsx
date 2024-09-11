@@ -9,7 +9,7 @@ import ContactInfo from './components/contactinfo';
 import LocationInfo from './components/locationinfo';
 import Poster from './components/imagesection';
 import back from '/Icon/back.svg';
-import getImageURL from '@/utils/getImageURL';
+import { getImageURL } from '@/utils';
 import TagList from './components/taglist';
 import { ExhibitionData } from '@/types/ExhibitionData';
 
