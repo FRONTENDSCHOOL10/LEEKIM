@@ -8,15 +8,11 @@ import Divider from './components/Divider';
 import { NavLink, useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
+import { TagData } from '@/types/TagData';
 
 interface CheckState {
   visibility: React.CSSProperties['visibility'];
   ariaHidden: boolean;
-}
-
-interface TagData {
-  id: string;
-  Name: string;
 }
 
 const dbApiUrl = import.meta.env.VITE_DB_API;
