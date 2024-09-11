@@ -6,7 +6,7 @@ import type { SwiperOptions } from 'swiper/types';
 import 'swiper/scss';
 import 'swiper/scss/pagination';
 import 'swiper/scss/navigation';
-import ExhibitionInfo from './ExhibitionInfo';
+import ExhibitionInfo from './conponents/ExhibitionInfo';
 import { ExhibitionData } from '@/types/ExhibitionData';
 import getImageURL from '@/utils/getImageURL';
 
@@ -27,15 +27,18 @@ function ExhibitionSlider({ exhibitions }: any) {
   return (
     <div className={S.exhibitContainer}>
       <Swiper {...swiperParams} className={S.swiper}>
-        {exhibitions.map((item) => (
-          <SwiperSlide key={item.id} className={S.slide}>
-            <ExhibitionInfo
-              schoolName={item.expand.School.Name}
-              major={item.expand.Major.Name}
-              posterUrl={getImageURL(item)}
-            />
-          </SwiperSlide>
-        ))}
+        {exhibitions.map((item: ExhibitionData) =>
+          item ? (
+            <SwiperSlide key={item.id} className={S.slide}>
+              <ExhibitionInfo
+                schoolName={item?.expand?.School?.Name as string}
+                major={item?.expand?.Major?.Name as string}
+                posterUrl={getImageURL(item)}
+                exhiId={item.id}
+              />
+            </SwiperSlide>
+          ) : null
+        )}
       </Swiper>
     </div>
   );

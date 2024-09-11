@@ -7,18 +7,11 @@ interface FilterOptionsProps {
   inProgress: boolean;
   setInProgress: (value: boolean) => void;
   // 정렬 순서 recent | oldest | popular
-  sortOrder: string;
-  setSortOrder: (value: string) => void;
+  sort: string;
+  setSort: (value: string) => void;
 }
 
-function FilterOptions({
-  isOnline,
-  setIsOnline,
-  inProgress,
-  setInProgress,
-  sortOrder,
-  setSortOrder,
-}: FilterOptionsProps) {
+function FilterOptions({ isOnline, setIsOnline, inProgress, setInProgress, sort, setSort }: FilterOptionsProps) {
   return (
     <div className={S.component}>
       <label htmlFor="online">
@@ -35,15 +28,10 @@ function FilterOptions({
         />
       </label>
       <label htmlFor="exhibition-filter">
-        <select
-          name="exhibition-filter"
-          id="exhibition-filter"
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
-        >
-          <option value="recent">최신순</option>
-          <option value="oldest">오래된순</option>
-          <option value="popular">인기순</option>
+        <select name="exhibition-filter" id="exhibition-filter" value={sort} onChange={(e) => setSort(e.target.value)}>
+          <option value="-Start">최신순</option>
+          <option value="Start">오래된순</option>
+          <option value="-Bookmark">인기순</option>
         </select>
       </label>
     </div>

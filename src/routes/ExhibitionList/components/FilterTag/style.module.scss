@@ -20,18 +20,32 @@
   }
 
   .filterCategory {
-    list-style-type: none;
-
-    li {
+    fieldset {
       display: flex;
+      flex-flow: column nowrap;
       font-weight: 700;
       white-space: nowrap;
-      margin: 1rem;
-    }
+      width: 100%;
 
-    img {
-      width: 75rem;
-      margin-left: 1rem;
+      img {
+        width: 75rem;
+        margin-left: 1rem;
+      }
+
+      .swiperContainer {
+        width: 100%;
+
+        .swiperSlide {
+          width: 50px;
+          white-space: nowrap;
+          padding: 0.5rem;
+          height: 100%;
+          border: none;
+          background-color: #d9d9d9;
+          border-radius: 6.25rem;
+          user-select: none;
+        }
+      }
     }
 
     &.hidden {
@@ -42,16 +56,4 @@
       display: block;
     }
   }
-}
-.swiperContainer {
-  width: 100%;
-}
-
-.tag {
-  white-space: nowrap;
-  padding: 0.5rem;
-  height: 100%;
-  border: none;
-  background-color: #d9d9d9;
-  border-radius: 6.25rem;
 }

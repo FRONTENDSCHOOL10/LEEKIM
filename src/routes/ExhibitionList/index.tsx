@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 import S from './style.module.scss';
 import Banner from './components/Banner/Banner';
-// import ExhibitionSlider from '@/components/ExhibitionSlider';
 import FilterTag from './components/FilterTag/FilterTag';
 import axios from 'axios';
 import { ExhibitionData } from '@/types/ExhibitionData';
-import ExhibitionInfo from '@/components/ExhibitionSlider/ExhibitionInfo';
+import ExhibitionInfo from '@/components/ExhibitionSlider/conponents/ExhibitionInfo';
 import getImageURL from '@/utils/getImageURL';
 import FilterOptions from './components/FilterOptions/FilterOptions';
 
@@ -14,46 +13,74 @@ const pocketbaseUrl = import.meta.env.VITE_DB_URL;
 
 export const Component: React.FC = () => {
   useDocumentTitle('전시 목록 | JJ.com');
+
   const [exhibitions, setExhibitions] = useState<ExhibitionData[]>([]);
   const [error, setError] = useState<string | null>(null);
+
   // checkbox 온라인 전시 | 진행 중 전시 필터
   const [isOnline, setIsOnline] = useState<boolean>(false);
   const [inProgress, setInProgress] = useState<boolean>(false);
   const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+
+  const [tagDepartmentArray, setTagDepartmentArray] = useState<string[]>([]);
+  const [tagLocationArray, setTagLocationArray] = useState<string[]>([]);
+  const [tagYearArray, setTagYearArray] = useState<string[]>([]);
+
   // dropdown 정렬 순서 필터
-  const [sortOrder, setSortOrder] = useState<string>('recent');
+  const [sort, setSort] = useState<string>('-Start');
+
   // 더보기 기능 용 page 번호
   const [page, setPage] = useState<number>(1);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let url = `${pocketbaseUrl}/api/collections/Exhibition/records?expand=School,Major&page=${page}&perPage=20`;
+        let url = `${pocketbaseUrl}/api/collections/Exhibition/records?sort=${sort}&expand=School,Major&page=${page}&perPage=20`;
         // 기본 필터 - 승인된 전시만
-        const filters = ['(IsApprove=true)'];
-        let sort = '';
+        const filters = ['IsApprove=true'];
+        const departmentFilters: string[] = [];
+        const locationFilters: string[] = [];
+        const yearFilters: string[] = [];
+
+        console.log(today);
 
         // checkbox 필터 적용
-        if (isOnline) filters.push('(IsOnline=true)');
-        if (inProgress) filters.push(`(Start<'${today}'%26%26End>'${today}')`);
+        if (isOnline) filters.push('IsOnline=true');
+        if (inProgress) filters.push(`Start<'${today}'%26%26End>'${today}'`);
 
-        // dropdown 정렬 옵션 적용
-        if (sortOrder === 'recent') {
-          sort = '-Start';
-        } else if (sortOrder === 'oldest') {
-          sort = 'Start';
-        } else if (sortOrder === 'popular') {
-          /* 북마크 순 정렬 로직 필요 */
+        // 분야 필터 적용
+        if (tagDepartmentArray.length > 0) {
+          // if (page !== 1) setPage(1);
+          tagDepartmentArray.forEach((id: string) => departmentFilters.push('TagDepartment~' + `'${id}'`));
+          filters.push('(' + departmentFilters.join('||') + ')');
+        }
+
+        // 지역 필터 적용
+        if (tagLocationArray.length > 0) {
+          // if (page !== 1) setPage(1);
+          tagLocationArray.map((id: string) => locationFilters.push('TagLocation~' + `'${id}'`));
+          filters.push('(' + locationFilters.join('||') + ')');
+        }
+
+        // 분야 필터 적용
+        if (tagYearArray.length > 0) {
+          // if (page !== 1) setPage(1);
+          console.log(tagYearArray);
+          tagYearArray.map((year: string) => yearFilters.push(`Start<='${year}-12-31'%26%26End>='${year}-01-01'`));
+          console.log(yearFilters);
+          filters.push('(' + yearFilters.join('||') + ')');
         }
 
         // URL에 필터와 정렬 옵션 추가
-        if (filters.length > 0) url += `&filter=${filters.join('%26%26')}`;
-        if (sort) url += `&sort=${sort}`;
+        if (filters.length > 0) url += `&filter=(${filters.join('%26%26')})`;
+
+        console.log(url);
 
         // API 요청
         const response = await axios.get(url);
         if (page === 1) {
           setExhibitions(response.data.items);
+          console.log(response.data.items);
         } else {
           setExhibitions((prevData) => [...prevData, ...response.data.items]);
         }
@@ -62,13 +89,15 @@ export const Component: React.FC = () => {
         setError('문제 발생');
       }
     };
+
     fetchData();
-  }, [isOnline, inProgress, today, sortOrder, page]);
+  }, [isOnline, inProgress, today, sort, page, tagDepartmentArray, tagLocationArray, tagYearArray]);
 
   // 필터/정렬 옵션 변경 시 page를 1로 reset
   useEffect(() => {
+    setExhibitions([]);
     setPage(1);
-  }, [isOnline, inProgress, sortOrder]);
+  }, [isOnline, inProgress, sort, tagDepartmentArray, tagLocationArray, tagYearArray]);
 
   // '더보기' 버튼 핸들러
   function handleLoadMore() {
@@ -76,12 +105,18 @@ export const Component: React.FC = () => {
   }
 
   if (error) return <div>{error}</div>;
-  if (exhibitions.length === 0) return <div>로딩 중⏳</div>;
 
   return (
     <main id="page" className={S.component}>
       <Banner />
-      <FilterTag />
+      <FilterTag
+        tagDepartmentArray={tagDepartmentArray}
+        setTagDepartmentArray={setTagDepartmentArray}
+        tagLocationArray={tagLocationArray}
+        setTagLocationArray={setTagLocationArray}
+        tagYearArray={tagYearArray}
+        setTagYearArray={setTagYearArray}
+      />
       <section>
         <div className={S.listHeader}>
           <h2>졸업 전시 리스트</h2>
@@ -90,28 +125,34 @@ export const Component: React.FC = () => {
             setIsOnline={setIsOnline}
             inProgress={inProgress}
             setInProgress={setInProgress}
-            sortOrder={sortOrder}
-            setSortOrder={setSortOrder}
+            sort={sort}
+            setSort={setSort}
           />
         </div>
         {/* 전시 정보 목록 */}
-        <ul className={S.infoContainer}>
-          {/* <ExhibitionSlider exhibitions={exhibitions} /> */}
-          {exhibitions.map((item) => (
-            <ExhibitionInfo
-              key={item.id}
-              schoolName={item.expand.School.Name}
-              major={item.expand.Major.Name}
-              posterUrl={getImageURL(item)}
-            />
-          ))}
-        </ul>
-        {/* 더보기 버튼 */}
-        <div className={S.buttonWrapper}>
-          <button className={S.loadMoreButton} onClick={handleLoadMore}>
-            더보기
-          </button>
-        </div>
+        {exhibitions.length !== 0 ? (
+          <>
+            <ul className={S.infoContainer}>
+              {exhibitions.map((item) => (
+                <ExhibitionInfo
+                  key={item.id}
+                  schoolName={item?.expand?.School?.Name as string}
+                  major={item?.expand?.Major?.Name as string}
+                  posterUrl={getImageURL(item)}
+                  exhiId={item.id}
+                />
+              ))}
+            </ul>
+            {/* 더보기 버튼 */}
+            <div className={S.buttonWrapper}>
+              <button className={S.loadMoreButton} onClick={handleLoadMore}>
+                더보기
+              </button>
+            </div>
+          </>
+        ) : (
+          <p>해당하는 전시가 없습니다.</p>
+        )}
       </section>
     </main>
   );

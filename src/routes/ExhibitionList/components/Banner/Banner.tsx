@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import S from './style.module.scss';
+import { NavLink } from 'react-router-dom';
 
 const Banner: React.FC = () => {
   return (
@@ -15,9 +16,9 @@ const Banner: React.FC = () => {
         <p>우리 학교, 우리 학과 전시회가 없다면?</p>
 
         {/* 추후 NavLink로 수정 */}
-        <button type="button" className={S.bannerButton}>
+        <NavLink to={'/registerExhi'} className={S.bannerButton}>
           전시 등록 바로가기
-        </button>
+        </NavLink>
       </div>
     </section>
   );

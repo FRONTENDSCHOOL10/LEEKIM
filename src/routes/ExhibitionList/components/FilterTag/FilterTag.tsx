@@ -1,73 +1,148 @@
 import { memo, useEffect, useRef, useState } from 'react';
 import S from './style.module.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Scrollbar } from 'swiper/modules';
 // Swiper styles
 import 'swiper/css';
-import 'swiper/css/scrollbar';
+import 'swiper/css/free-mode';
+import { FreeMode } from 'swiper/modules';
+import axios from 'axios';
+import { TagData } from '@/types/TagData';
 
-// renderSwiper 함수 props 타입 정의
-interface RenderSwiperProps {
-  tags: string[];
+interface FilterTag {
+  tagDepartmentArray: string[];
+  setTagDepartmentArray: React.Dispatch<React.SetStateAction<string[]>>;
+  tagLocationArray: string[];
+  setTagLocationArray: React.Dispatch<React.SetStateAction<string[]>>;
+  tagYearArray: string[];
+  setTagYearArray: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-function FilterTag() {
-  // 필터 태그 열림/닫힘 상태 관리
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  // 필터 카테고리 목록에 대한 ref
-  const ulRef = useRef<HTMLUListElement>(null);
+const dbApiUrl = import.meta.env.VITE_DB_API;
 
-  // Dummy
-  const fieldTags = [
-    '게임그래픽디자인',
-    '웹디자인',
-    '프로그래밍',
-    'UI/UX',
-    '그래픽디자인',
-    '미디어디자인',
-    '패션디자인',
-    '영상콘텐츠',
-    '디자인공학',
-    '아니 TS진짜',
-    '모든 오류는 TS로부터',
-    '왜 속성 적용이 안 되니?',
-  ];
-  const yearTags = ['2024', '2023', '2022', '2021', '2020'];
-  const regionTags = ['서울', '경기', '인천', '부산', '대구'];
+function FilterTag({
+  tagDepartmentArray,
+  setTagDepartmentArray,
+  tagLocationArray,
+  setTagLocationArray,
+  tagYearArray,
+  setTagYearArray,
+}: FilterTag) {
+  // 필터 태그 열림/닫힘 상태 관리
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+
+  // 서버에서 필터 목록 받아올 상태
+  const [tagDepartment, setTagDepartment] = useState<TagData[]>([]);
+  const [tagLocation, setTagLocation] = useState<TagData[]>([]);
+  const [tagYear, setTagYear] = useState<TagData[]>([]);
+
+  // 필터 카테고리 목록에 대한 ref
+  const filterFormRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    const getTagDepartment = async () => {
+      try {
+        const response = await axios.get(`${dbApiUrl}/collections/TagDepartment/records`);
+        setTagDepartment(response.data.items);
+      } catch (err) {
+        console.error('An error occurred:', err);
+      }
+    };
+
+    const getTagLocation = async () => {
+      try {
+        const response = await axios.get(`${dbApiUrl}/collections/TagLocation/records`);
+        setTagLocation(response.data.items);
+      } catch (err) {
+        console.error('An error occurred:', err);
+      }
+    };
+
+    const getTagYear = async () => {
+      try {
+        const response = await axios.get(`${dbApiUrl}/collections/TagYear/records`);
+        setTagYear(response.data.items);
+      } catch (err) {
+        console.error('An error occurred:', err);
+      }
+    };
+
+    getTagDepartment();
+    getTagLocation();
+    getTagYear();
+  }, []);
 
   // 필터 열기/닫기 토글 함수
   const handleToggle = (): void => {
     setIsOpen(!isOpen);
   };
 
-  // 필터 메뉴 열릴 때 scrollIntoView() 주기 위함
-  useEffect(() => {
-    if (isOpen && ulRef.current) {
-      ulRef.current.scrollIntoView({ behavior: 'smooth' });
+  const handleDepartmentFilter = (tagId: string) => {
+    if (tagDepartmentArray.includes(tagId)) {
+      const nextArray = tagDepartmentArray.filter((id: string) => id !== tagId);
+      setTagDepartmentArray(nextArray);
+      return;
     }
-  }, [isOpen]);
 
-  // Swiper 컴포넌트 렌더링 함수
-  function renderSwiper({ tags }: RenderSwiperProps): JSX.Element {
+    const nextArray = tagDepartmentArray;
+
+    nextArray.push(tagId);
+    setTagDepartmentArray([...nextArray]);
+  };
+
+  const handleLocationFilter = (tagId: string) => {
+    if (tagLocationArray.includes(tagId)) {
+      const nextArray = tagLocationArray.filter((id: string) => id !== tagId);
+      setTagLocationArray(nextArray);
+      return;
+    }
+
+    const nextArray = tagLocationArray;
+
+    nextArray.push(tagId);
+    setTagLocationArray([...nextArray]);
+  };
+
+  const handleYearFilter = (tagYear: string) => {
+    if (tagYearArray.includes(tagYear)) {
+      const nextArray = tagYearArray.filter((year: string) => year !== tagYear);
+      setTagYearArray(nextArray);
+      return;
+    }
+
+    const nextArray = tagYearArray;
+
+    nextArray.push(tagYear);
+    setTagYearArray([...nextArray]);
+  };
+
+  const swiperCreater = (tagArray: TagData[], handleChangeFunc: (id: string) => void, isTagYear: boolean) => {
     return (
       <Swiper
-        slidesPerView={8}
-        spaceBetween={10}
-        // slidesOffsetAfter={20} 적용이 안 돼서 보류
-        scrollbar={{
-          hide: true,
-        }}
-        modules={[Scrollbar]}
+        slidesPerView={'auto'}
+        spaceBetween={30}
+        freeMode={true}
+        modules={[FreeMode]}
         className={S.swiperContainer}
       >
-        {tags.map((tag, index) => (
-          <SwiperSlide key={index} className={S.swiperSlide}>
-            <button className={S.tag}>#{tag}</button>
+        {tagArray.map(({ id, Name }) => (
+          <SwiperSlide key={id.slice(0, 5)} className={S.swiperSlide}>
+            <label htmlFor={id.slice(0, 5)}>#{Name}</label>
+            <input
+              type="checkbox"
+              id={id.slice(0, 5)}
+              onChange={() => {
+                if (isTagYear) {
+                  handleChangeFunc(Name);
+                } else {
+                  handleChangeFunc(id);
+                }
+              }}
+            />
           </SwiperSlide>
         ))}
       </Swiper>
     );
-  }
+  };
 
   return (
     <section className={S.component}>
@@ -84,24 +159,24 @@ function FilterTag() {
       </div>
 
       {/* 필터 카테고리 목록 */}
-      <ul ref={ulRef} className={`${S.filterCategory} ${isOpen ? S.visible : S.hidden}`}>
-        <li>
-          분야별
-          <img src="/Icon/IconArrow.svg" alt="" />
-        </li>
-        {renderSwiper({ tags: fieldTags })}
-        <li>
-          연도별
-          <img src="/Icon/IconArrow.svg" alt="" />
-        </li>
-        {renderSwiper({ tags: yearTags })}
-        <li>
-          지역별
-          <img src="/Icon/IconArrow.svg" alt="" />
-        </li>
-        {renderSwiper({ tags: regionTags })}
+      <form ref={filterFormRef} className={`${S.filterCategory} ${isOpen ? S.visible : S.hidden}`}>
+        <fieldset>
+          <legend>분야별</legend>
+          <img src="/Icon/IconArrow.svg" aria-hidden="true" />
+          {swiperCreater(tagDepartment, handleDepartmentFilter, false)}
+        </fieldset>
+        <fieldset>
+          <legend>연도별</legend>
+          <img src="/Icon/IconArrow.svg" aria-hidden="true" />
+          {swiperCreater(tagLocation, handleLocationFilter, false)}
+        </fieldset>
+        <fieldset>
+          <legend>지역별</legend>
+          <img src="/Icon/IconArrow.svg" aria-hidden="true" />
+          {swiperCreater(tagYear, handleYearFilter, true)}
+        </fieldset>
         <button>초기화</button>
-      </ul>
+      </form>
     </section>
   );
 }
