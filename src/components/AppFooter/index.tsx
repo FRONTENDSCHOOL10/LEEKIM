@@ -47,7 +47,7 @@ function AppFooter() {
     return emailRegex.test(email);
   };
 
-  const handleSubscribe = async (e: FormDataEvent) => {
+  const handleSubscribe = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (subscribeEmailInput.current && !subscribeEmailInput.current.value.trim()) {
@@ -73,6 +73,7 @@ function AppFooter() {
         if (existEmailData.data.items.length > 0) {
           toast.remove();
           toast.error('이미 구독하신 이메일 주소입니다.');
+          subscribeEmailInput.current.value = '';
           return;
         }
 
@@ -111,7 +112,7 @@ function AppFooter() {
               },
             }}
           />
-          <form>
+          <form onSubmit={handleSubscribe}>
             <label htmlFor={subscribeInputId}>
               이메일을 등록하여
               <br />
@@ -119,11 +120,15 @@ function AppFooter() {
             </label>
             <br />
             {/* 구독하기 처리 로직 필요, 현재는 아무 기능없이 마크업만 완료된 상태 */}
-            <input id={subscribeInputId} type="email" placeholder="email@joljeon.com" ref={subscribeEmailInput} />
+            <input
+              id={subscribeInputId}
+              type="email"
+              placeholder="email@joljeon.com"
+              spellCheck="false"
+              ref={subscribeEmailInput}
+            />
             <br />
-            <button type="submit" onClick={handleSubscribe}>
-              구독하기
-            </button>
+            <button type="submit">구독하기</button>
           </form>
           <img src="/Icon/TextLogo.svg" alt="졸전닷컴 글자 로고" />
         </div>
