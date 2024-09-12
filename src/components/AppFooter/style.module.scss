@@ -3,6 +3,8 @@
   flex-flow: column nowrap;
   align-items: center;
 
+  user-select: none;
+
   margin: 15rem 0 3.75rem 0;
   .wrapperBox {
     display: flex;
