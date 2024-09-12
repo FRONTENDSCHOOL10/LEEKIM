@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { navigationItems } from '@/router';
 import { ExtendedRouteObject } from '@/types/ExtendedRouteObject';
@@ -19,6 +19,8 @@ function GlobalNav() {
   const { isLogin } = useIsLogin(({ isLogin }) => ({
     isLogin,
   }));
+
+  const userId = sessionStorage.getItem('userId');
 
   return (
     <nav className={S.component}>
@@ -54,7 +56,7 @@ function GlobalNav() {
                 <SearchBox />
               </li>
               <li>
-                <BoxButton text={'내 정보'} />
+                <BoxButton text={'내 정보'} toUrl={`/my/${userId}`} />
               </li>
             </ul>
           </li>
@@ -67,7 +69,7 @@ function GlobalNav() {
                 <SearchBox />
               </li>
               <li>
-                <BoxButton text={'로그인'} />
+                <BoxButton text={'로그인'} toUrl={'/login'} />
               </li>
             </ul>
           </li>
