@@ -21,8 +21,9 @@ function GlobalNav() {
   }));
 
   return (
-    <nav>
-      <ul className={S.component}>
+    <nav className={S.component}>
+      <h2 className="sr-only">메뉴 내비게이션</h2>
+      <ul className={S.navigationWrapper}>
         {isContentPage ? (
           // 콘텐츠 페이지일 때
           <li className={S.HomeButtonContent}>
@@ -39,15 +40,7 @@ function GlobalNav() {
             {navigationList.map(({ path, text }) =>
               path ? (
                 <li key={path}>
-                  <NavLink
-                    to={path}
-                    className={({ isActive }) => {
-                      // 해당 메뉴가 활성화 된 상태인지 체크
-                      return isActive ? S.active : undefined;
-                    }}
-                  >
-                    {text}
-                  </NavLink>
+                  <NavLink to={path}>{text}</NavLink>
                 </li>
               ) : null
             )}

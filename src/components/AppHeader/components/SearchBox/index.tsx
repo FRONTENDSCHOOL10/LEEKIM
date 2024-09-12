@@ -8,7 +8,7 @@ function SearchBox() {
   };
 
   return (
-    <form method="get" action="/exhibition" role="search">
+    <form method="get" action="/exhibition" role="search" className={S.component}>
       <label className="sr-only" htmlFor="SearchBox">
         검색창
       </label>
