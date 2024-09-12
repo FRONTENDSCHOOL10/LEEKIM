@@ -1,14 +1,9 @@
 import { memo } from 'react';
 import S from './style.module.scss';
-import { debounce } from '@/utils';
 
 function SearchBox() {
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-  };
-
   return (
-    <form method="get" action="/exhibition" role="search" className={S.component}>
+    <form role="search" className={S.component}>
       <label className="sr-only" htmlFor="SearchBox">
         검색창
       </label>
@@ -19,7 +14,6 @@ function SearchBox() {
         // name="filter"
         placeholder="검색어를 입력하세요."
         spellCheck="false"
-        onChange={debounce(onChange)}
       />
       <button type="submit">검색</button>
     </form>
