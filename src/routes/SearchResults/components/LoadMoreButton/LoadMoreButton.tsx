@@ -1,6 +1,10 @@
 import S from './style.module.scss';
 
-function LoadMoreButton({ onClick }) {
+interface LoadMoreButtonProps {
+  onClick: () => void;
+}
+
+function LoadMoreButton({ onClick }: LoadMoreButtonProps) {
   return (
     <div className={S.component}>
       <button className={S.loadMoreButton} onClick={onClick}>

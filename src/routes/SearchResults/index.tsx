@@ -16,6 +16,7 @@ const pocketbaseUrl = import.meta.env.VITE_DB_URL;
 export function Component() {
   useDocumentTitle('검색 결과 | JJ.com');
 
+  // 검색어 상태
   const { inputValue, setInputValue } = useSearchTermStore();
 
   const [exhibitions, setExhibitions] = useState<ExhibitionData[]>([]);
@@ -109,7 +110,7 @@ export function Component() {
           <LoadMoreButton onClick={handleLoadMore} />
         </>
       ) : (
-        <p>'{inputValue}'에 대한 검색 결과가 없습니다. 다른 키워드로 검색해 보세요.</p>
+        <p>&apos;{inputValue}&apos;에 대한 검색 결과가 없습니다. 다른 키워드로 검색해 보세요.</p>
       )}
     </main>
   );
