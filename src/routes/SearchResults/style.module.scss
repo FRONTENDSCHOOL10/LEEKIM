@@ -1,2 +1,10 @@
 .component {
+  max-width: 90rem;
+  min-width: 67.5rem;
+  margin: 0 auto;
+
+  .infoContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
