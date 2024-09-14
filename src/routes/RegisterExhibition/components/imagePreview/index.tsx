@@ -1,65 +1,88 @@
-import { ChangeEvent, ReactElement, DragEvent, useState } from 'react';
+import React, { ChangeEvent, DragEvent, memo, useCallback, useEffect } from 'react';
 import S from './style.module.scss';
 import camera from '../../assets/camera.svg';
 import { useImageUploadStore } from '@/stores/imageUploadStore';
 
-interface DragState {
-  isDragging: boolean;
+interface ImageUploadProps {
+  onImageUpload: (file: File | null) => void;
 }
 
-function ImageUpload(): ReactElement {
+function ImageUpload({ onImageUpload }: ImageUploadProps): React.ReactElement {
   const { preview, setSelectedFile, setPreview } = useImageUploadStore();
-  const [isDragging, setIsDragging] = useState<DragState['isDragging']>(false);
 
-  function handleFile(file: File): void {
-    setSelectedFile(file);
-    const reader = new FileReader();
-    reader.onloadend = function () {
-      setPreview(reader.result as string);
+  useEffect(() => {
+    return () => {
+      if (preview) {
+        URL.revokeObjectURL(preview);
+      }
     };
-    reader.readAsDataURL(file);
-  }
+  }, [preview]);
 
-  function handleFileChange(e: ChangeEvent<HTMLInputElement>): void {
-    const file = e.target.files?.[0];
-    if (file) handleFile(file);
-  }
+  //파일처리
+  const handleFile = useCallback(
+    (file: File): void => {
+      setSelectedFile(file);
+      onImageUpload(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    },
+    [setSelectedFile, onImageUpload, setPreview]
+  );
 
-  function handleDragOver(e: DragEvent<HTMLDivElement>): void {
+  //여기서 선택된 파일을 handlefile로 전달해주는거임!
+  const handleFileChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>): void => {
+      const file = e.target.files?.[0];
+      if (file) handleFile(file);
+    },
+    [handleFile]
+  );
+
+  const handleDragOver = useCallback((e: DragEvent<HTMLDivElement>): void => {
     e.preventDefault();
-    setIsDragging(true);
-  }
+    e.currentTarget.classList.add(S.dragging);
+  }, []);
 
-  function handleDragLeave(e: DragEvent<HTMLDivElement>): void {
+  const handleDragLeave = useCallback((e: DragEvent<HTMLDivElement>): void => {
     e.preventDefault();
-    setIsDragging(false);
-  }
+    e.currentTarget.classList.remove(S.dragging);
+  }, []);
 
-  function handleDrop(e: DragEvent<HTMLDivElement>): void {
-    e.preventDefault();
-    setIsDragging(false);
-    const file = e.dataTransfer.files?.[0];
-    if (file) handleFile(file);
-  }
+  const handleDrop = useCallback(
+    (e: DragEvent<HTMLDivElement>): void => {
+      e.preventDefault();
+      e.currentTarget.classList.remove(S.dragging);
+      const file = e.dataTransfer.files?.[0];
+      if (file) handleFile(file);
+    },
+    [handleFile]
+  );
 
   return (
-    <div
-      className={`${S.imageupload} ${isDragging ? S.dragging : ''}`}
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
-    >
+    <div className={S.imageupload} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop}>
       {preview ? (
         <img src={preview} alt="Preview" className={S.previewimage} />
       ) : (
         <label htmlFor="file-upload" className={S.placeholder}>
           <img src={camera} alt="사진첨부" className={S.cameraicon} />
           <p>드래그 앤 드롭</p>
+          <p>포스터 첨부 필수</p>
         </label>
       )}
-      <input id="file-upload" type="file" accept="image/*" onChange={handleFileChange} className={S.fileinput} />
+      <input
+        id="file-upload"
+        name="file-upload"
+        type="file"
+        accept="image/*"
+        onChange={handleFileChange}
+        className={S.fileinput}
+        required
+      />
     </div>
   );
 }
 
-export default ImageUpload;
+export default memo(ImageUpload);
