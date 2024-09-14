@@ -33,6 +33,9 @@ export function Component() {
   // 더보기 기능 용 page 번호
   const [page, setPage] = useState<number>(1);
 
+  // 총 항목 수 - 더보기 버튼 알림 용
+  const [totalItems, setTotalItems] = useState<number>(0);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -58,7 +61,8 @@ export function Component() {
         if (page === 1) setExhibitions(response.data.items);
         else setExhibitions((prevData) => [...prevData, ...response.data.items]);
 
-        if (response.data.items.length === 0) toast.error('더이상 데이터가 없습니다.');
+        // 총 항목 수 저장
+        setTotalItems(response.data.totalItems);
       } catch (err) {
         console.error('Error fetching data:', err);
         setError('문제 발생');
@@ -75,7 +79,13 @@ export function Component() {
 
   // '더보기' 버튼 핸들러
   function handleLoadMore() {
-    setPage((prevPage) => prevPage + 1);
+    // 더 보여줄 데이터 유무 확인
+    if (exhibitions.length < totalItems) {
+      setPage((prevPage) => prevPage + 1);
+    } else {
+      // 데이터가 없을 때 표시
+      toast.error('더 이상 없습니다.');
+    }
   }
 
   if (error) return <div>{error}</div>;
