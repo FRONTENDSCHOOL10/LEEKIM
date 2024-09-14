@@ -10,6 +10,7 @@ import SearchBanner from './components/SearchBanner/SearchBanner';
 import LoadMoreButton from './components/LoadMoreButton/LoadMoreButton';
 import { useSearchTermStore } from '@/stores/searchTerm';
 import toast, { Toaster } from 'react-hot-toast';
+import { useParams } from 'react-router-dom';
 
 const pocketbaseUrl = import.meta.env.VITE_DB_URL;
 
@@ -18,6 +19,7 @@ export function Component() {
 
   // 검색어 상태
   const { inputValue, setInputValue } = useSearchTermStore();
+  const { searchWord } = useParams<{ searchWord: string }>();
 
   const [exhibitions, setExhibitions] = useState<ExhibitionData[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -35,6 +37,10 @@ export function Component() {
 
   // 총 항목 수 - 더보기 버튼 알림 용
   const [totalItems, setTotalItems] = useState<number>(0);
+
+  useEffect(() => {
+    setInputValue(searchWord ?? '');
+  }, [searchWord]);
 
   useEffect(() => {
     const fetchData = async () => {
