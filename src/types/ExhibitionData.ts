@@ -23,7 +23,7 @@ export interface ExhibitionData {
   Introduce: string;
   Contact: string;
   Address: string;
-
+  IsApprove: boolean;
   Start: string;
   End: string;
   Time: {
