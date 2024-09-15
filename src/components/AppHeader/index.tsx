@@ -15,6 +15,10 @@ function AppHeader() {
       sessionStorage.setItem('userId', '');
     }
 
+    if (sessionStorage.getItem('recentlyViewed') === null) {
+      sessionStorage.setItem('recentlyViewed', '');
+    }
+
     if (sessionStorage.getItem('userId') !== '') {
       login();
     } else {

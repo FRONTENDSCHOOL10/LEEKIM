@@ -33,15 +33,24 @@ function RecentlyViewedExhibition() {
           const exhibitionData = await axios.get(`${dbApiUrl}collections/Exhibition/records/${id}`);
           exhibitionDataArray.push(exhibitionData.data);
         }
-        exhibitionDataArray.push(...exhibitionDataArray);
-        exhibitionDataArray.push(...exhibitionDataArray);
+
         setViewedExhibitionData(exhibitionDataArray);
       }
     };
 
     const getGuestViewedExhibitionData = async () => {
-      // 게스트라면 최근 본 전시를 세션 스토리지에 저장
-      console.log('게스트');
+      const exhibitionDataArray = [];
+      let sessionDataString = sessionStorage.getItem('recentlyViewed');
+      if (sessionDataString === '' || sessionDataString === null) return;
+
+      const sessionDataArray = sessionDataString.split(',');
+
+      for (let id of sessionDataArray) {
+        const exhibitionData = await axios.get(`${dbApiUrl}collections/Exhibition/records/${id}`);
+        exhibitionDataArray.push(exhibitionData.data);
+      }
+
+      setViewedExhibitionData(exhibitionDataArray);
     };
 
     if (isLogin && userId !== '') {
@@ -53,7 +62,7 @@ function RecentlyViewedExhibition() {
       getLoginedViewedExhibitionData();
     }
 
-    if (!isLogin && sessionStorage.getItem('recentlyViewed') !== '') {
+    if (!isLogin && userId === '' && sessionStorage.getItem('recentlyViewed') !== '') {
       getGuestViewedExhibitionData();
     }
   }, [userId]);
@@ -62,9 +71,8 @@ function RecentlyViewedExhibition() {
     modules: [A11y, Keyboard],
     slidesPerView: 'auto',
     spaceBetween: 30,
-    loop: true,
-    centeredSlides: true,
     keyboard: { enabled: true },
+    initialSlide: viewedExhibitionData.length > 3 ? (viewedExhibitionData.length > 4 ? 2 : 1) : 0,
   };
 
   // if (!posterCardData) return <div>로딩 중</div>;
@@ -75,9 +83,6 @@ function RecentlyViewedExhibition() {
         <section className={S.component}>
           <div className={S.titleSection}>
             <h2 className={S.title}>최근 본 전시</h2>
-            <NavLink to={'/'} className={S.viewedMore}>
-              자세히 보기
-            </NavLink>
           </div>
           <Swiper {...swiperParams} className={S.swiperWrapper}>
             {viewedExhibitionData.map((item: ExhibitionData, index) =>
