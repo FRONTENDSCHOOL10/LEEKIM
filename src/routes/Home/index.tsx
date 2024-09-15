@@ -6,6 +6,9 @@ import RecommendBanner from './components/RecommendBanner';
 import { useIsContentPage } from '@/stores/isContentPage';
 import { useIsLogin } from '@/stores/isLogin';
 import { useEffect } from 'react';
+import IngExhibition from './components/IngExhibition';
+import SoonExhibition from './components/SoonExhibition';
+import RecentlyViewedExhibition from './components/RecentlyViewedExhibition';
 
 function HomePage() {
   useDocumentTitle('미래를 엿보는 창, 졸전.com | JJ.com');
@@ -28,10 +31,10 @@ function HomePage() {
       <h1 className="sr-only">졸전닷컴 메인페이지</h1>
       <Slogan />
       <MainPosterCard />
-      {/* 진행 중 전시 컴포넌트 */}
-      {/* 진행 예정 전시 컴포넌트 */}
+      <IngExhibition />
+      <SoonExhibition />
       <RecommendBanner />
-      {/* 최근 본 전시 */}
+      <RecentlyViewedExhibition />
     </main>
   );
 }
