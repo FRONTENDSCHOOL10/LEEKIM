@@ -20,57 +20,71 @@ export function Component() {
   const navigate = useNavigate();
   const [exhibitionData, setExhibitionData] = useState<ExhibitionData | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [isApprove, setisApprove] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchExhibitionData = async () => {
-      if (!exhiId) return;
+      if (!exhiId) {
+        setError('전시회 정보가 없습니다.');
+        setIsLoading(false);
+        return;
+      }
 
       try {
-        const response = await axios.get(
+        const response = await axios.get<ExhibitionData>(
           `${pocketbaseUrl}/api/collections/Exhibition/records/${exhiId}?expand=School,Major,TagLocation,TagDepartment`
         );
         setExhibitionData(response.data);
 
         if (!response.data.IsApprove) {
-          navigate('/', {
-            replace: true,
-          });
+          navigate('/', { replace: true });
         }
       } catch (err) {
-        console.error('에러로그', err);
         setError('전시회 데이터를 불러오는 데 실패했습니다. 잠시 후 다시 시도해 주세요.');
       } finally {
-        setisApprove(false);
+        setIsLoading(false);
       }
     };
 
     fetchExhibitionData();
   }, [exhiId, navigate]);
 
-  function handleGoBack() {
-    navigate(-1);
-  }
-
-  if (isApprove) return <div className={S.loading}>로딩 중입니당</div>;
+  if (isLoading) return <div className={S.loading}>로딩 중입니다</div>;
   if (error) return <div className={S.error}>{error}</div>;
-  if (!exhibitionData) return null;
+  if (!exhibitionData) return <div className={S.error}>전시회 정보를 찾을 수 없습니다.</div>;
+  if (!exhibitionData.IsApprove) return null;
 
   const posterUrl = getImageURL(exhibitionData, 'Poster');
+
+  // Time 데이터 처리 로직 수정
+  let timeData: string[] | undefined;
+  if (typeof exhibitionData.Time === 'string') {
+    try {
+      const parsedTime = JSON.parse(exhibitionData.Time);
+      timeData = parsedTime.time;
+    } catch {
+      timeData = [exhibitionData.Time];
+    }
+  } else if (exhibitionData.Time && typeof exhibitionData.Time === 'object' && 'time' in exhibitionData.Time) {
+    timeData = exhibitionData.Time.time;
+  }
 
   return (
     <div className={S.component}>
       <main className={S.main}>
         <div className={S.contentWrapper}>
-          <button className={S.backButton} onClick={handleGoBack}>
-            <img src={back} alt="" />
+          <button className={S.backButton} onClick={() => navigate(-1)}>
+            <img src={back} alt="뒤로 가기" />
             뒤로가기
           </button>
-          <TagList location={exhibitionData.expand.TagLocation} departments={exhibitionData.expand.TagDepartment} />
+          <TagList
+            location={exhibitionData.expand?.TagLocation ?? []}
+            departments={exhibitionData.expand?.TagDepartment ?? []}
+          />
           <Title
-            title={exhibitionData.expand.School.Name}
+            title={exhibitionData.expand?.School?.Name ?? ''}
             subtitle={exhibitionData.SubTitle}
-            major={exhibitionData.expand.Major.Name}
+            major={exhibitionData.expand?.Major?.Name ?? ''}
           />
           <div className={S.infoWrapper}>
             <div className={S.posterWrapper}>
@@ -80,7 +94,7 @@ export function Component() {
               <Description title={exhibitionData.Title} description={exhibitionData.Introduce} />
               <ContactInfo tel={exhibitionData.Contact} />
               <div className={S.wrapper}>
-                <ExhibitionDate start={exhibitionData.Start} end={exhibitionData.End} time={exhibitionData.Time.time} />
+                <ExhibitionDate start={exhibitionData.Start} end={exhibitionData.End} time={timeData} />
                 <LocationInfo address={exhibitionData.Address} />
               </div>
             </div>

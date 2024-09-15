@@ -7,7 +7,7 @@ import { ko } from 'date-fns/locale';
 interface DateProps {
   start: string;
   end: string;
-  time: string[];
+  time: string[] | undefined;
 }
 
 function ExhibitionDate({ start, end, time }: DateProps): ReactElement {
@@ -29,11 +29,15 @@ function ExhibitionDate({ start, end, time }: DateProps): ReactElement {
       </div>
       <p>{startDate}</p>
       <p>{endDate}</p>
-      <ul>
-        {time.map((timeInfo, index) => (
-          <li key={index}>{timeInfo}</li>
-        ))}
-      </ul>
+      {Array.isArray(time) && time.length > 0 ? (
+        <ul>
+          {time.map((timeInfo, index) => (
+            <li key={index}>{timeInfo}</li>
+          ))}
+        </ul>
+      ) : (
+        ''
+      )}
     </div>
   );
 }
