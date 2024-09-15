@@ -3,8 +3,27 @@
   flex-flow: row nowrap;
   gap: 2%;
 
-  height: 500px;
-  border: 1px solid black;
+  width: 90%;
+  aspect-ratio: 1/0.6;
+  max-width: 90rem;
+  min-width: 67.5rem;
+
+  margin: 5rem 0 15rem 0;
+
+  img {
+    border: 1px solid var(--white);
+    border-radius: 2.5rem;
+  }
+
+  figcaption {
+    position: absolute;
+    left: 10%;
+    bottom: 10%;
+    color: white;
+
+    font-weight: 500;
+    font-size: 2rem;
+  }
 
   .leftSide {
     display: flex;
@@ -25,16 +44,7 @@
         height: 100%;
         width: 100%;
         object-fit: cover;
-        filter: brightness(50%);
-      }
-
-      figcaption {
-        position: absolute;
-        left: 10%;
-        bottom: 10%;
-        color: white;
-        font-weight: bolder;
-        font-size: x-large;
+        filter: brightness(70%);
       }
     }
 
@@ -45,15 +55,6 @@
         width: 100%;
         object-fit: cover;
         filter: brightness(50%);
-      }
-
-      figcaption {
-        position: absolute;
-        left: 10%;
-        bottom: 10%;
-        color: white;
-        font-weight: bolder;
-        font-size: x-large;
       }
     }
   }
@@ -81,12 +82,7 @@
       }
 
       figcaption {
-        position: absolute;
         right: 10%;
-        bottom: 10%;
-        color: white;
-        font-weight: bolder;
-        font-size: x-large;
         text-align: right;
       }
     }
@@ -98,15 +94,6 @@
         width: 100%;
         object-fit: cover;
         filter: brightness(50%);
-      }
-
-      figcaption {
-        position: absolute;
-        left: 10%;
-        bottom: 10%;
-        color: white;
-        font-weight: bolder;
-        font-size: x-large;
       }
     }
   }

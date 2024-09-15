@@ -11,18 +11,14 @@ type ExhibitionInfoProps = {
 
 function ExhibitionInfo({ schoolName, major, posterUrl, exhiId }: ExhibitionInfoProps) {
   return (
-    <div className={S.component}>
-      <li>
-        {/* 전시 포스터, 학교, 학과 정보 */}
-        <NavLink to={`/exhibition/detail/${exhiId}`}>
-          <figure className={S.poster}>
-            <img src={posterUrl} alt={`${schoolName} ${major} 포스터`} />
-            <figcaption className={S.schoolName}>{schoolName}</figcaption>
-            <p>{major}</p>
-          </figure>
-        </NavLink>
-      </li>
-    </div>
+    // 전시 포스터, 학교, 학과 정보
+    <figure className={S.component}>
+      <NavLink to={`/exhibition/detail/${exhiId}`}>
+        <img src={posterUrl} alt={`${schoolName} ${major} 졸업전시 포스터`} />
+        <figcaption className={S.schoolName}>{schoolName}</figcaption>
+        <span>{major} 졸업전시</span>
+      </NavLink>
+    </figure>
   );
 }
 

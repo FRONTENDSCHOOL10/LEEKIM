@@ -1,14 +1,27 @@
 .exhibitContainer {
   width: 100%;
   height: auto;
-}
 
-.swiper {
-  width: 100%;
-}
+  .swiperWrapper {
+    width: 100%;
 
-.slide {
-  text-align: center;
-  font-size: 18px;
-  border-radius: 2.1875rem;
+    .slide {
+      width: 100%;
+    }
+  }
+
+  .swiperPagination {
+    margin-top: 2rem;
+  }
+
+  .swiperPaginationBullet {
+    background-color: red; /* 페이지네이션 점 색상 */
+    width: 12px; /* 페이지네이션 점 너비 */
+    height: 12px; /* 페이지네이션 점 높이 */
+    opacity: 1; /* 불투명도 */
+  }
+
+  .swiperPaginationBulletActive {
+    background-color: white; /* 활성화된 페이지네이션 점 색상 */
+  }
 }

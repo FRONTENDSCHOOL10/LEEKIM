@@ -1,0 +1,41 @@
+.component {
+  width: 90%;
+  max-width: 90rem;
+  min-width: 67.5rem;
+
+  margin: 5rem 0 10rem 0;
+
+  .titleSection {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: end;
+
+    margin: 1.8rem 0;
+
+    .title {
+      margin: 0;
+
+      font-size: 1.6rem;
+    }
+
+    .soonMore {
+      color: var(--white);
+      font-size: 1.2rem;
+      text-decoration: none;
+
+      &:visited {
+        color: var(--white);
+      }
+    }
+  }
+
+  p {
+    margin: 0;
+
+    line-height: 15rem;
+    text-align: center;
+
+    font-size: 2rem;
+  }
+}

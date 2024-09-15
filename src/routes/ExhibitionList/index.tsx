@@ -134,13 +134,15 @@ export const Component: React.FC = () => {
           <>
             <ul className={S.infoContainer}>
               {exhibitions.map((item) => (
-                <ExhibitionInfo
-                  key={item.id}
-                  schoolName={item?.expand?.School?.Name as string}
-                  major={item?.expand?.Major?.Name as string}
-                  posterUrl={getImageURL(item)}
-                  exhiId={item.id}
-                />
+                <li>
+                  <ExhibitionInfo
+                    key={item.id}
+                    schoolName={item?.expand?.School?.Name as string}
+                    major={item?.expand?.Major?.Name as string}
+                    posterUrl={getImageURL(item)}
+                    exhiId={item.id}
+                  />
+                </li>
               ))}
             </ul>
             {/* 더보기 버튼 */}

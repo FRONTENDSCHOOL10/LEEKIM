@@ -1,14 +1,46 @@
 .component {
-  list-style: none;
+  user-select: none;
+
   display: flex;
-  justify-content: center;
+  flex-flow: column nowrap;
+  align-items: start;
+  width: 99%;
 
-  .poster {
-    flex-direction: column;
+  margin: 0 0 4rem 0;
 
-    img {
-      width: 15rem;
-      height: 20rem;
-    }
+  img {
+    width: 100%;
+    aspect-ratio: 1/1.414;
+    margin-bottom: 1.5rem;
+
+    border-radius: 1.5rem;
+
+    border: 1px solid var(--white);
   }
+
+  figcaption {
+    text-align: start;
+    color: var(--white);
+
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  span {
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    text-align: start;
+
+    color: var(--graytext);
+    font-size: 1.2rem;
+  }
+}
+
+.component a {
+  text-decoration: none; /* 링크의 밑줄 제거 */
+}
+
+.component a:hover {
+  text-decoration: none; /* 링크에 마우스를 올렸을 때도 밑줄 제거 */
 }
