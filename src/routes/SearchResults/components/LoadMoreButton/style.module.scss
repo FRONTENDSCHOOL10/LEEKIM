@@ -1,0 +1,16 @@
+.component {
+  display: flex;
+  justify-content: center;
+
+  .loadMoreButton {
+    background-color: #3a39ff;
+    color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.5625rem;
+    font-weight: 600;
+    line-height: 150%;
+    width: 10rem;
+    height: 3rem;
+  }
+}
