@@ -65,7 +65,7 @@ export function Component() {
   }
 
   return (
-    <>
+    <main>
       <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
       <div className={S.component}>
         <BackButton />
@@ -93,7 +93,7 @@ export function Component() {
           </button>
         </div>
       </div>
-    </>
+    </main>
   );
 }
 export default Component;

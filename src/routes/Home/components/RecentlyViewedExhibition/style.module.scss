@@ -25,16 +25,6 @@
 
       font-size: 1.6rem;
     }
-
-    .viewedMore {
-      color: var(--white);
-      font-size: 1.2rem;
-      text-decoration: none;
-
-      &:visited {
-        color: var(--white);
-      }
-    }
   }
 
   .swiperWrapper {
@@ -46,11 +36,13 @@
     align-items: center;
 
     width: 100%;
+    max-width: 90rem;
 
     .slider {
-      width: 28%;
+      width: 30%;
       aspect-ratio: 1/0.5;
-      max-width: 30rem;
+      max-width: 16.5rem;
+      min-width: 12rem;
 
       img {
         width: 100%;

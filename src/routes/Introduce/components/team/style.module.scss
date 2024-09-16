@@ -36,10 +36,13 @@
     width: 658px;
     height: 394px;
     gap: 40px;
+
     .profileimage {
       width: 340px;
       height: 392px;
       border-radius: 50px;
+
+      object-fit: cover;
     }
   }
 }

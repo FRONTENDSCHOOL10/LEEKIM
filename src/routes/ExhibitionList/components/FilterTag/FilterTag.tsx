@@ -59,7 +59,7 @@ function FilterTag({
 
     const getTagYear = async () => {
       try {
-        const response = await axios.get(`${dbApiUrl}/collections/TagYear/records`);
+        const response = await axios.get(`${dbApiUrl}/collections/TagYear/records?sort=-Name`);
         setTagYear(response.data.items);
       } catch (err) {
         console.error('An error occurred:', err);

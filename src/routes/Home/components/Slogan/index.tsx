@@ -32,13 +32,24 @@ function Slogan() {
   const controls = useAnimation();
 
   useEffect(() => {
+    let isMounted = true;
+
     const sequence = async () => {
+      if (!isMounted) return;
       await controls.start('visible');
       await new Promise((resolve) => setTimeout(resolve, 5000)); // 5초 대기
+      if (!isMounted) return;
       await controls.start('erase');
       sequence(); // 무한 반복
     };
-    sequence();
+
+    if (controls) {
+      sequence();
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, [controls]);
 
   return (

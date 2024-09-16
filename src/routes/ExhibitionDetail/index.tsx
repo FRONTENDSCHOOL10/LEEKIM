@@ -12,6 +12,7 @@ import back from '/Icon/back.svg';
 import { getImageURL } from '@/utils';
 import TagList from './components/taglist';
 import { ExhibitionData } from '@/types/ExhibitionData';
+import { useIsLogin } from '@/stores/isLogin';
 
 const pocketbaseUrl = import.meta.env.VITE_DB_URL;
 
@@ -21,8 +22,65 @@ export function Component() {
   const [exhibitionData, setExhibitionData] = useState<ExhibitionData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [userId, setUserId] = useState<string | null>(sessionStorage.getItem('userId'));
+
+  const { isLogin } = useIsLogin(({ isLogin }) => ({
+    isLogin,
+  }));
 
   useEffect(() => {
+    // 로그인 상태일 때 최근 본 전시 서버에 저장
+    const setLoginedViewedExhibitionData = async () => {
+      const userData = await axios.get(
+        `${pocketbaseUrl}/api/collections/users/records/${userId}?fields=RecentlyViewed`
+      );
+
+      let serverDataArray = userData.data.RecentlyViewed.id;
+
+      if (serverDataArray.includes(exhiId as string)) {
+        serverDataArray = serverDataArray.filter((data) => data !== exhiId);
+      }
+
+      if (serverDataArray.length >= 5) {
+        while (serverDataArray.length > 4) {
+          serverDataArray.shift();
+        }
+      }
+
+      serverDataArray.push(exhiId as string);
+
+      await axios.patch(`${pocketbaseUrl}/api/collections/users/records/${userId}?fields=RecentlyViewed`, {
+        RecentlyViewed: {
+          id: serverDataArray,
+        },
+      });
+    };
+
+    // 게스트 상태일 때 최근 본 전시 세션스토리지에 저장
+    const setGuestViewedExhibitionData = async () => {
+      let sessionDataString = await sessionStorage.getItem('recentlyViewed');
+      if (sessionDataString === null) return;
+
+      let sessionDataArray = sessionDataString.split(',');
+      if (sessionDataArray.includes('')) {
+        sessionDataArray = sessionDataArray.filter((data) => data !== '');
+      }
+
+      if (sessionDataArray.includes(exhiId as string)) {
+        sessionDataArray = sessionDataArray.filter((data) => data !== exhiId);
+      }
+
+      if (sessionDataArray.length >= 5) {
+        while (sessionDataArray.length > 4) {
+          sessionDataArray.shift();
+        }
+      }
+
+      sessionDataArray.push(exhiId as string);
+      sessionDataString = sessionDataArray.join(',');
+      await sessionStorage.setItem('recentlyViewed', sessionDataString);
+    };
+
     const fetchExhibitionData = async () => {
       if (!exhiId) {
         setError('전시회 정보가 없습니다.');
@@ -45,6 +103,12 @@ export function Component() {
         setIsLoading(false);
       }
     };
+
+    if (isLogin && userId !== '') {
+      setLoginedViewedExhibitionData();
+    } else if (!isLogin && userId === '') {
+      setGuestViewedExhibitionData();
+    }
 
     fetchExhibitionData();
   }, [exhiId, navigate]);
