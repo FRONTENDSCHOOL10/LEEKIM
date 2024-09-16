@@ -55,11 +55,17 @@ export function Component() {
     exitContentPage,
   }));
   // 로그인 했는지 확인하는 상태
-  const { logout } = useIsLogin(({ logout }) => ({
-    logout,
+  const { isLogin } = useIsLogin(({ isLogin }) => ({
+    isLogin,
   }));
 
   useEffect(() => {
+    if (isLogin) {
+      navigate('/', {
+        replace: true,
+      });
+    }
+
     const getTagData = async () => {
       try {
         const response = await axios.get(`${dbApiUrl}/collections/TagDepartment/records`);
@@ -69,16 +75,14 @@ export function Component() {
       }
     };
 
-    sessionStorage.setItem('userId', '');
     getTagData();
-    logout();
     exitContentPage();
-  }, []);
+  }, [isLogin]);
 
   // 닉네임 검증 함수
   const validateName = (nickname: string): boolean => {
-    // 한글, 영문 대소문자, 숫자만 허용, 최대 9자
-    const nicknameRegex = /^[가-힣a-zA-Z0-9]{1,9}$/;
+    // 한글, 영문 대소문자, 숫자만 허용, 3자에서 9자까지
+    const nicknameRegex = /^[가-힣a-zA-Z0-9]{3,9}$/;
     return nicknameRegex.test(nickname);
   };
 
@@ -94,6 +98,25 @@ export function Component() {
     // 최소 8자, 하나 이상의 숫자, 특수문자, 영어 문자 포함
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return passwordRegex.test(password);
+  };
+
+  // 회원가입 할 때 세션 스토리지의 최근 본 전시 데이터를 서버의 유저 정보에 저장
+  const setLoginedViewedExhibitionData = async () => {
+    let sessionDataString = await sessionStorage.getItem('recentlyViewed');
+    if (sessionDataString === null) return [];
+
+    let sessionDataArray = sessionDataString.split(',');
+    if (sessionDataArray.includes('')) {
+      sessionDataArray = sessionDataArray.filter((data) => data !== '');
+    }
+
+    if (sessionDataArray.length > 5) {
+      while (sessionDataArray.length > 5) {
+        sessionDataArray.shift();
+      }
+    }
+
+    return sessionDataArray;
   };
 
   // 회원가입 버튼 눌렀을 때 처리하는 함수
@@ -195,6 +218,8 @@ export function Component() {
         return;
       }
 
+      const sessionStorageViewedArray = await setLoginedViewedExhibitionData();
+
       await axios.post(`${dbApiUrl}collections/users/records`, {
         username: nameInput.current.value,
         email: emailInput.current.value,
@@ -205,22 +230,23 @@ export function Component() {
           id: [],
         },
         RecentlyViewed: {
-          id: [],
+          id: sessionStorageViewedArray,
         },
         InterestedTag: interestedTagArray.current,
         Admin: false,
       });
 
       toast.remove();
-      toast.success('졸전 닷컴에 오신 걸 환영합니다.\n로그인 페이지로 이동합니다.');
+      toast.success('졸전 닷컴에 오신 걸 환영합니다!\n로그인 페이지로 이동합니다.');
       // 토스트 창을 기다린 뒤 로그인 창으로 이동
       setTimeout(() => {
-        // navigate('/login', {
-        //   replace: true,
-        // });
+        navigate('/login', {
+          replace: true,
+        });
         toast.remove();
       }, 1500);
     } catch (err) {
+      console.log(err);
       toast.remove();
       toast.error('서버와의 통신에 실패했습니다.\n잠시 후 다시 시도해 주세요.');
     }
@@ -263,7 +289,7 @@ export function Component() {
               </span>
             ) : (
               <span style={{ visibility: checkName.visibility }} aria-hidden={checkName.ariaHidden}>
-                한글, 영문 대소문자, 숫자만 포함해서 9자 이하로 작성해 주세요
+                한글, 영문 대소문자, 숫자만 포함해서 3~9자 사이로 작성해 주세요
               </span>
             )}
           </fieldset>

@@ -54,15 +54,8 @@ function RecentlyViewedExhibition() {
     };
 
     if (isLogin && userId !== '') {
-      if (sessionStorage.getItem('recentlyViewed') !== '') {
-        // 만약 게스트 상태로 전시를 구경하다가 로그인 했을 경우 세션 스토리지에 저장된 전시 id를 계정에 업데이트
-        console.log('최근 본 전시 계정에 업데이트');
-      }
-
       getLoginedViewedExhibitionData();
-    }
-
-    if (!isLogin && userId === '' && sessionStorage.getItem('recentlyViewed') !== '') {
+    } else if (!isLogin && userId === '' && sessionStorage.getItem('recentlyViewed') !== '') {
       getGuestViewedExhibitionData();
     }
   }, [userId]);

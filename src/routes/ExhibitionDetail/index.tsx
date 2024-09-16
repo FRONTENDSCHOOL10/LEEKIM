@@ -29,16 +29,13 @@ export function Component() {
   }));
 
   useEffect(() => {
+    // 로그인 상태일 때 최근 본 전시 서버에 저장
     const setLoginedViewedExhibitionData = async () => {
       const userData = await axios.get(
         `${pocketbaseUrl}/api/collections/users/records/${userId}?fields=RecentlyViewed`
       );
 
       let serverDataArray = userData.data.RecentlyViewed.id;
-      console.log(serverDataArray);
-      // if (serverDataArray.includes('')) {
-      //   serverDataArray = serverDataArray.filter((data) => data !== '');
-      // }
 
       if (serverDataArray.includes(exhiId as string)) {
         serverDataArray = serverDataArray.filter((data) => data !== exhiId);
@@ -59,6 +56,7 @@ export function Component() {
       });
     };
 
+    // 게스트 상태일 때 최근 본 전시 세션스토리지에 저장
     const setGuestViewedExhibitionData = async () => {
       let sessionDataString = await sessionStorage.getItem('recentlyViewed');
       if (sessionDataString === null) return;
@@ -108,7 +106,6 @@ export function Component() {
 
     if (isLogin && userId !== '') {
       setLoginedViewedExhibitionData();
-      console.log('로그인 된 유저');
     } else if (!isLogin && userId === '') {
       setGuestViewedExhibitionData();
     }

@@ -30,11 +30,18 @@ export function Component() {
     exitContentPage,
   }));
   // 로그인 했는지 확인하는 상태
-  const { login } = useIsLogin(({ login }) => ({
+  const { isLogin, login } = useIsLogin(({ isLogin, login }) => ({
+    isLogin,
     login,
   }));
 
   useEffect(() => {
+    if (isLogin) {
+      navigate('/', {
+        replace: true,
+      });
+    }
+
     const getExhibitionData = async () => {
       try {
         const response = await axios.get(
@@ -48,7 +55,7 @@ export function Component() {
 
     getExhibitionData();
     exitContentPage();
-  }, []);
+  }, [isLogin]);
 
   const handleLoginButton = async (e: FormEvent) => {
     e.preventDefault();
@@ -68,20 +75,46 @@ export function Component() {
         password: pwInput.current.value,
       });
 
-      sessionStorage.setItem('userId', response.data.record.id);
       // 최근 본 전시를 세션에서 처리할 때 다시 사용할 수도 있는 코드
-      // if (!sessionStorage.getItem('RecentlyViewed')) {
-      //   sessionStorage.setItem('RecentlyViewed', response.data.record.RecentlyViewed.id);
-      // }
+      if (sessionStorage.getItem('recentlyViewed') !== '') {
+        const userData = await axios.get(`${dbApiUrl}collections/users/records/${response.data.record.id}`);
+        const dataArray = userData.data.RecentlyViewed.id;
 
-      login();
+        const sessionStorageString = await sessionStorage.getItem('recentlyViewed');
+        if (sessionStorageString === null) return;
+
+        const sessionStorageArray = sessionStorageString?.split(',');
+
+        for (const id of sessionStorageArray) {
+          if (dataArray.includes(id)) {
+            dataArray.filter((item) => item !== id);
+          }
+        }
+
+        const mergeArray = [...dataArray, ...sessionStorageArray];
+
+        if (mergeArray.length >= 5) {
+          while (mergeArray.length > 4) {
+            mergeArray.shift();
+          }
+        }
+
+        await axios.patch(`${dbApiUrl}collections/users/records/${response.data.record.id}?fields=RecentlyViewed`, {
+          RecentlyViewed: {
+            id: mergeArray,
+          },
+        });
+      }
 
       toast.success('로그인에 성공했습니다.\n메인페이지로 이동합니다.', {
         id: toastMessage,
       });
 
       // 토스트 창을 기다린 뒤 홈으로 이동
-      setTimeout(() => {
+      await setTimeout(() => {
+        sessionStorage.setItem('recentlyViewed', '');
+        sessionStorage.setItem('userId', response.data.record.id);
+        login();
         navigate('/', {
           replace: true,
         });
@@ -92,7 +125,7 @@ export function Component() {
       toast.error('로그인 정보가 정확하지 않거나,\n계정이 존재하지 않습니다.');
       emailInput.current.value = '';
       pwInput.current.value = '';
-      sessionStorage.setItem('user', '');
+      sessionStorage.setItem('userId', '');
     }
   };
 
