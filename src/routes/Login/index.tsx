@@ -130,7 +130,7 @@ export function Component() {
   };
 
   return (
-    <section className={S.component}>
+    <main className={S.component}>
       <div role="presentation">
         <h2>로그인</h2>
         <p>효율적인 서비스 이용을 위해 로그인해 주세요.</p>
@@ -180,6 +180,6 @@ export function Component() {
           />
         </NavLink>
       )}
-    </section>
+    </main>
   );
 }

@@ -7,11 +7,11 @@ function RootLayout() {
   const isLoading = navigation.state === 'loading';
 
   return (
-    <div className="">
+    <>
       <AppHeader />
-      <main className="">{isLoading ? <AppSpinner /> : <Outlet />}</main>
+      {isLoading ? <AppSpinner /> : <Outlet />}
       <AppFooter />
-    </div>
+    </>
   );
 }
 

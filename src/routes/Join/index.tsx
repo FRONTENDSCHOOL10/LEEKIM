@@ -266,7 +266,7 @@ export function Component() {
   };
 
   return (
-    <section className={S.component}>
+    <main className={S.component}>
       <div role="presentation">
         <h2>
           <span>졸전닷컴</span>에 어서오세요!
@@ -376,6 +376,6 @@ export function Component() {
           )}
         </fieldset>
       </form>
-    </section>
+    </main>
   );
 }
