@@ -39,10 +39,15 @@ export function Component() {
   const [totalItems, setTotalItems] = useState<number>(0);
 
   useEffect(() => {
-    setInputValue(searchWord ?? '');
-  }, [searchWord]);
+    if (searchWord) {
+      setInputValue(searchWord);
+    }
+  }, [searchWord, setInputValue]);
 
   useEffect(() => {
+    // inputValue가 설정된 후에만 실행되도록
+    if (inputValue === '') return;
+
     const fetchData = async () => {
       try {
         let url = `${pocketbaseUrl}/api/collections/Exhibition/records?sort=${sort}&expand=School,Major&page=${page}&perPage=20`;
