@@ -6,9 +6,9 @@ interface SearchBannerProps {
 
 function SearchBanner({ inputValue }: SearchBannerProps) {
   return (
-    <div className={S.searchBanner}>
+    <div className={S.component}>
       <p className={S.searchResult}>
-        &apos;{inputValue}&apos;에
+        <span className={S.searchTerm}>&apos;{inputValue}&apos;</span>에
         <br /> 관련된 검색 결과입니다.
       </p>
     </div>
