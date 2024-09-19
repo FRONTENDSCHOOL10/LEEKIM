@@ -6,5 +6,25 @@
   .infoContainer {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    gap: 1.17rem;
+    padding: 0;
+  }
+
+  hr,
+  .infoContainer,
+  p {
+    margin-left: 8.0175rem; /* 10.69 */
+    margin-right: 8.955rem; /* 11.94 */
+  }
+
+  hr {
+    margin-bottom: 4.3125rem; /* 5.75 */
+    margin-top: 1.875rem; /* 2.5 */
+  }
+
+  .noResult {
+    font-size: 2rem;
+    font-weight: 700;
+    min-height: 40rem;
   }
 }
