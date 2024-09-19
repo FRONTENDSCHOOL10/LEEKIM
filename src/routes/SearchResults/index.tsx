@@ -114,6 +114,7 @@ export function Component() {
         sort={sort}
         setSort={setSort}
       />
+      <hr />
       {/* 검색된 전시 목록 */}
       {exhibitions.length !== 0 ? (
         <>
@@ -131,7 +132,10 @@ export function Component() {
           <LoadMoreButton onClick={handleLoadMore} />
         </>
       ) : (
-        <p>&apos;{inputValue}&apos;에 대한 검색 결과가 없습니다. 다른 키워드로 검색해 보세요.</p>
+        <p>
+          &apos;{inputValue}&apos;에 대한 검색 결과가 없습니다.
+          <br /> 다른 키워드로 검색해 보세요.
+        </p>
       )}
     </main>
   );

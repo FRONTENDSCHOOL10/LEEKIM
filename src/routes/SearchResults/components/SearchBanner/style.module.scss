@@ -1,15 +1,16 @@
 .component {
   border-radius: 6.25rem 6.25rem 0rem 0rem;
   background: var(--mainBlue, #3a39ff);
-  height: 34.375rem;
+  // height: 34.375rem;
+  height: 26.5rem;
 
   .searchResult {
-    font-size: 3.75rem;
+    font-size: 2.8125rem; // 3.75 * 0.75
     font-style: normal;
     font-weight: 600;
     line-height: 150%;
-    padding-top: 8.69rem;
-    padding-left: 11.5rem;
+    padding-top: 6.51875rem; // 8.69 * 0.75
+    padding-left: 3rem;
   }
 
   .searchTerm {
