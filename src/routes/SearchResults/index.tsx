@@ -132,7 +132,7 @@ export function Component() {
           <LoadMoreButton onClick={handleLoadMore} />
         </>
       ) : (
-        <p>
+        <p className={S.noResult}>
           &apos;{inputValue}&apos;에 대한 검색 결과가 없습니다.
           <br /> 다른 키워드로 검색해 보세요.
         </p>
