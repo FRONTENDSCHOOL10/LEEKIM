@@ -83,10 +83,7 @@ function FilterTag({
       return;
     }
 
-    const nextArray = tagDepartmentArray;
-
-    nextArray.push(tagId);
-    setTagDepartmentArray([...nextArray]);
+    setTagDepartmentArray([...tagDepartmentArray, tagId]);
   };
 
   const handleLocationFilter = (tagId: string) => {
@@ -96,10 +93,7 @@ function FilterTag({
       return;
     }
 
-    const nextArray = tagLocationArray;
-
-    nextArray.push(tagId);
-    setTagLocationArray([...nextArray]);
+    setTagLocationArray([...tagLocationArray, tagId]);
   };
 
   const handleYearFilter = (tagYear: string) => {
@@ -109,10 +103,7 @@ function FilterTag({
       return;
     }
 
-    const nextArray = tagYearArray;
-
-    nextArray.push(tagYear);
-    setTagYearArray([...nextArray]);
+    setTagYearArray([...tagYearArray, tagYear]);
   };
 
   const swiperCreater = (tagArray: TagData[], handleChangeFunc: (id: string) => void, isTagYear: boolean) => {
@@ -124,22 +115,23 @@ function FilterTag({
         modules={[FreeMode]}
         className={S.swiperContainer}
       >
-        {tagArray.map(({ id, Name }) => (
-          <SwiperSlide key={id.slice(0, 5)} className={S.swiperSlide}>
-            <label htmlFor={id.slice(0, 5)}>#{Name}</label>
-            <input
-              type="checkbox"
-              id={id.slice(0, 5)}
-              onChange={() => {
-                if (isTagYear) {
-                  handleChangeFunc(Name);
-                } else {
-                  handleChangeFunc(id);
-                }
-              }}
-            />
-          </SwiperSlide>
-        ))}
+        {Array.isArray(tagArray) &&
+          tagArray.map(({ id, Name }) => (
+            <SwiperSlide key={id.slice(0, 5)} className={S.swiperSlide}>
+              <label htmlFor={id.slice(0, 5)}>#{Name}</label>
+              <input
+                type="checkbox"
+                id={id.slice(0, 5)}
+                onChange={() => {
+                  if (isTagYear) {
+                    handleChangeFunc(Name);
+                  } else {
+                    handleChangeFunc(id);
+                  }
+                }}
+              />
+            </SwiperSlide>
+          ))}
       </Swiper>
     );
   };

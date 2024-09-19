@@ -130,7 +130,7 @@ export const Component: React.FC = () => {
           />
         </div>
         {/* 전시 정보 목록 */}
-        {exhibitions.length !== 0 ? (
+        {exhibitions && exhibitions.length !== 0 ? (
           <>
             <ul className={S.infoContainer}>
               {exhibitions.map((item) => (
