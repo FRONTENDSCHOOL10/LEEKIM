@@ -1,8 +1,8 @@
 .component {
-  padding: 0 20px;
+  padding: 0 90px;
 
   .listHeader {
-    border-bottom: 0.078125rem solid #000;
+    margin-top: 350px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -11,6 +11,19 @@
   .infoContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  label {
+    padding: 20px;
+  }
+  input {
+    margin: 7px;
+  }
+
+  select {
+    border: none;
+    color: #fff;
+    background-color: #02081a;
   }
 
   .buttonWrapper {
@@ -28,5 +41,10 @@
     line-height: 150%;
     width: 10rem;
     height: 3rem;
+  }
+
+  hr {
+    border: 0;
+    border-top: 0.75px solid #fff;
   }
 }

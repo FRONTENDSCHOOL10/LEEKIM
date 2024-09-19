@@ -129,6 +129,7 @@ export const Component: React.FC = () => {
             setSort={setSort}
           />
         </div>
+        <hr />
         {/* 전시 정보 목록 */}
         {exhibitions && exhibitions.length !== 0 ? (
           <>
