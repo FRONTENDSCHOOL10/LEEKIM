@@ -1,11 +1,15 @@
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 import S from './style.module.scss';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import ExhibitionInfo from '@/components/ExhibitionSlider/components/ExhibitionInfo';
 import { getImageURL } from '@/utils';
 import { ExhibitionData } from '@/types/ExhibitionData';
+import { useIsLogin } from '@/stores/isLogin';
+import { tr } from 'date-fns/locale';
+import { log } from 'console';
+import toast, { Toaster } from 'react-hot-toast';
 
 const dbApiUrl = import.meta.env.VITE_DB_API;
 
@@ -18,7 +22,20 @@ export function Component() {
   const [registerData, setRegisterData] = useState<ExhibitionData[] | null>(null);
   const [bookmarkData, setBookmarkData] = useState<ExhibitionData[] | null>(null);
 
+  const navigate = useNavigate();
+
+  const { isLogin, logout } = useIsLogin(({ isLogin, logout }) => ({
+    isLogin,
+    logout,
+  }));
+
   useEffect(() => {
+    if (!isLogin) {
+      navigate('/', {
+        replace: true,
+      });
+    }
+
     let localUserData = null;
 
     const getRelationExhiData = async (RelationIdDataArray, setFunction) => {
@@ -51,11 +68,54 @@ export function Component() {
       getRelationExhiData(localUserData.Bookmark.id, setBookmarkData);
     };
 
-    getUserData();
+    try {
+      getUserData();
+    } catch (err) {
+      console.clear();
+      window.location.reload();
+    }
   }, []);
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+
+    if (confirm('정말 로그아웃 하시겠어요?')) {
+      toast.success('로그아웃이 완료되었습니다.\n다음에 또 만나요!');
+
+      await setTimeout(() => {
+        sessionStorage.setItem('userId', '');
+        logout();
+        navigate('/', {
+          replace: true,
+        });
+        toast.remove();
+      }, 1500);
+    }
+  };
 
   return (
     <main id="page" className={S.component}>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        gutter={10}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          // Define default options
+          className: '',
+          duration: 2000,
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+
+          // Default options for specific types
+          success: {
+            duration: 1500,
+          },
+        }}
+      />
       <div>
         <p className="sr-only">{userData?.username}님 어서오세요!</p>
         <span aria-hidden="true">{userData?.username}</span>
@@ -137,6 +197,9 @@ export function Component() {
             )}
           </ul>
         </section>
+        <button type="button" onClick={handleLogout}>
+          로그아웃
+        </button>
       </div>
     </main>
   );
