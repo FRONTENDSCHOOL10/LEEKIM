@@ -1,2 +1,303 @@
 .component {
+  user-select: none;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+  .head {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: end;
+
+    width: 90%;
+    max-width: 90rem;
+    min-width: 67.5rem;
+
+    margin: 8rem;
+
+    .headLeft {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: end;
+
+      .userName {
+        margin: 0 0.2rem;
+        font-size: 5rem;
+        line-height: 5rem;
+        font-weight: 600;
+      }
+
+      .welcome {
+        font-size: 1.8rem;
+        font-weight: 600;
+      }
+    }
+
+    .headRight {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 0.5rem;
+
+      .headButton {
+        padding: 0.5rem 1.5rem;
+
+        border-radius: 999rem;
+        background-color: var(--mainblue);
+
+        color: var(--white);
+        text-decoration: none;
+
+        font-size: 1rem;
+        line-height: 1.5rem;
+        font-weight: 400;
+
+        :visited {
+          color: var(--white);
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .contentWrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10rem;
+
+    width: 90%;
+    max-width: 90rem;
+    min-width: 67.5rem;
+
+    margin-bottom: 10rem;
+
+    .recently {
+      h2 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin: 0;
+        margin-bottom: 2rem;
+      }
+
+      ul {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: start;
+        align-items: center;
+        gap: 1%;
+
+        margin: 0;
+        padding: 0;
+
+        list-style: none;
+
+        li {
+          width: 19%;
+        }
+      }
+    }
+
+    .contentBottom {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: start;
+
+      width: 100%;
+      max-width: 90rem;
+      min-width: 67.5rem;
+
+      h2 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin: 0;
+        margin-bottom: 2rem;
+      }
+
+      .registered {
+        width: 60%;
+
+        table {
+          border-collapse: collapse;
+          width: 100%;
+
+          padding: 0;
+          margin: 0;
+
+          tr {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+          }
+
+          thead {
+            border-bottom: 1.25px solid var(--white);
+
+            tr {
+              th {
+                margin-bottom: 0.5rem;
+                font-size: 1.2rem;
+                font-weight: 300;
+                text-align: left;
+              }
+
+              :nth-child(1) {
+                width: 30%;
+              }
+              :nth-child(2) {
+                width: 24%;
+              }
+              :nth-child(3) {
+                width: 26%;
+              }
+              :nth-child(4) {
+                width: 10%;
+              }
+            }
+          }
+
+          tbody {
+            tr {
+              line-height: 2rem;
+              margin: 1.5rem 0;
+
+              td {
+                font-size: 1.2rem;
+                font-weight: 400;
+                text-align: left;
+              }
+
+              :nth-child(1) {
+                width: 30%;
+                font-weight: 600;
+              }
+              :nth-child(2) {
+                width: 24%;
+              }
+              :nth-child(3) {
+                width: 26%;
+              }
+              :nth-child(4) {
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: center;
+                align-items: center;
+
+                width: 10%;
+              }
+
+              .regiLink {
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: center;
+                align-items: center;
+
+                height: 100%;
+                width: 100%;
+
+                img {
+                  height: 100%;
+                  width: auto;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .bookmark {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: start;
+
+        width: 35%;
+
+        .bookmarkTitle {
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: space-between;
+          align-items: end;
+
+          width: 100%;
+
+          margin-bottom: 0.5rem;
+
+          .bookmarkTitleLeft {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            align-items: center;
+
+            h2 {
+              font-size: 1.8rem;
+              font-weight: 600;
+              margin: 0;
+            }
+
+            img {
+              width: 2.5rem;
+              margin: 0 1rem;
+            }
+          }
+
+          .bookmarkLink {
+            color: var(--white);
+            font-size: 1.2rem;
+            text-decoration: none;
+
+            :visited {
+              color: var(--white);
+              text-decoration: none;
+            }
+          }
+        }
+
+        ul {
+          margin: 0;
+          padding: 0;
+
+          list-style: none;
+
+          li {
+            width: 100%;
+            aspect-ratio: 1/0.2;
+
+            img {
+              width: 100%;
+              height: 100%;
+
+              margin: 0.8rem 0;
+
+              object-fit: cover;
+              object-position: top;
+
+              border-radius: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  button {
+    padding: 1rem;
+
+    color: #646979;
+    font-size: 1.5rem;
+
+    border: 0px;
+    background-color: transparent;
+
+    &:hover {
+      color: var(--white);
+    }
+  }
 }
