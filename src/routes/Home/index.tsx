@@ -1,4 +1,3 @@
-import useDocumentTitle from '@/hooks/useDocumentTitle';
 import S from './style.module.scss';
 import Slogan from './components/Slogan/';
 import MainPosterCard from './components/MainPosterCard';
@@ -9,10 +8,9 @@ import { useEffect } from 'react';
 import IngExhibition from './components/IngExhibition';
 import SoonExhibition from './components/SoonExhibition';
 import RecentlyViewedExhibition from './components/RecentlyViewedExhibition';
+import CommonHelmet from '@/components/CommonHelmet';
 
 function HomePage() {
-  useDocumentTitle('미래를 엿보는 창, 졸전.com | JJ.com');
-
   const { isContentPage, enterContentPage } = useIsContentPage(({ isContentPage, enterContentPage }) => ({
     isContentPage,
     enterContentPage,
@@ -28,6 +26,11 @@ function HomePage() {
 
   return (
     <main id="page" className={S.component}>
+      <CommonHelmet
+        pageTitle="미래를 엿보는 창, 졸전.com"
+        pageDescription="다양한 졸업 전시회 정보를 제공해주는 졸전닷컴"
+      />
+
       <h1 className="sr-only">졸전닷컴 메인페이지</h1>
       <Slogan />
       <MainPosterCard />

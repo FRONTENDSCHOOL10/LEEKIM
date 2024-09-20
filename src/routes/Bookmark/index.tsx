@@ -1,12 +1,10 @@
-import useDocumentTitle from '@/hooks/useDocumentTitle';
+import CommonHelmet from '@/components/CommonHelmet';
 import S from './style.module.scss';
 
 export function Component() {
-  useDocumentTitle('나의 북마크 | JJ.com');
-
   return (
     <main id="page" className={S.component}>
-      북마크
+      <CommonHelmet pageTitle="나의 북마크" pageDescription="졸전 닷컴 북마크 페이지" />
     </main>
   );
 }

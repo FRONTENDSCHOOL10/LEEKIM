@@ -1,4 +1,3 @@
-import useDocumentTitle from '@/hooks/useDocumentTitle';
 import S from './style.module.scss';
 import FilterOptions from './components/FilterOptions/FilterOptions';
 import { useEffect, useState } from 'react';
@@ -11,12 +10,11 @@ import LoadMoreButton from './components/LoadMoreButton/LoadMoreButton';
 import { useSearchTermStore } from '@/stores/searchTerm';
 import toast, { Toaster } from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
+import CommonHelmet from '@/components/CommonHelmet';
 
 const pocketbaseUrl = import.meta.env.VITE_DB_URL;
 
 export function Component() {
-  useDocumentTitle('검색 결과 | JJ.com');
-
   // 검색어 상태
   const { inputValue, setInputValue } = useSearchTermStore();
   const { searchWord } = useParams<{ searchWord: string }>();
@@ -103,6 +101,11 @@ export function Component() {
 
   return (
     <main id="page" className={S.component}>
+      <CommonHelmet
+        pageTitle="검색 결과"
+        pageDescription="졸전 닷컴 검색 결과 페이지"
+        keywords={`졸전, 졸전 검색, 전시회 검색, 졸업 전시회${inputValue ? `, ${inputValue}` : ''}`}
+      />
       <Toaster position="top-center" toastOptions={{ duration: 2000 }} />
       <SearchBanner inputValue={inputValue} />
       {/* 필터 */}
