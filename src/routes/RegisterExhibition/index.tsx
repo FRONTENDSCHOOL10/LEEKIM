@@ -5,7 +5,9 @@ import S from './style.module.scss';
 import ImageUpload from './components/imagePreview';
 import RequireInfo from './components/requiredinfo';
 import SelectInfo from './components/selectinfo';
+import toast, { Toaster } from 'react-hot-toast';
 import { useImageUploadStore } from '@/stores/imageUploadStore';
+import TagList from './components/taglist';
 
 interface ExhibitionData {
   School: string;
@@ -19,6 +21,8 @@ interface ExhibitionData {
   URL: string;
   Contact: string;
   Poster: File | null;
+  TagDepartment: string[];
+  TagLocation: string[];
 }
 
 const POCKETBASE_API = import.meta.env.VITE_DB_URL;
@@ -35,14 +39,16 @@ const initialExhibitionData: ExhibitionData = {
   URL: '',
   Contact: '',
   Poster: null,
+  TagDepartment: [],
+  TagLocation: [],
 };
 
 export function Component() {
   useDocumentTitle('전시 등록 | JJ.com');
 
   const [exhibitionData, setExhibitionData] = useState<ExhibitionData>(initialExhibitionData);
-  const [error, setError] = useState<string | null>(null);
   const { reset: resetImageUpload } = useImageUploadStore();
+  const [resetTags, setResetTags] = useState<boolean>(false);
 
   const handleInputChange = useCallback((name: string, value: string) => {
     setExhibitionData((prevData) => ({
@@ -51,7 +57,14 @@ export function Component() {
     }));
   }, []);
 
-  //이미지가 업로드 될때  poster필드 업데이트
+  const handleTagChange = useCallback((selectedTags: { departments: string[]; locations: string[] }) => {
+    setExhibitionData((prevData) => ({
+      ...prevData,
+      TagDepartment: selectedTags.departments,
+      TagLocation: selectedTags.locations,
+    }));
+  }, []);
+
   const handleImageUpload = useCallback((file: File | null) => {
     setExhibitionData((prevData) => ({
       ...prevData,
@@ -59,60 +72,65 @@ export function Component() {
     }));
   }, []);
 
-  //초기상태 리셋
   const resetForm = useCallback(() => {
     setExhibitionData(initialExhibitionData);
     resetImageUpload();
+    setResetTags(true);
+    setTimeout(() => setResetTags(false), 0);
   }, [resetImageUpload]);
 
   const validateData = useCallback(() => {
     const requiredFields = ['School', 'Major', 'Title', 'Address', 'Start', 'End', 'Time', 'Introduce'];
     for (const field of requiredFields) {
       if (!exhibitionData[field as keyof ExhibitionData]) {
-        setError(`${field} 필수입니다.`);
+        toast.error(`${field} 필수입니다.`);
         return false;
       }
     }
-    //포스터는 따로줘야해서 넣어뒀습니닷
     if (!exhibitionData.Poster) {
-      setError('포스터는 필수입니다.');
+      toast.remove();
+      toast.error('포스터는 필수입니다.');
+      return false;
+    }
+    if (exhibitionData.TagDepartment.length === 0) {
+      toast.remove();
+      toast.error('분야별 태그를 하나 이상 선택해주세요.');
+      return false;
+    }
+    if (exhibitionData.TagLocation.length === 0) {
+      toast.remove();
+      toast.error('지역별 태그를 하나 이상 선택해주세요.');
       return false;
     }
     return true;
   }, [exhibitionData]);
 
-  //학교랑 학과 expand 릴레이션으로 연결되어있어서 받아와서 찾은다음에 없으면 새로 생성
   const findOrCreateRecord = useCallback(async (collectionName: string, name: string): Promise<string> => {
-    try {
-      const searchResponse = await axios.get(
-        `${POCKETBASE_API}/api/collections/${collectionName}/records?filter=(Name='${name}')`
-      );
+    const searchResponse = await axios.get(
+      `${POCKETBASE_API}/api/collections/${collectionName}/records?filter=(Name='${name}')`
+    );
 
-      if (searchResponse.data.items.length > 0) {
-        return searchResponse.data.items[0].id;
-      } else {
-        const createResponse = await axios.post(`${POCKETBASE_API}/api/collections/${collectionName}/records`, {
-          Name: name,
-        });
-        return createResponse.data.id;
-      }
-    } catch (error) {
-      console.error(`컬렉션 못만듬 ${collectionName}:`, error);
-      throw error;
+    if (searchResponse.data.items.length > 0) {
+      return searchResponse.data.items[0].id;
+    } else {
+      const createResponse = await axios.post(`${POCKETBASE_API}/api/collections/${collectionName}/records`, {
+        Name: name,
+      });
+      return createResponse.data.id;
     }
   }, []);
 
-  //폼제출
   const handleSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      setError(null);
 
       if (!validateData()) {
         return;
       }
 
       try {
+        toast.remove();
+        toast.loading('전시 등록중입니다..');
         const schoolId = await findOrCreateRecord('School', exhibitionData.School);
         const majorId = await findOrCreateRecord('Major', exhibitionData.Major);
 
@@ -128,27 +146,31 @@ export function Component() {
           } else if (key === 'Time') {
             const timeArray = value.split(',').map((item: string) => item.trim());
             formData.append('Time', JSON.stringify({ time: timeArray }));
+          } else if (key === 'TagDepartment' || key === 'TagLocation') {
+            (value as string[]).forEach((id) => {
+              formData.append(`${key}`, id);
+            });
           } else if (typeof value === 'string') {
             formData.append(key, value);
           }
         });
 
-        const response = await axios.post(`${POCKETBASE_API}/api/collections/Exhibition/records`, formData, {
+        await axios.post(`${POCKETBASE_API}/api/collections/Exhibition/records`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
 
-        console.log('성공하면 데이터:', response.data);
-        alert('등록이 완료되었습니다! 관리자의 승인 후 게시됩니다!');
+        toast.remove();
+        toast.success('등록이 완료되었습니다! 관리자의 승인 후 게시됩니다!');
         resetForm();
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
-          console.error('Error response:', error.response.data);
-          setError(`Submission failed: ${error.response.data.message || 'Unknown error'}`);
+          toast.remove();
+          toast.error(`제출 실패: ${error.response.data.message || '알 수 없는 오류'}`);
         } else {
-          console.error('실패시:', error);
-          setError('다시시도해주세욤.');
+          toast.remove();
+          toast.error('다시 시도해주세요.');
         }
       }
     },
@@ -159,8 +181,26 @@ export function Component() {
     <main id="page" className={S.component}>
       <h2 className={S.title}>전시 등록</h2>
       <span className={S.subtitle}>모든 전시는 관리자의 검토 후 등록됩니다. 검토에는 3-5일이 소요됩니다.</span>
-      {error && <div className={S.error}>{error}</div>}
+
       <form className={S.infocontainer} onSubmit={handleSubmit}>
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+          gutter={10}
+          containerClassName=""
+          containerStyle={{}}
+          toastOptions={{
+            className: '',
+            duration: 2000,
+            style: {
+              background: '#363636',
+              color: '#fff',
+            },
+            success: {
+              duration: 1500,
+            },
+          }}
+        />
         <div className={S.formrow}>
           <ImageUpload onImageUpload={handleImageUpload} />
           <div className={S.requireinfo}>
@@ -169,6 +209,8 @@ export function Component() {
           </div>
         </div>
         <SelectInfo exhibitionData={exhibitionData} onInputChange={handleInputChange} />
+        <span>태그 선택</span>
+        <TagList onTagChange={handleTagChange} resetTags={resetTags} />
         <button type="submit" className={S.submitbutton}>
           제출하기
         </button>
