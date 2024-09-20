@@ -7,13 +7,13 @@ const Banner: React.FC = () => {
     <section className={S.component}>
       <div className={S.mainBanner}>
         <h1 className={S.bannerTitle}>졸업 전시</h1>
-        <p>
+        <p className={S.bannerSub}>
           전국의 모든
           <br /> 졸업 전시를 만나보세요.
         </p>
       </div>
       <div className={S.subBanner}>
-        <p>우리 학교, 우리 학과 전시회가 없다면?</p>
+        <p className={S.subBannerText}>우리 학교, 우리 학과 전시회가 없다면?</p>
 
         {/* 추후 NavLink로 수정 */}
         <NavLink to={'/registerExhi'} className={S.bannerButton}>

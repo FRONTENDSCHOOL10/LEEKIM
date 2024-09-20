@@ -1,41 +1,72 @@
 .component {
-  width: 100%;
-  position: relative;
-  margin-bottom: 7.12rem;
+  width: 90rem;
+  padding: 80px 0;
+  color: #fff;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+}
 
-  .mainBanner {
-    border-radius: 3.125rem;
-    height: 32rem;
+.mainBanner {
+  max-width: 78rem;
+  margin: 0 auto;
+  margin-bottom: 4.5rem;
 
-    .bannerTitle {
-      margin-top: 2rem;
-    }
+  .bannerTitle {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0;
   }
 
-  .subBanner {
-    border-radius: 40px;
-    width: 80%;
-    margin: 0 auto;
+  .bannerSub {
+    margin: 0 0;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 800;
+  }
+}
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 9.3125rem;
+.subBanner {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 78rem;
+  background-color: #3a39ff; // blue background for the bottom section
+  border-radius: 2rem;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
 
-    p {
-      font-weight: 500;
-      line-height: 120%;
-      margin-left: 3.5rem;
-    }
+  .subBannerText {
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    padding: 10px;
+    padding-left: 36px;
+    margin: 1.5rem;
+    margin-right: 20%;
   }
 
   .bannerButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 329px;
+
+    margin-right: 40px;
+    padding: 22 72px;
+    height: 5.125rem;
     background-color: #fff;
     color: #3a39ff;
-    width: 20rem;
-    height: 5rem;
-    border-radius: 1.87rem;
-    border: none;
-    margin-right: 3rem;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
   }
 }

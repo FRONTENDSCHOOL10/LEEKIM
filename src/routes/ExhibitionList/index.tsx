@@ -40,8 +40,6 @@ export const Component: React.FC = () => {
         const locationFilters: string[] = [];
         const yearFilters: string[] = [];
 
-        console.log(today);
-
         // checkbox 필터 적용
         if (isOnline) filters.push('IsOnline=true');
         if (inProgress) filters.push(`Start<'${today}'%26%26End>'${today}'`);
@@ -72,13 +70,10 @@ export const Component: React.FC = () => {
         // URL에 필터와 정렬 옵션 추가
         if (filters.length > 0) url += `&filter=(${filters.join('%26%26')})`;
 
-        console.log(url);
-
         // API 요청
         const response = await axios.get(url);
         if (page === 1) {
           setExhibitions(response.data.items);
-          console.log(response.data.items);
         } else {
           setExhibitions((prevData) => [...prevData, ...response.data.items]);
         }
@@ -128,12 +123,13 @@ export const Component: React.FC = () => {
             setSort={setSort}
           />
         </div>
+        <hr />
         {/* 전시 정보 목록 */}
-        {exhibitions.length !== 0 ? (
+        {exhibitions && exhibitions.length !== 0 ? (
           <>
             <ul className={S.infoContainer}>
               {exhibitions.map((item) => (
-                <li>
+                <li key={item.id}>
                   <ExhibitionInfo
                     key={item.id}
                     schoolName={item?.expand?.School?.Name as string}

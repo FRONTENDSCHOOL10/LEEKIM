@@ -8,6 +8,7 @@ import { FreeMode } from 'swiper/modules';
 import axios from 'axios';
 import { TagData } from '@/types/TagData';
 
+// FilterTag 컴포넌트의 props 타입 정의
 interface FilterTag {
   tagDepartmentArray: string[];
   setTagDepartmentArray: React.Dispatch<React.SetStateAction<string[]>>;
@@ -17,6 +18,7 @@ interface FilterTag {
   setTagYearArray: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
+// API 엔드포인트 URL
 const dbApiUrl = import.meta.env.VITE_DB_API;
 
 function FilterTag({
@@ -38,6 +40,7 @@ function FilterTag({
   // 필터 카테고리 목록에 대한 ref
   const filterFormRef = useRef<HTMLFormElement>(null);
 
+  // 컴포넌트 마운트 시 태그 데이터 가져오기
   useEffect(() => {
     const getTagDepartment = async () => {
       try {
@@ -76,6 +79,7 @@ function FilterTag({
     setIsOpen(!isOpen);
   };
 
+  // 부서 필터 처리 함수
   const handleDepartmentFilter = (tagId: string) => {
     if (tagDepartmentArray.includes(tagId)) {
       const nextArray = tagDepartmentArray.filter((id: string) => id !== tagId);
@@ -83,12 +87,10 @@ function FilterTag({
       return;
     }
 
-    const nextArray = tagDepartmentArray;
-
-    nextArray.push(tagId);
-    setTagDepartmentArray([...nextArray]);
+    setTagDepartmentArray([...tagDepartmentArray, tagId]);
   };
 
+  // 지역 필터 처리 함수
   const handleLocationFilter = (tagId: string) => {
     if (tagLocationArray.includes(tagId)) {
       const nextArray = tagLocationArray.filter((id: string) => id !== tagId);
@@ -96,12 +98,10 @@ function FilterTag({
       return;
     }
 
-    const nextArray = tagLocationArray;
-
-    nextArray.push(tagId);
-    setTagLocationArray([...nextArray]);
+    setTagLocationArray([...tagLocationArray, tagId]);
   };
 
+  // 연도 필터 처리 함수
   const handleYearFilter = (tagYear: string) => {
     if (tagYearArray.includes(tagYear)) {
       const nextArray = tagYearArray.filter((year: string) => year !== tagYear);
@@ -109,13 +109,16 @@ function FilterTag({
       return;
     }
 
-    const nextArray = tagYearArray;
-
-    nextArray.push(tagYear);
-    setTagYearArray([...nextArray]);
+    setTagYearArray([...tagYearArray, tagYear]);
   };
 
-  const swiperCreater = (tagArray: TagData[], handleChangeFunc: (id: string) => void, isTagYear: boolean) => {
+  // Swiper 슬라이드 생성 함수
+  const swiperCreater = (
+    tagArray: TagData[],
+    handleChangeFunc: (id: string) => void,
+    isTagYear: boolean,
+    selectedArray: string[]
+  ) => {
     return (
       <Swiper
         slidesPerView={'auto'}
@@ -124,60 +127,80 @@ function FilterTag({
         modules={[FreeMode]}
         className={S.swiperContainer}
       >
-        {tagArray.map(({ id, Name }) => (
-          <SwiperSlide key={id.slice(0, 5)} className={S.swiperSlide}>
-            <label htmlFor={id.slice(0, 5)}>#{Name}</label>
-            <input
-              type="checkbox"
-              id={id.slice(0, 5)}
-              onChange={() => {
-                if (isTagYear) {
-                  handleChangeFunc(Name);
-                } else {
-                  handleChangeFunc(id);
-                }
-              }}
-            />
-          </SwiperSlide>
-        ))}
+        {Array.isArray(tagArray) &&
+          tagArray.map(({ id, Name }) => {
+            // 태그의 체크 상태 확인
+            const isChecked = isTagYear ? selectedArray.includes(Name) : selectedArray.includes(id);
+            return (
+              <SwiperSlide key={id} className={`${S.swiperSlide} ${isChecked ? S.checked : ''}`}>
+                <label htmlFor={id} className={S.tagLabel}>
+                  #{Name}
+                </label>
+                <input
+                  type="checkbox"
+                  id={id}
+                  onChange={() => {
+                    if (isTagYear) {
+                      handleChangeFunc(Name);
+                    } else {
+                      handleChangeFunc(id);
+                    }
+                  }}
+                  checked={isChecked}
+                />
+              </SwiperSlide>
+            );
+          })}
       </Swiper>
     );
   };
 
   return (
     <section className={S.component}>
+      {/* 필터 헤더 */}
       <div className={S.filterHeader}>
-        <div>
+        <div className={S.headerwrapper}>
           <h2>필터 카테고리</h2>
           <img src="/Icon/IconFilter.svg" alt="" />
         </div>
         {/* 필터 토글 버튼 */}
         <button className={S.filterButton} onClick={handleToggle}>
           <img src="/Icon/IconClose.svg" />
-          {/* <img src={isOpen ? '/Icon/IconClose.svg' : '/Icon/IconOpen.svg'} alt={isOpen ? '필터 닫기' : '필터 열기'} /> */}
+          {/* 아이콘 변경 로직 (현재 주석 처리됨)
+          <img src={isOpen ? '/Icon/IconClose.svg' : '/Icon/IconOpen.svg'} alt={isOpen ? '필터 닫기' : '필터 열기'} /> */}
         </button>
       </div>
 
       {/* 필터 카테고리 목록 */}
       <form ref={filterFormRef} className={`${S.filterCategory} ${isOpen ? S.visible : S.hidden}`}>
-        <fieldset>
-          <legend>분야별</legend>
-          <img src="/Icon/IconArrow.svg" aria-hidden="true" />
-          {swiperCreater(tagDepartment, handleDepartmentFilter, false)}
+        {/* 분야별 필터 */}
+        <fieldset className={S.tagwrapper}>
+          <div className={S.title}>
+            <legend>분야별</legend>
+            <img src="/Icon/IconArrow.svg" aria-hidden="true" />
+          </div>
+          {swiperCreater(tagDepartment, handleDepartmentFilter, false, tagDepartmentArray)}
         </fieldset>
-        <fieldset>
-          <legend>연도별</legend>
-          <img src="/Icon/IconArrow.svg" aria-hidden="true" />
-          {swiperCreater(tagLocation, handleLocationFilter, false)}
+        {/* 연도별 필터 */}
+        <fieldset className={S.tagwrapper}>
+          <div className={S.title}>
+            <legend>지역별</legend>
+            <img src="/Icon/IconArrow.svg" aria-hidden="true" />
+          </div>
+          {swiperCreater(tagLocation, handleLocationFilter, false, tagLocationArray)}
         </fieldset>
-        <fieldset>
-          <legend>지역별</legend>
-          <img src="/Icon/IconArrow.svg" aria-hidden="true" />
-          {swiperCreater(tagYear, handleYearFilter, true)}
+        {/* 지역별 필터 */}
+        <fieldset className={S.tagwrapper}>
+          <div className={S.title}>
+            <legend>연도별</legend>
+            <img src="/Icon/IconArrow.svg" aria-hidden="true" />
+          </div>
+          {swiperCreater(tagYear, handleYearFilter, true, tagYearArray)}
         </fieldset>
         <button>초기화</button>
       </form>
     </section>
   );
 }
+
 export default memo(FilterTag);

@@ -1,16 +1,48 @@
 .component {
-  padding: 0 20px;
+  padding: 0 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  section {
+    width: 96.875rem;
+
+    p {
+      margin: 5rem 0;
+
+      font-size: 2rem;
+      font-weight: 700;
+    }
+  }
 
   .listHeader {
-    border-bottom: 0.078125rem solid #000;
+    margin-top: 8rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
   .infoContainer {
+    width: 1440px;
     display: grid;
+    gap: 25px;
+    margin-top: 90px;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    list-style: none;
+    padding: 0;
+  }
+
+  label {
+    padding: 20px;
+  }
+  input {
+    margin: 7px;
+  }
+
+  select {
+    border: none;
+    color: #fff;
+    background-color: #02081a;
   }
 
   .buttonWrapper {
@@ -28,5 +60,10 @@
     line-height: 150%;
     width: 10rem;
     height: 3rem;
+  }
+
+  hr {
+    border: 0;
+    border-top: 0.75px solid #fff;
   }
 }
