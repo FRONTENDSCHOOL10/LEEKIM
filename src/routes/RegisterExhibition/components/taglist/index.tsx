@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/free-mode';
-import S from './style.module.scss'; // 스타일 모듈을 import 했다고 가정합니다.
+import S from './style.module.scss';
 
 interface Tag {
   id: string;
