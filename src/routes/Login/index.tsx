@@ -1,4 +1,3 @@
-import useDocumentTitle from '@/hooks/useDocumentTitle';
 import { useIsContentPage } from '@/stores/isContentPage';
 import { useIsLogin } from '@/stores/isLogin';
 import { FormEvent, useEffect, useId, useRef, useState } from 'react';
@@ -10,12 +9,11 @@ import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import { ExhibitionData } from '@/types/ExhibitionData';
 import { getImageURL } from '@/utils';
+import CommonHelmet from '@/components/CommonHelmet';
 
 const dbApiUrl = import.meta.env.VITE_DB_API;
 
 export function Component() {
-  useDocumentTitle('로그인 | JJ.com');
-
   const [exhibitionItem, setExhibitionItem] = useState<ExhibitionData | null>(null);
 
   const emailInput = useRef<HTMLInputElement>(null);
@@ -131,6 +129,8 @@ export function Component() {
 
   return (
     <main className={S.component}>
+      <CommonHelmet pageTitle="로그인" pageDescription="졸전 닷컴 로그인 페이지" />
+
       <div role="presentation">
         <h2>로그인</h2>
         <p>효율적인 서비스 이용을 위해 로그인해 주세요.</p>

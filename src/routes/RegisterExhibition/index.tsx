@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import axios from 'axios';
-import useDocumentTitle from '@/hooks/useDocumentTitle';
 import S from './style.module.scss';
 import ImageUpload from './components/imagePreview';
 import RequireInfo from './components/requiredinfo';
@@ -8,6 +7,7 @@ import SelectInfo from './components/selectinfo';
 import toast, { Toaster } from 'react-hot-toast';
 import { useImageUploadStore } from '@/stores/imageUploadStore';
 import TagList from './components/taglist';
+import CommonHelmet from '@/components/CommonHelmet';
 
 interface ExhibitionData {
   School: string;
@@ -44,8 +44,6 @@ const initialExhibitionData: ExhibitionData = {
 };
 
 export function Component() {
-  useDocumentTitle('전시 등록 | JJ.com');
-
   const [exhibitionData, setExhibitionData] = useState<ExhibitionData>(initialExhibitionData);
   const { reset: resetImageUpload } = useImageUploadStore();
   const [resetTags, setResetTags] = useState<boolean>(false);
@@ -179,6 +177,12 @@ export function Component() {
 
   return (
     <main id="page" className={S.component}>
+      <CommonHelmet
+        pageTitle="전시 등록"
+        pageDescription="졸전 닷컴 전시 등록 페이지"
+        keywords="졸전, 졸업 전시회, 전시 등록, 전시 관리, 전시회 등록"
+      />
+
       <h2 className={S.title}>전시 등록</h2>
       <span className={S.subtitle}>모든 전시는 관리자의 검토 후 등록됩니다. 검토에는 3-5일이 소요됩니다.</span>
 

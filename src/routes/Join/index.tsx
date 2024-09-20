@@ -1,4 +1,3 @@
-import useDocumentTitle from '@/hooks/useDocumentTitle';
 import { useIsContentPage } from '@/stores/isContentPage';
 import { useIsLogin } from '@/stores/isLogin';
 import { FormEvent, useEffect, useId, useRef, useState } from 'react';
@@ -9,6 +8,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { TagData } from '@/types/TagData';
+import CommonHelmet from '@/components/CommonHelmet';
 
 interface CheckState {
   visibility: React.CSSProperties['visibility'];
@@ -18,8 +18,6 @@ interface CheckState {
 const dbApiUrl = import.meta.env.VITE_DB_API;
 
 export function Component() {
-  useDocumentTitle('회원가입 | JJ.com');
-
   const [tagData, setTagData] = useState<TagData[] | null>(null);
   const interestedTagArray = useRef<string[]>([]);
 
@@ -267,6 +265,7 @@ export function Component() {
 
   return (
     <main className={S.component}>
+      <CommonHelmet pageTitle="회원가입" pageDescription="졸전 닷컴 회원가입 페이지" />
       <div role="presentation">
         <h2>
           <span>졸전닷컴</span>에 어서오세요!
