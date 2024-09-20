@@ -134,19 +134,23 @@ export function Component() {
       <div role="presentation">
         <h2>로그인</h2>
         <p>효율적인 서비스 이용을 위해 로그인해 주세요.</p>
-        <SnsLoginButton>Google 계정으로 로그인</SnsLoginButton>
-        <SnsLoginButton>KAKAO 계정으로 로그인</SnsLoginButton>
-        <div role="presentation">
-          <Divider />
+        <div className={S.btnContainer}>
+          <SnsLoginButton>Google 계정으로 로그인</SnsLoginButton>
+          <SnsLoginButton>KAKAO 계정으로 로그인</SnsLoginButton>
+        </div>
+        <div role="presentation" className={S.orSpan}>
+          <hr />
           <span>or</span>
-          <Divider />
+          <hr />
         </div>
         <form onSubmit={handleLoginButton}>
           <label htmlFor={emailInputId}>Email</label>
           <input id={emailInputId} type="email" placeholder="email@joljeon.com" ref={emailInput} />
           <label htmlFor={pwInputId}>비밀번호</label>
           <input id={pwInputId} type="password" placeholder="비밀번호를 입력해 주세요" ref={pwInput} />
-          <button type="submit">로그인</button>
+          <button type="submit" className={S.logInBtn}>
+            로그인
+          </button>
           <Toaster
             position="top-center"
             reverseOrder={false}
@@ -169,8 +173,10 @@ export function Component() {
             }}
           />
         </form>
-        <p>계정이 없으신가요?</p>
-        <NavLink to={'/join'}>회원가입</NavLink>
+        <div className={S.join}>
+          <p>계정이 없으신가요?</p>
+          <NavLink to={'/join'}>회원가입</NavLink>
+        </div>
       </div>
       {exhibitionItem && (
         <NavLink to={`/exhibition/detail/${exhibitionItem.id}`}>
