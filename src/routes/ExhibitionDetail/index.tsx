@@ -169,7 +169,7 @@ export function Component() {
               <Poster url={exhibitionData.URL} image={posterUrl} />
             </div>
             <div className={S.infoSection}>
-              <Description title={exhibitionData.Title} description={exhibitionData.Introduce} />
+              <Description title={exhibitionData.Title} description={exhibitionData.Introduce} exhiId={exhiId} />
               <ContactInfo tel={exhibitionData.Contact} />
               <div className={S.wrapper}>
                 <ExhibitionDate start={exhibitionData.Start} end={exhibitionData.End} time={timeData} />

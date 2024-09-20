@@ -8,8 +8,8 @@ export interface UserData {
   email: string;
   created: Date;
   updated: Date;
-  Bookmark: string[];
-  RecentlyViewed: string[];
+  Bookmark: { id: string[] };
+  RecentlyViewed: { id: string[] };
   InterestedTag: string[];
   Admin: boolean;
 }
