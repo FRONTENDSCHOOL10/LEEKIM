@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import useDocumentTitle from '@/hooks/useDocumentTitle';
 import S from './style.module.scss';
 import Banner from './components/Banner/Banner';
 import FilterTag from './components/FilterTag/FilterTag';
@@ -8,12 +7,11 @@ import { ExhibitionData } from '@/types/ExhibitionData';
 import ExhibitionInfo from '@/components/ExhibitionSlider/components/ExhibitionInfo';
 import { getImageURL } from '@/utils';
 import FilterOptions from './components/FilterOptions/FilterOptions';
+import CommonHelmet from '@/components/CommonHelmet';
 
 const pocketbaseUrl = import.meta.env.VITE_DB_URL;
 
 export const Component: React.FC = () => {
-  useDocumentTitle('전시 목록 | JJ.com');
-
   const [exhibitions, setExhibitions] = useState<ExhibitionData[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -108,6 +106,7 @@ export const Component: React.FC = () => {
 
   return (
     <main id="page" className={S.component}>
+      <CommonHelmet pageTitle="전시 목록" pageDescription="졸업 전시회 목록 페이지" />
       <Banner />
       <FilterTag
         tagDepartmentArray={tagDepartmentArray}

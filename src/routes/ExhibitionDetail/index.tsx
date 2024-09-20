@@ -13,6 +13,7 @@ import { getImageURL } from '@/utils';
 import TagList from './components/taglist';
 import { ExhibitionData } from '@/types/ExhibitionData';
 import { useIsLogin } from '@/stores/isLogin';
+import CommonHelmet from '@/components/CommonHelmet';
 
 const pocketbaseUrl = import.meta.env.VITE_DB_URL;
 
@@ -23,6 +24,18 @@ export function Component() {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [userId, setUserId] = useState<string | null>(sessionStorage.getItem('userId'));
+
+  // Helmet의 keywords에 전달
+  const keywords = [
+    exhibitionData?.Title,
+    exhibitionData?.SubTitle,
+    exhibitionData?.expand?.School?.Name,
+    exhibitionData?.expand?.Major?.Name,
+    '졸업전시',
+    '전시회',
+  ]
+    .filter(Boolean)
+    .join(', ');
 
   const { isLogin } = useIsLogin(({ isLogin }) => ({
     isLogin,
@@ -135,6 +148,7 @@ export function Component() {
 
   return (
     <div className={S.component}>
+      <CommonHelmet pageTitle="전시 상세" pageDescription="전시회 상세 정보" keywords={keywords} />
       <main className={S.main}>
         <div className={S.contentWrapper}>
           <button className={S.backButton} onClick={() => navigate(-1)}>

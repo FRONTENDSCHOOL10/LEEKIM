@@ -1,17 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import S from './style.module.scss';
-import useDocumentTitle from '@/hooks/useDocumentTitle';
 import { useIsLogin } from '@/stores/isLogin';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import { UserData } from '@/types/UserData';
+import CommonHelmet from '@/components/CommonHelmet';
 
 const dbApiUrl = import.meta.env.VITE_DB_API;
 
 export function Component() {
-  useDocumentTitle('프로필 편집 | JJ.com');
-
   const navigate = useNavigate();
 
   const [userData, setUserData] = useState<UserData | null>(null);
@@ -157,6 +155,7 @@ export function Component() {
 
   return (
     <main id="page" className={S.component}>
+      <CommonHelmet pageTitle="프로필 편집" pageDescription="프로필 편집 페이지" />
       <Toaster
         position="top-center"
         reverseOrder={false}

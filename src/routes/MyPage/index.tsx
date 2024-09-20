@@ -1,4 +1,3 @@
-import useDocumentTitle from '@/hooks/useDocumentTitle';
 import S from './style.module.scss';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -10,12 +9,11 @@ import { useIsLogin } from '@/stores/isLogin';
 import { tr } from 'date-fns/locale';
 import { log } from 'console';
 import toast, { Toaster } from 'react-hot-toast';
+import CommonHelmet from '@/components/CommonHelmet';
 
 const dbApiUrl = import.meta.env.VITE_DB_API;
 
 export function Component() {
-  useDocumentTitle('마이페이지 | JJ.com');
-
   const { userId } = useParams<{ userId: string }>();
   const [userData, setUserData] = useState(null);
   const [recentlyViewedData, setRecentlyViewedData] = useState<ExhibitionData[] | null>(null);
@@ -95,6 +93,8 @@ export function Component() {
 
   return (
     <main id="page" className={S.component}>
+      <CommonHelmet pageTitle="마이페이지" pageDescription="졸전 닷컴 마이페이지" />
+
       <Toaster
         position="top-center"
         reverseOrder={false}
