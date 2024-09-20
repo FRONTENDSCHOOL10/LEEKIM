@@ -1,44 +1,50 @@
 .component {
-  background-color: #02081a;
-  color: #fff;
-  margin: 0;
-  padding: 0 11.31rem;
+  max-width: 90rem;
+  min-width: 67.5rem;
+  margin: 0 auto;
 
+  // 전시 등록 신청 관리 타이틀
   .regList {
     font-size: 3.125rem;
-    padding: 0 2rem;
     margin-bottom: 6.56rem;
   }
 
+  // 전시명, 학교, 학과
   .regListHeader {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    padding: 0;
     list-style: none;
     font-size: 1.5rem;
     border-bottom: 1.25px solid #fff;
-    padding: 0;
     padding-bottom: 1.69rem;
-    margin-left: 2rem;
     margin-bottom: 4.75rem;
+  }
+
+  .regListItem {
+    min-height: 85.31rem;
+    padding: 0;
+  }
+
+  .regList,
+  .regListHeader,
+  .regListItem {
+    margin-left: 2rem;
+    margin-right: 2rem;
   }
 
   .loadMoreButton {
     display: flex;
     justify-content: center;
-    padding-bottom: 11.69rem;
 
     button {
-      width: 18.375rem;
-      height: 5.625rem;
+      width: 13.781rem;
+      height: 4.219rem;
       border-radius: 3.125rem;
       background: #3a39ff;
       border: none;
       color: #fff;
       font-size: 1.5625rem;
     }
-  }
-
-  .regListItem {
-    min-height: 89.31rem;
   }
 }

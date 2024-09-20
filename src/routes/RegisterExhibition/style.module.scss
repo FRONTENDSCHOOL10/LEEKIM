@@ -5,7 +5,7 @@
   color: #fff;
   background: #02081a;
   min-width: 1920px;
-  height: 4692px;
+  height: 3092px;
   .title {
     margin: 225px 0 35px;
     font-size: 60px;
@@ -31,8 +31,16 @@
       margin: 0;
       margin-bottom: 35px;
     }
+
+    span {
+      font-size: 40px;
+
+      font-weight: 700;
+      margin-top: 240px;
+      margin-bottom: 35px;
+    }
     .submitbutton {
-      margin-top: 35px;
+      margin-top: 320px;
       width: 329px;
       height: 95px;
       border-radius: 80px;

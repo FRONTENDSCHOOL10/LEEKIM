@@ -39,10 +39,15 @@ export function Component() {
   const [totalItems, setTotalItems] = useState<number>(0);
 
   useEffect(() => {
-    setInputValue(searchWord ?? '');
-  }, [searchWord]);
+    if (searchWord) {
+      setInputValue(searchWord);
+    }
+  }, [searchWord, setInputValue]);
 
   useEffect(() => {
+    // inputValue가 설정된 후에만 실행되도록
+    if (inputValue === '') return;
+
     const fetchData = async () => {
       try {
         let url = `${pocketbaseUrl}/api/collections/Exhibition/records?sort=${sort}&expand=School,Major&page=${page}&perPage=20`;
@@ -109,6 +114,7 @@ export function Component() {
         sort={sort}
         setSort={setSort}
       />
+      <hr />
       {/* 검색된 전시 목록 */}
       {exhibitions.length !== 0 ? (
         <>
@@ -126,7 +132,10 @@ export function Component() {
           <LoadMoreButton onClick={handleLoadMore} />
         </>
       ) : (
-        <p>&apos;{inputValue}&apos;에 대한 검색 결과가 없습니다. 다른 키워드로 검색해 보세요.</p>
+        <p className={S.noResult}>
+          &apos;{inputValue}&apos;에 대한 검색 결과가 없습니다.
+          <br /> 다른 키워드로 검색해 보세요.
+        </p>
       )}
     </main>
   );

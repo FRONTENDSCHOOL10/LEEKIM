@@ -1,4 +1,59 @@
 .component {
   display: flex;
   justify-content: right;
+  align-items: end;
+
+  height: 16.59375rem; /* 22.125 * 0.75 */
+  position: relative;
+  top: -5.90625rem; /* -7.875 * 0.75 */
+
+  background: var(--background);
+  border-radius: 4.6875rem 4.6875rem 0 0; /* 6.25 * 0.75 */
+  margin-bottom: -5.90625rem; /* -7.875 * 0.75 */
+
+  padding-left: 8.01875rem; /* 10.69 * 0.75 */
+  padding-right: 8.955rem; /* 11.94 * 0.75 */
+
+  label,
+  select {
+    font-size: 1.40625rem; /* 1.875 * 0.75 */
+    font-weight: 500;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+  }
+
+  input {
+    appearance: none;
+    width: 1.171875rem; /* 1.5625 * 0.75 */
+    height: 1.171875rem; /* 1.5625 * 0.75 */
+    border: 1px solid white;
+    border-radius: 50%;
+    margin-right: 4.08rem; /* 5.44 * 0.75 */
+    margin-left: 0.60625rem; /* 0.81 * 0.75 */
+
+    &:checked {
+      background: var(--mainblue) url(/Icon/IconCheckbox.svg) center/2rem no-repeat;
+    }
+  }
+
+  select {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: #fff;
+    background-color: pink;
+    padding-right: 1.2rem; /* 1.6 * 0.75 */
+    background: url('/Icon/IconSortArrow.svg') no-repeat right center;
+    background-size: 1.171875rem 1.171875rem; /* 1.5625 * 0.75 */
+
+    &:focus {
+      outline: none;
+      border: 1px solid var(--mainblue);
+    }
+  }
+
+  option {
+    background: var(--background);
+  }
 }
