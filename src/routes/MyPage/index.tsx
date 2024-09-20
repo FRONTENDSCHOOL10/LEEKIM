@@ -11,6 +11,7 @@ import { tr } from 'date-fns/locale';
 import { log } from 'console';
 import toast, { Toaster } from 'react-hot-toast';
 import { UserData } from '@/types/UserData';
+import ExhibitionDate from '../ExhibitionDetail/components/exhibitionDate';
 
 const dbApiUrl = import.meta.env.VITE_DB_API;
 
@@ -145,21 +146,23 @@ export function Component() {
         <section className={S.recently}>
           <h2>최근 본 전시</h2>
           <ul>
-            {recentlyViewedData?.map((item: ExhibitionData) =>
-              item ? (
-                <li key={item.id}>
-                  <ExhibitionInfo
-                    schoolName={item?.expand?.School?.Name as string}
-                    major={item?.expand?.Major?.Name as string}
-                    posterUrl={getImageURL(item)}
-                    exhiId={item.id}
-                  />
-                </li>
-              ) : (
-                <li>
-                  <p>최근 본 전시가 존재하지 않습니다.😭</p>
-                </li>
-              )
+            {recentlyViewedData?.length > 0 ? (
+              recentlyViewedData?.map((item: ExhibitionData) => {
+                return (
+                  <li key={item.id} className={S.ExhiPoster}>
+                    <ExhibitionInfo
+                      schoolName={item?.expand?.School?.Name as string}
+                      major={item?.expand?.Major?.Name as string}
+                      posterUrl={getImageURL(item)}
+                      exhiId={item.id}
+                    />
+                  </li>
+                );
+              })
+            ) : (
+              <li className={S.info}>
+                <p>최근 본 전시가 존재하지 않습니다.😭</p>
+              </li>
             )}
           </ul>
         </section>
@@ -210,21 +213,27 @@ export function Component() {
               </NavLink>
             </div>
             <ul>
-              {bookmarkData?.slice(0, 2).map((item: ExhibitionData) =>
-                item ? (
-                  <li key={item.id}>
-                    <NavLink to={`/exhibition/detail/${item.id}`}>
-                      <img
-                        src={getImageURL(item)}
-                        alt={`${item?.expand?.School?.Name} ${item?.expand?.Major?.Name} 졸업전시회`}
-                      />
-                    </NavLink>
-                  </li>
-                ) : (
-                  <li>
-                    <p>아직 북마크한 전시가 없어요. 마음에 드는 전시를 북마크해 보세요!</p>
-                  </li>
-                )
+              {bookmarkData?.length > 0 ? (
+                bookmarkData?.slice(0, 2).map((item: ExhibitionData) => {
+                  return (
+                    <li key={item.id}>
+                      <NavLink to={`/exhibition/detail/${item.id}`}>
+                        <img
+                          src={getImageURL(item)}
+                          alt={`${item?.expand?.School?.Name} ${item?.expand?.Major?.Name} 졸업전시회`}
+                        />
+                      </NavLink>
+                    </li>
+                  );
+                })
+              ) : (
+                <li>
+                  <p>
+                    아직 북마크한 전시가 없어요.
+                    <br />
+                    마음에 드는 전시를 북마크해 보세요!
+                  </p>
+                </li>
               )}
             </ul>
           </section>
