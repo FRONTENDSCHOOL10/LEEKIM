@@ -37,22 +37,14 @@
 
     .HomeButtonContent {
       order: 1;
-
-      ul {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
-      }
+      width: 5rem;
+      padding: 1rem;
     }
 
     .HomeButtonLogin {
       order: 0;
-
-      ul {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
-      }
+      width: 12rem;
+      padding: 1rem;
     }
 
     .formWrapper {
