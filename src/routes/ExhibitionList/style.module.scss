@@ -1,5 +1,8 @@
 .component {
   padding: 0 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .listHeader {
     margin-top: 350px;
@@ -9,8 +12,13 @@
   }
 
   .infoContainer {
+    width: 1440px;
     display: grid;
+    gap: 25px;
+    margin-top: 90px;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    list-style: none;
+    padding: 0;
   }
 
   label {
