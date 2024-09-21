@@ -1,7 +1,6 @@
 .warpper {
   display: flex;
   flex-direction: column;
-  color: #fff;
   white-space: pre-line;
   padding-top: 201px;
   gap: 300px;
@@ -81,7 +80,7 @@
     .bluetext {
       font-size: 125px;
       margin: 0;
-      color: #3a39ff;
+      color: var(--mainblue);
     }
     span {
       display: flex;
@@ -96,19 +95,19 @@
       align-items: center;
       justify-content: center;
       border-radius: 100px;
-      border: 2.25px solid #3a39ff;
+      border: 2.25px solid var(--mainblue);
       font-weight: 500;
       background-color: transparent;
       font-size: 30px;
       margin-left: 10px;
-      color: #3a39ff;
+      color: var(--mainblue);
       text-decoration: none;
     }
   }
   span {
     margin-top: 260px;
     margin-bottom: 45px;
-    color: #fff;
+    color: var(--white);
     font-size: 25px;
     font-style: normal;
     font-weight: 600;
@@ -122,7 +121,7 @@
     gap: 75px;
     max-height: 29px;
     p {
-      color: #fff;
+      color: var(--white);
 
       font-size: 30px;
       font-style: normal;

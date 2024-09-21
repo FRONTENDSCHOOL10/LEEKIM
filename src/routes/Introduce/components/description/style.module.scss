@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #3a39ff;
+  background-color: var(--mainblue);
   border-radius: 100px 100px 0px 0px;
   width: 100%;
   min-height: 2433px;
@@ -13,7 +13,6 @@
     margin-top: 314px;
     font-size: 50px;
     font-weight: 800;
-    color: #fff;
     text-align: left;
   }
   .wrapper {
@@ -22,7 +21,7 @@
     width: 1555px;
     height: 412px;
     border-radius: 50px;
-    background-color: #fff;
+    background-color: var(--white);
     gap: 82px;
 
     img {

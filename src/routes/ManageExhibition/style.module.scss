@@ -16,7 +16,7 @@
     padding: 0;
     list-style: none;
     font-size: 1.5rem;
-    border-bottom: 1.25px solid #fff;
+    border-bottom: 0.078125rem solid var(--white);
     padding-bottom: 1.69rem;
     margin-bottom: 4.75rem;
   }
@@ -41,9 +41,9 @@
       width: 13.781rem;
       height: 4.219rem;
       border-radius: 3.125rem;
-      background: #3a39ff;
+      background: var(--mainblue);
       border: none;
-      color: #fff;
+      color: var(--white);
       font-size: 1.5625rem;
     }
   }
