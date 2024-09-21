@@ -154,7 +154,7 @@ function RequireInfo({ exhibitionData, onInputChange }: RequireInfoProps): React
           value={exhibitionData.Time}
           onChange={handleChange}
           className={S.input}
-          placeholder="Ex) OO일 09:00 ~ 18:00, OO일 10:00 ~ 19:00"
+          placeholder="ex) OO일 09:00 ~ 18:00, OO일 10:00 ~ 19:00"
           required
         />
       </div>

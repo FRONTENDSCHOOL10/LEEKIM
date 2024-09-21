@@ -7,7 +7,6 @@
   width: 100%;
   min-height: 2433px;
   gap: 92px;
-  font-family: Pretendard;
 
   .text {
     width: 1555px;
@@ -25,12 +24,11 @@
     border-radius: 50px;
     background-color: #fff;
     gap: 82px;
+
     img {
       margin-left: 46px;
-      border-radius: 50px;
-      background-color: blue;
-      width: 328px;
-      height: 328px;
+      width: 300px;
+      height: 300px;
     }
   }
 }

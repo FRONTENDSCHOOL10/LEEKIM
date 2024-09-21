@@ -42,7 +42,7 @@ export const Component: React.FC = () => {
 
         // checkbox 필터 적용
         if (isOnline) filters.push('IsOnline=true');
-        if (inProgress) filters.push(`Start<'${today}'%26%26End>'${today}'`);
+        if (inProgress) filters.push(`Start<='${today}'%26%26End>='${today}'`);
 
         // 분야 필터 적용
         if (tagDepartmentArray.length > 0) {
