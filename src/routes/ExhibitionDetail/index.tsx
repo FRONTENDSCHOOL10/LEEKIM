@@ -14,6 +14,7 @@ import TagList from './components/taglist';
 import { ExhibitionData } from '@/types/ExhibitionData';
 import { useIsLogin } from '@/stores/isLogin';
 import CommonHelmet from '@/components/CommonHelmet';
+import MoreExhibition from './components/moreExhibition';
 
 const pocketbaseUrl = import.meta.env.VITE_DB_URL;
 
@@ -179,6 +180,11 @@ export function Component() {
           </div>
         </div>
       </main>
+      <h2>이 전시가 마음에 든다면?</h2>
+      <MoreExhibition
+        currentTagDepartments={exhibitionData.expand?.TagDepartment ?? []}
+        currentTagLocations={exhibitionData.expand?.TagLocation ?? []}
+      />
     </div>
   );
 }
