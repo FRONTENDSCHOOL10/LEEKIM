@@ -3,20 +3,20 @@
   justify-content: right;
   align-items: end;
 
-  height: 16.59375rem; /* 22.125 * 0.75 */
+  height: 16.59375rem;
   position: relative;
-  top: -5.90625rem; /* -7.875 * 0.75 */
+  top: -5.90625rem;
 
   background: var(--background);
-  border-radius: 4.6875rem 4.6875rem 0 0; /* 6.25 * 0.75 */
-  margin-bottom: -5.90625rem; /* -7.875 * 0.75 */
+  border-radius: 4.6875rem 4.6875rem 0 0;
+  margin-bottom: -5.90625rem;
 
-  padding-left: 8.01875rem; /* 10.69 * 0.75 */
-  padding-right: 8.955rem; /* 11.94 * 0.75 */
+  padding-left: 8.01875rem;
+  padding-right: 8.955rem;
 
   label,
   select {
-    font-size: 1.40625rem; /* 1.875 * 0.75 */
+    font-size: 1.40625rem;
     font-weight: 500;
     line-height: 150%;
     display: flex;
@@ -25,12 +25,12 @@
 
   input {
     appearance: none;
-    width: 1.171875rem; /* 1.5625 * 0.75 */
-    height: 1.171875rem; /* 1.5625 * 0.75 */
+    width: 1.171875rem;
+    height: 1.171875rem;
     border: 1px solid white;
     border-radius: 50%;
-    margin-right: 4.08rem; /* 5.44 * 0.75 */
-    margin-left: 0.60625rem; /* 0.81 * 0.75 */
+    margin-right: 4.08rem;
+    margin-left: 0.60625rem;
 
     &:checked {
       background: var(--mainblue) url(/Icon/IconCheckbox.svg) center/2rem no-repeat;
@@ -43,9 +43,9 @@
     background: transparent;
     color: #fff;
     background-color: pink;
-    padding-right: 1.2rem; /* 1.6 * 0.75 */
+    padding-right: 1.2rem;
     background: url('/Icon/IconSortArrow.svg') no-repeat right center;
-    background-size: 1.171875rem 1.171875rem; /* 1.5625 * 0.75 */
+    background-size: 1.171875rem 1.171875rem;
 
     &:focus {
       outline: none;
