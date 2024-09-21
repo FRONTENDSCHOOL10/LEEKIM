@@ -26,7 +26,7 @@ function SelectInfo({ exhibitionData, onInputChange }: SelectInfoProps): ReactEl
             name="URL"
             value={exhibitionData.URL}
             onChange={handleChange}
-            placeholder="Ex) https://www.exhibitionSite.com"
+            placeholder="ex) https://www.exhibitionSite.com"
           />
         </div>
         <div className={S.formgroup}>

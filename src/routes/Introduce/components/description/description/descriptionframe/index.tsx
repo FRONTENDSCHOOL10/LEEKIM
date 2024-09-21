@@ -12,8 +12,6 @@ function DescriptionFrame({ step, description }: frameprops): ReactElement {
       <h3 className={S.title}>{step}</h3>
       <div className={S.textwrapper}>
         <p className={S.text}>{description}</p>
-        <p className={S.text}>{description}</p>
-        <p className={S.text}>{description}</p>
       </div>
     </div>
   );
