@@ -13,19 +13,28 @@
   height: auto;
   padding-bottom: 150px;
   flex-shrink: 0;
-  border-radius: 100px 100px 0px 0px;
-  background: #f5f5f5;
+  border-radius: 100px;
+  background: #02081a;
+  margin-bottom: 20rem;
   gap: 195px;
+
+  filter: drop-shadow(0px 30px 15px #282887);
+
   .backButton {
     border: 0;
     background-color: transparent;
-    font-size: 40px;
+    font-size: 30px;
     display: flex;
     align-items: center;
     margin-top: 139px;
     margin-bottom: 200px;
     gap: 30px;
     width: 250px;
+    color: #fff;
+
+    img {
+      width: 1rem;
+    }
   }
 }
 
