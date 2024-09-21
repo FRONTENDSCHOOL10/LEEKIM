@@ -1,6 +1,9 @@
 .header {
   display: flex;
   flex-direction: row;
+  img {
+    width: 1.3rem;
+  }
   h2 {
     margin: 0;
     margin-left: 15px;
