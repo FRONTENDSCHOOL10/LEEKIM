@@ -1,6 +1,16 @@
 .component {
   margin-top: 10rem;
-  margin-left: 10rem;
+  margin-left: 20rem;
+  display: flex;
+
+  img {
+    max-width: 35rem;
+    height: 50rem;
+    border: 0.75px solid #fff;
+    border-radius: 3rem;
+    margin-left: 10rem;
+  }
+
   h2 {
     font-size: 3rem;
   }
