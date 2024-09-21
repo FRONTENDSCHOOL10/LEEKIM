@@ -271,13 +271,15 @@ export function Component() {
         <h2>
           <span>졸전닷컴</span>에 어서오세요!
         </h2>
-        <SnsJoinButton>Google 계정으로 회원가입</SnsJoinButton>
-        <SnsJoinButton>KAKAO 계정으로 회원가입</SnsJoinButton>
+        <div className={S.loginComponent}>
+          <SnsJoinButton>Google 계정으로 회원가입</SnsJoinButton>
+          <SnsJoinButton>KAKAO 계정으로 회원가입</SnsJoinButton>
+        </div>
         <Divider />
-        <div role="presentation">
-          <Divider />
+        <div role="presentation" className={S.orSpan}>
+          <hr />
           <span>or</span>
-          <Divider />
+          <hr />
         </div>
         <form onSubmit={handleJoinButton}>
           <fieldset>
@@ -306,7 +308,7 @@ export function Component() {
               </span>
             )}
           </fieldset>
-          <div>
+          <div className={S.passwordField}>
             <fieldset>
               <label htmlFor={pwInputId}>비밀번호</label>
               <input id={pwInputId} type="password" placeholder="영문, 숫자, 특수문자 포함 8자 이상" ref={pwInput} />
@@ -315,8 +317,12 @@ export function Component() {
                   비밀번호를 입력하세요
                 </span>
               ) : (
-                <span style={{ visibility: checkPw.visibility }} aria-hidden={checkPw.ariaHidden}>
-                  영문, 숫자, 특수문자(@, $, !, %, *, ?, &) 포함 8자 이상 입력하세요
+                <span
+                  style={{ visibility: checkPw.visibility }}
+                  aria-hidden={checkPw.ariaHidden}
+                  className={S.passwordInput}
+                >
+                  영문, 숫자, 특수문자(@, $, !, %, *, ?, &) 포함 8자 이상
                 </span>
               )}
             </fieldset>
@@ -357,10 +363,12 @@ export function Component() {
             }}
           />
         </form>
-        <p>계정이 있으신가요?</p>
-        <NavLink to={'/login'}>로그인</NavLink>
+        <div className={S.join}>
+          <p>계정이 있으신가요?</p>
+          <NavLink to={'/login'}>로그인</NavLink>
+        </div>
       </div>
-      <form>
+      <form className={S.tag}>
         <fieldset>
           <legend>
             내가 관심 있는 <strong>태그</strong>를 선택해 주세요!
