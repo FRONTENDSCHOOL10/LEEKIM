@@ -1,18 +1,14 @@
 .component {
-  padding: 0 90px;
+  padding: 0 5.625rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 67.5rem;
+  max-width: 90rem;
+  margin: 0 auto;
 
   section {
     width: 96.875rem;
-
-    p {
-      margin: 5rem 0;
-
-      font-size: 2rem;
-      font-weight: 700;
-    }
   }
 
   .listHeader {
@@ -20,29 +16,23 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    h2 {
+      font-size: 2.5rem;
+    }
   }
 
   .infoContainer {
-    width: 1440px;
     display: grid;
-    gap: 25px;
-    margin-top: 90px;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    grid-template-columns: repeat(4, 1fr);
     list-style: none;
     padding: 0;
+    margin: 0 auto;
   }
 
-  label {
-    padding: 20px;
-  }
   input {
-    margin: 7px;
-  }
-
-  select {
-    border: none;
-    color: #fff;
-    background-color: #02081a;
+    margin: 0.4375rem;
   }
 
   .buttonWrapper {
@@ -51,19 +41,25 @@
   }
 
   .loadMoreButton {
-    background-color: #3a39ff;
-    color: #ffffff;
+    background-color: var(--mainblue);
+    color: var(--white);
     border: none;
-    border-radius: 50px;
+    border-radius: 3.125rem;
     font-size: 1.5625rem;
     font-weight: 600;
     line-height: 150%;
-    width: 10rem;
-    height: 3rem;
+    width: 13.781rem;
+    height: 4.219rem;
+    margin-top: 8rem;
   }
 
   hr {
-    border: 0;
-    border-top: 0.75px solid #fff;
+    margin-bottom: 4.3125rem;
+  }
+
+  .noResult {
+    font-size: 2rem;
+    font-weight: 700;
+    min-height: 40rem;
   }
 }

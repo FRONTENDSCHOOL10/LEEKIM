@@ -15,7 +15,6 @@ const Banner: React.FC = () => {
       <div className={S.subBanner}>
         <p className={S.subBannerText}>우리 학교, 우리 학과 전시회가 없다면?</p>
 
-        {/* 추후 NavLink로 수정 */}
         <NavLink to={'/registerExhi'} className={S.bannerButton}>
           전시 등록 바로가기
         </NavLink>

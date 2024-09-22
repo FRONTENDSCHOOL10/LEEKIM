@@ -1,9 +1,21 @@
 .component {
-  width: 1550px;
+  padding: 2rem;
+  border-radius: 0 0 50px 50px;
+
+  &.open {
+    box-shadow: 0px 30px 20px #282887;
+  }
+
+  &.closed {
+    box-shadow: none;
+  }
+
   .filterHeader {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 70px;
+
     .headerwrapper {
       display: flex;
       gap: 24px;
@@ -12,16 +24,24 @@
         font-size: 60px;
       }
     }
+
     button {
       background-color: transparent;
       border: none;
     }
   }
+
   .filterCategory {
     display: flex;
     flex-direction: column;
     gap: 100px;
-    width: 1550px;
+
+    // filter: drop-shadow(0px 30px 15px #282887);
+
+    &.hidden {
+      display: none;
+    }
+
     button {
       background-color: transparent;
       border: none;
@@ -30,25 +50,29 @@
       font-size: 25px;
       font-style: normal;
       font-weight: 600;
-      color: #d9d9d9;
+      color: var(--graytext);
     }
+
     .tagwrapper {
       border: none;
+
       .swiperContainer {
         width: 1550px;
+
         .swiperSlide {
           width: auto;
           white-space: nowrap;
           height: 100%;
           border: none;
           background-color: var(--mainblue);
-          border-radius: 6.25rem;
+          border-radius: 100px;
           user-select: none;
           border: 2px solid transparent;
           &.checked {
-            border-color: #fff;
+            border-color: var(--white);
           }
         }
+
         .tagLabel {
           display: block;
           width: 100%;
@@ -59,6 +83,7 @@
           font-weight: 600;
           transition: border 0.3s ease;
         }
+
         input {
           position: absolute;
           opacity: 0;
@@ -67,10 +92,12 @@
           width: 0;
         }
       }
+
       .title {
         display: flex;
         gap: 35px;
         margin-bottom: 35px;
+
         legend {
           margin: 0;
           font-size: 40px;
@@ -78,5 +105,19 @@
         }
       }
     }
+  }
+
+  .filterButton {
+    display: block;
+    color: var(--graytext);
+    font-size: 25px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--mainblue);
+    border-radius: 50%;
+  }
+
+  .resetButton {
+    margin: 0 176px 54px 0;
   }
 }

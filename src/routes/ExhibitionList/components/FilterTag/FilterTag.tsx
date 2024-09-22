@@ -156,7 +156,7 @@ function FilterTag({
   };
 
   return (
-    <section className={S.component}>
+    <section className={`${S.component} ${isOpen ? S.open : S.closed}`}>
       {/* 필터 헤더 */}
       <div className={S.filterHeader}>
         <div className={S.headerwrapper}>
@@ -165,9 +165,7 @@ function FilterTag({
         </div>
         {/* 필터 토글 버튼 */}
         <button className={S.filterButton} onClick={handleToggle}>
-          <img src="/Icon/IconClose.svg" />
-          {/* 아이콘 변경 로직 (현재 주석 처리됨)
-          <img src={isOpen ? '/Icon/IconClose.svg' : '/Icon/IconOpen.svg'} alt={isOpen ? '필터 닫기' : '필터 열기'} /> */}
+          {isOpen ? <span>닫힘</span> : <span>열림</span>}
         </button>
       </div>
 
@@ -197,7 +195,7 @@ function FilterTag({
           </div>
           {swiperCreater(tagYear, handleYearFilter, true, tagYearArray)}
         </fieldset>
-        <button>초기화</button>
+        <button className={S.resetButton}>초기화</button>
       </form>
     </section>
   );

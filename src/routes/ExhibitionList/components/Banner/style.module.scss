@@ -1,7 +1,6 @@
 .component {
   width: 90rem;
-  padding: 80px 0;
-  color: #fff;
+  padding: 5rem 0;
   margin-top: 10rem;
   margin-bottom: 10rem;
 }
@@ -19,7 +18,7 @@
 
   .bannerSub {
     margin: 0 0;
-    font-size: 60px;
+    font-size: 3.75rem;
     font-style: normal;
     font-weight: 800;
   }
@@ -30,19 +29,18 @@
   align-items: center;
   margin: 0 auto;
   max-width: 78rem;
-  background-color: #3a39ff; // blue background for the bottom section
+  background-color: var(--mainblue);
   border-radius: 2rem;
-  color: #fff;
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 0.625rem;
 
   .subBannerText {
-    font-size: 30px;
+    font-size: 1.875rem;
     font-style: normal;
     font-weight: 600;
-    padding: 10px;
-    padding-left: 36px;
+    padding: 0.625rem;
+    padding-left: 2.25rem;
     margin: 1.5rem;
     margin-right: 20%;
   }
@@ -51,18 +49,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 329px;
+    width: 20.5625rem;
 
-    margin-right: 40px;
-    padding: 22 72px;
+    margin-right: 2.5rem;
+    padding: 22 4.5rem;
     height: 5.125rem;
-    background-color: #fff;
-    color: #3a39ff;
-    font-size: 25px;
+    background-color: var(--white);
+    color: var(--mainblue);
+    font-size: 1.5625rem;
     font-style: normal;
     font-weight: 600;
     text-decoration: none;
-    border-radius: 30px;
+    border-radius: 1.875rem;
     transition: background-color 0.3s;
 
     &:hover {
