@@ -7,6 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import ManageExhibit from './components/ManageExhibit/ManageExhibit';
 import { ExhibitionData } from '@/types/ExhibitionData';
 import BackButton from './components/BackButton/BackButton';
+import { useIsContentPage } from '@/stores/isContentPage';
 
 const pocketbaseUrl = import.meta.env.VITE_DB_URL;
 
@@ -17,8 +18,14 @@ export function Component() {
   const [page, setPage] = useState<number>(1);
   const navigate = useNavigate();
 
+  const { enterContentPage } = useIsContentPage(({ enterContentPage }) => ({
+    enterContentPage,
+  }));
+
   // 관리자 권한 확인
   useEffect(() => {
+    enterContentPage();
+
     const checkAdmin = async () => {
       try {
         const userId = sessionStorage.getItem('userId');

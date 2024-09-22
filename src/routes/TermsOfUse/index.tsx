@@ -1,9 +1,18 @@
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 import S from './style.module.scss';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useIsContentPage } from '@/stores/isContentPage';
 
 export function Component() {
   useDocumentTitle('이용 약관 | JJ.com');
+
+  const { enterContentPage } = useIsContentPage(({ enterContentPage }) => ({
+    enterContentPage,
+  }));
+
+  useEffect(() => {
+    enterContentPage();
+  }, []);
 
   return (
     <main id="page" className={S.component}>

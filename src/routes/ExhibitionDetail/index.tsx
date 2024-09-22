@@ -15,6 +15,7 @@ import { ExhibitionData } from '@/types/ExhibitionData';
 import { useIsLogin } from '@/stores/isLogin';
 import CommonHelmet from '@/components/CommonHelmet';
 import MoreExhibition from './components/moreExhibition';
+import { useIsContentPage } from '@/stores/isContentPage';
 
 const pocketbaseUrl = import.meta.env.VITE_DB_URL;
 
@@ -25,6 +26,10 @@ export function Component() {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [userId, setUserId] = useState<string | null>(sessionStorage.getItem('userId'));
+
+  const { enterContentPage } = useIsContentPage(({ enterContentPage }) => ({
+    enterContentPage,
+  }));
 
   // Helmet의 keywords에 전달
   const keywords = [
@@ -43,6 +48,8 @@ export function Component() {
   }));
 
   useEffect(() => {
+    enterContentPage();
+
     // 로그인 상태일 때 최근 본 전시 서버에 저장
     const setLoginedViewedExhibitionData = async () => {
       const userData = await axios.get(

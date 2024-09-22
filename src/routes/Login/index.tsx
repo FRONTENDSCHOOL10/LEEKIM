@@ -40,6 +40,8 @@ export function Component() {
       });
     }
 
+    exitContentPage();
+
     const getExhibitionData = async () => {
       try {
         const response = await axios.get(
@@ -52,7 +54,6 @@ export function Component() {
     };
 
     getExhibitionData();
-    exitContentPage();
   }, [isLogin]);
 
   const handleLoginButton = async (e: FormEvent) => {

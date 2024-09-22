@@ -64,6 +64,8 @@ export function Component() {
       });
     }
 
+    exitContentPage();
+
     const getTagData = async () => {
       try {
         const response = await axios.get(`${dbApiUrl}/collections/TagDepartment/records`);
@@ -74,7 +76,6 @@ export function Component() {
     };
 
     getTagData();
-    exitContentPage();
   }, [isLogin]);
 
   // 닉네임 검증 함수

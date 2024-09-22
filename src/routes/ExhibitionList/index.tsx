@@ -9,6 +9,7 @@ import { getImageURL } from '@/utils';
 import CommonHelmet from '@/components/CommonHelmet';
 import toast, { Toaster } from 'react-hot-toast';
 import FilterOptions from './components/FilterOptions/FilterOptions';
+import { useIsContentPage } from '@/stores/isContentPage';
 
 const pocketbaseUrl = import.meta.env.VITE_DB_URL;
 
@@ -25,6 +26,10 @@ export const Component: React.FC = () => {
   const [tagLocationArray, setTagLocationArray] = useState<string[]>([]);
   const [tagYearArray, setTagYearArray] = useState<string[]>([]);
 
+  const { enterContentPage } = useIsContentPage(({ enterContentPage }) => ({
+    enterContentPage,
+  }));
+
   // dropdown 정렬 순서 필터
   const [sort, setSort] = useState<string>('-Start');
 
@@ -35,6 +40,8 @@ export const Component: React.FC = () => {
   const [totalItems, setTotalItems] = useState<number>(0);
 
   useEffect(() => {
+    enterContentPage();
+
     const fetchData = async () => {
       try {
         let url = `${pocketbaseUrl}/api/collections/Exhibition/records?sort=${sort}&expand=School,Major&page=${page}&perPage=20`;

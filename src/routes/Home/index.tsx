@@ -11,8 +11,7 @@ import RecentlyViewedExhibition from './components/RecentlyViewedExhibition';
 import CommonHelmet from '@/components/CommonHelmet';
 
 function HomePage() {
-  const { isContentPage, enterContentPage } = useIsContentPage(({ isContentPage, enterContentPage }) => ({
-    isContentPage,
+  const { enterContentPage } = useIsContentPage(({ enterContentPage }) => ({
     enterContentPage,
   }));
   // 로그인 했는지 확인하는 상태

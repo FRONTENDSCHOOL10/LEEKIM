@@ -6,10 +6,15 @@ import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import { UserData } from '@/types/UserData';
 import CommonHelmet from '@/components/CommonHelmet';
+import { useIsContentPage } from '@/stores/isContentPage';
 
 const dbApiUrl = import.meta.env.VITE_DB_API;
 
 export function Component() {
+  const { enterContentPage } = useIsContentPage(({ enterContentPage }) => ({
+    enterContentPage,
+  }));
+
   const navigate = useNavigate();
 
   const [userData, setUserData] = useState<UserData | null>(null);
@@ -30,6 +35,8 @@ export function Component() {
         replace: true,
       });
     }
+
+    enterContentPage();
 
     const userId = sessionStorage.getItem('userId');
 

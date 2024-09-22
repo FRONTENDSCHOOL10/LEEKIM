@@ -11,6 +11,7 @@ import { useSearchTermStore } from '@/stores/searchTerm';
 import toast, { Toaster } from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 import CommonHelmet from '@/components/CommonHelmet';
+import { useIsContentPage } from '@/stores/isContentPage';
 
 const pocketbaseUrl = import.meta.env.VITE_DB_URL;
 
@@ -36,7 +37,13 @@ export function Component() {
   // 총 항목 수 - 더보기 버튼 알림 용
   const [totalItems, setTotalItems] = useState<number>(0);
 
+  const { enterContentPage } = useIsContentPage(({ enterContentPage }) => ({
+    enterContentPage,
+  }));
+
   useEffect(() => {
+    enterContentPage();
+
     if (searchWord) {
       setInputValue(searchWord);
     }

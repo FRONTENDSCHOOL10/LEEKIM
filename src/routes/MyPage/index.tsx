@@ -12,6 +12,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { UserData } from '@/types/UserData';
 import ExhibitionDate from '../ExhibitionDetail/components/exhibitionDate';
 import CommonHelmet from '@/components/CommonHelmet';
+import { useIsContentPage } from '@/stores/isContentPage';
 
 const dbApiUrl = import.meta.env.VITE_DB_API;
 
@@ -24,6 +25,10 @@ export function Component() {
 
   const navigate = useNavigate();
 
+  const { enterContentPage } = useIsContentPage(({ enterContentPage }) => ({
+    enterContentPage,
+  }));
+
   const { isLogin, logout } = useIsLogin(({ isLogin, logout }) => ({
     isLogin,
     logout,
@@ -35,6 +40,8 @@ export function Component() {
         replace: true,
       });
     }
+
+    enterContentPage();
 
     let localUserData = null;
 

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
 import S from './style.module.scss';
 import ImageUpload from './components/imagePreview';
@@ -8,6 +8,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useImageUploadStore } from '@/stores/imageUploadStore';
 import TagList from './components/taglist';
 import CommonHelmet from '@/components/CommonHelmet';
+import { useIsContentPage } from '@/stores/isContentPage';
 
 interface ExhibitionData {
   School: string;
@@ -47,6 +48,14 @@ export function Component() {
   const [exhibitionData, setExhibitionData] = useState<ExhibitionData>(initialExhibitionData);
   const { reset: resetImageUpload } = useImageUploadStore();
   const [resetTags, setResetTags] = useState<boolean>(false);
+
+  const { enterContentPage } = useIsContentPage(({ enterContentPage }) => ({
+    enterContentPage,
+  }));
+
+  useEffect(() => {
+    enterContentPage();
+  }, []);
 
   const handleInputChange = useCallback((name: string, value: string) => {
     setExhibitionData((prevData) => ({
