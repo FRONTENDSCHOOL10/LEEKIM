@@ -1,14 +1,19 @@
 .component {
-  margin-top: 10rem;
-  margin-left: 20rem;
   display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+
+  margin-top: 10rem;
+
+  .loginWrapper {
+    margin-right: 10rem;
+  }
 
   img {
     max-width: 35rem;
     height: 50rem;
     border: 0.75px solid #fff;
     border-radius: 3rem;
-    margin-left: 10rem;
   }
 
   h2 {
@@ -56,15 +61,17 @@
     display: block;
     margin-bottom: 0.75rem;
     margin-top: 0.75rem;
-    width: 25.5rem;
+    width: 23.5rem;
     height: 3.5rem;
     border: none;
     border-radius: 1rem;
     background-color: #323642;
 
+    font-size: 1rem;
+    padding-left: 2rem;
+    color: #fff;
+
     &::placeholder {
-      font-size: 0.8rem;
-      padding: 2rem;
       color: #fff;
     }
   }

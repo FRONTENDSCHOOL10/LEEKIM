@@ -132,7 +132,7 @@ export function Component() {
     <main className={S.component}>
       <CommonHelmet pageTitle="로그인" pageDescription="졸전 닷컴 로그인 페이지" />
 
-      <div role="presentation">
+      <div className={S.loginWrapper} role="presentation">
         <h2>로그인</h2>
         <p>효율적인 서비스 이용을 위해 로그인해 주세요.</p>
         <div className={S.btnContainer}>

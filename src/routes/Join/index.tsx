@@ -1,7 +1,6 @@
 import { useIsContentPage } from '@/stores/isContentPage';
 import { useIsLogin } from '@/stores/isLogin';
 import { FormEvent, useEffect, useId, useRef, useState } from 'react';
-import S from './style.module.scss';
 import SnsJoinButton from './components/SnsJoinButton';
 import Divider from './components/Divider';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -9,6 +8,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { TagData } from '@/types/TagData';
 import CommonHelmet from '@/components/CommonHelmet';
+import S from './style.module.scss';
 
 interface CheckState {
   visibility: React.CSSProperties['visibility'];
@@ -20,6 +20,8 @@ const dbApiUrl = import.meta.env.VITE_DB_API;
 export function Component() {
   const [tagData, setTagData] = useState<TagData[] | null>(null);
   const interestedTagArray = useRef<string[]>([]);
+
+  const scrollableRef = useRef<HTMLDivElement>(null);
 
   // 안내 메시지 보이기, 숨기기 관리하는 상태
   const [checkName, setCheckName] = useState<CheckState>({ visibility: 'hidden', ariaHidden: true });
@@ -77,6 +79,31 @@ export function Component() {
 
     getTagData();
   }, [isLogin]);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    const scrollableElement = scrollableRef.current;
+    if (!scrollableElement) return;
+
+    const startX = e.pageX - scrollableElement.offsetLeft;
+    const startY = e.pageY - scrollableElement.offsetTop;
+    const scrollLeft = scrollableElement.scrollLeft;
+    const scrollTop = scrollableElement.scrollTop;
+
+    const onMouseMove = (e: MouseEvent) => {
+      const x = e.pageX - scrollableElement.offsetLeft;
+      const y = e.pageY - scrollableElement.offsetTop;
+      scrollableElement.scrollLeft = scrollLeft - (x - startX);
+      scrollableElement.scrollTop = scrollTop - (y - startY);
+    };
+
+    const onMouseUp = () => {
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    };
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+  };
 
   // 닉네임 검증 함수
   const validateName = (nickname: string): boolean => {
@@ -255,7 +282,6 @@ export function Component() {
         toast.remove();
       }, 1500);
     } catch (err) {
-      console.log(err);
       toast.remove();
       toast.error('서버와의 통신에 실패했습니다.\n잠시 후 다시 시도해 주세요.');
     }
@@ -265,19 +291,16 @@ export function Component() {
     if (interestedTagArray.current.includes(tagId)) {
       const filterArray = interestedTagArray.current.filter((id) => id !== tagId);
       interestedTagArray.current = filterArray;
-      console.log(interestedTagArray.current);
       return;
     }
 
     interestedTagArray.current.push(tagId);
-
-    console.log(interestedTagArray.current);
   };
 
   return (
     <main className={S.component}>
       <CommonHelmet pageTitle="회원가입" pageDescription="졸전 닷컴 회원가입 페이지" />
-      <div role="presentation">
+      <div role="presentation" className={S.formWrapper}>
         <h2>
           <span>졸전닷컴</span>에 어서오세요!
         </h2>
@@ -291,29 +314,51 @@ export function Component() {
           <span>or</span>
           <hr />
         </div>
-        <form onSubmit={handleJoinButton}>
+        <form onSubmit={handleJoinButton} noValidate={true}>
           <fieldset>
             <label htmlFor={nameInputId}>닉네임</label>
-            <input id={nameInputId} type="text" placeholder="김졸전" ref={nameInput} />
+            <input className={S.nameInput} id={nameInputId} type="text" placeholder="김졸전" ref={nameInput} />
             {nameEmpty ? (
-              <span style={{ visibility: checkName.visibility }} aria-hidden={checkName.ariaHidden}>
+              <span
+                className={S.validateInfo}
+                style={{ visibility: checkName.visibility }}
+                aria-hidden={checkName.ariaHidden}
+              >
                 닉네임을 입력하세요
               </span>
             ) : (
-              <span style={{ visibility: checkName.visibility }} aria-hidden={checkName.ariaHidden}>
+              <span
+                className={S.validateInfo}
+                style={{ visibility: checkName.visibility }}
+                aria-hidden={checkName.ariaHidden}
+              >
                 한글, 영문 대소문자, 숫자만 포함해서 3~9자 사이로 작성해 주세요
               </span>
             )}
           </fieldset>
           <fieldset>
             <label htmlFor={emailInputId}>Email</label>
-            <input id={emailInputId} type="email" placeholder="email@joljeon.com" ref={emailInput} />
+            <input
+              className={S.emailInput}
+              id={emailInputId}
+              type="email"
+              placeholder="email@joljeon.com"
+              ref={emailInput}
+            />
             {emailEmpty ? (
-              <span style={{ visibility: checkEmail.visibility }} aria-hidden={checkEmail.ariaHidden}>
+              <span
+                className={S.validateInfo}
+                style={{ visibility: checkEmail.visibility }}
+                aria-hidden={checkEmail.ariaHidden}
+              >
                 이메일을 입력하세요
               </span>
             ) : (
-              <span style={{ visibility: checkEmail.visibility }} aria-hidden={checkEmail.ariaHidden}>
+              <span
+                className={S.validateInfo}
+                style={{ visibility: checkEmail.visibility }}
+                aria-hidden={checkEmail.ariaHidden}
+              >
                 올바르지 않은 이메일 형식입니다
               </span>
             )}
@@ -321,30 +366,56 @@ export function Component() {
           <div className={S.passwordField}>
             <fieldset>
               <label htmlFor={pwInputId}>비밀번호</label>
-              <input id={pwInputId} type="password" placeholder="영문, 숫자, 특수문자 포함 8자 이상" ref={pwInput} />
+              <input
+                className={S.pwInput}
+                id={pwInputId}
+                type="password"
+                placeholder="영문, 숫자, 특수문자 포함 8자 이상"
+                ref={pwInput}
+              />
               {pwEmpty ? (
-                <span style={{ visibility: checkPw.visibility }} aria-hidden={checkPw.ariaHidden}>
+                <span
+                  className={S.validateInfo}
+                  style={{ visibility: checkPw.visibility }}
+                  aria-hidden={checkPw.ariaHidden}
+                >
                   비밀번호를 입력하세요
                 </span>
               ) : (
                 <span
+                  className={S.validateInfo}
                   style={{ visibility: checkPw.visibility }}
                   aria-hidden={checkPw.ariaHidden}
-                  className={S.passwordInput}
                 >
-                  영문, 숫자, 특수문자(@, $, !, %, *, ?, &) 포함 8자 이상
+                  영문, 숫자, 특수문자(@, $, !, %, *, ?, &)
+                  <br />
+                  포함 8자 이상
                 </span>
               )}
             </fieldset>
             <fieldset>
               <label htmlFor={pwConfirmInputId}>비밀번호 확인</label>
-              <input id={pwConfirmInputId} type="password" placeholder="똑같이 입력해 주세요" ref={pwConfirmInput} />
+              <input
+                className={S.pwConfirmInput}
+                id={pwConfirmInputId}
+                type="password"
+                placeholder="똑같이 입력해 주세요"
+                ref={pwConfirmInput}
+              />
               {pwConfirmEmpty ? (
-                <span style={{ visibility: checkPwConfirm.visibility }} aria-hidden={checkPwConfirm.ariaHidden}>
+                <span
+                  className={S.validateInfo}
+                  style={{ visibility: checkPwConfirm.visibility }}
+                  aria-hidden={checkPwConfirm.ariaHidden}
+                >
                   비밀번호 확인을 입력하세요
                 </span>
               ) : (
-                <span style={{ visibility: checkPwConfirm.visibility }} aria-hidden={checkPwConfirm.ariaHidden}>
+                <span
+                  className={S.validateInfo}
+                  style={{ visibility: checkPwConfirm.visibility }}
+                  aria-hidden={checkPwConfirm.ariaHidden}
+                >
                   비밀번호와 일치하지 않습니다
                 </span>
               )}
@@ -379,20 +450,24 @@ export function Component() {
         </div>
       </div>
       <form className={S.tag}>
-        <fieldset>
+        <fieldset ref={scrollableRef} onMouseDown={handleMouseDown}>
           <legend>
-            내가 관심 있는 <strong>태그</strong>를 선택해 주세요!
+            내가 관심 있는 <strong>태그</strong>를<br />
+            선택해 주세요!
           </legend>
 
-          {tagData?.map(({ id, Name }) =>
-            id ? (
-              <div key={id.slice(0, 5)}>
-                <label htmlFor={id.slice(0, 5)}>{Name}</label>
-                <input type="checkbox" id={id.slice(0, 5)} onChange={() => handleTagChecked(id)} />
-              </div>
-            ) : null
-          )}
+          <div className={S.tagButtonWrapper}>
+            {tagData?.map(({ id, Name }) =>
+              id ? (
+                <div key={id.slice(0, 5)}>
+                  <label htmlFor={id.slice(0, 5)}>#{Name}</label>
+                  <input type="checkbox" id={id.slice(0, 5)} onChange={() => handleTagChecked(id)} />
+                </div>
+              ) : null
+            )}
+          </div>
         </fieldset>
+        <img src="/ImgAssets/joinCheckImg.png" alt="" />
       </form>
     </main>
   );
