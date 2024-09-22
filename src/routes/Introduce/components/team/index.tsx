@@ -5,22 +5,12 @@ import siwon from '../../assets/siwon.jpg';
 import jaerim from '../../assets/jaerim.jpg';
 import jinyon from '../../assets/jinyon.png';
 import jisoo from '../../assets/jisoo.jpg';
-import C from '../../assets/C.svg';
-import J from '../../assets/J.svg';
-import M from '../../assets/M.svg';
-import logo from '../../assets/logo.svg';
-import dot from '../../assets/dot.svg';
 
 function Profile(): ReactElement {
   return (
     <div className={S.profile}>
       <div className={S.logo}>
-        <img src={J} alt="" />
-        <img src={J} alt="" />
-        <img src={dot} alt="" />
-        <img src={C} alt="" />
-        <img src={logo} alt="" />
-        <img src={M} alt="" />
+        <img src={'/Icon/TextLogo.svg'} alt="졸전닷컴 로고" />
         <span>팀 소개</span>
       </div>
       <div className={S.profileui}>
@@ -31,7 +21,7 @@ function Profile(): ReactElement {
             job="Frontend Developer"
             description="Here we goMake it make it dropYeah my heart is like KING KONG"
             githublink="https://github.com/chlyun"
-            maillink="mailto:rkdmf1306@gmail.com"
+            maillink="rkdmf1306@gmail.com"
             contact=""
           />
         </div>
@@ -42,7 +32,7 @@ function Profile(): ReactElement {
             job="Frontend Developer"
             description="Here we goMake it make it dropYeah my heart is like KING KONG"
             githublink="https://github.com/Jisoo0907"
-            maillink="mailto:szjslee@gmail.com"
+            maillink="szjslee@gmail.com"
             contact=""
           />
         </div>
@@ -55,7 +45,7 @@ function Profile(): ReactElement {
             job="Frontend Developer"
             description="Here we goMake it make it dropYeah my heart is like KING KONG"
             githublink="https://github.com/jaerim1102"
-            maillink="mailto:jaerim1102@naver.com"
+            maillink="jaerim1102@naver.com"
             contact=""
           />
         </div>
@@ -66,7 +56,7 @@ function Profile(): ReactElement {
             job="Frontend Developer"
             description="Here we goMake it make it dropYeah my heart is like KING KONG"
             githublink="https://github.com/Lee-Jinyong"
-            maillink="mailto:yjy1480@gmail.com"
+            maillink="yjy1480@gmail.com"
             contact=""
           />
         </div>

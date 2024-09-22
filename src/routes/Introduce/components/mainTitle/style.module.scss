@@ -82,6 +82,16 @@
       margin: 0;
       color: var(--mainblue);
     }
+
+    .githubLink {
+      position: relative;
+
+      img {
+        position: absolute;
+        right: 10%;
+      }
+    }
+
     span {
       display: flex;
       align-items: center;

@@ -34,16 +34,24 @@ function MainTitle(): ReactElement {
             <span className={S.bluetext}>졸전.COM</span>은
             <span>
               이렇게
-              <a href="/">github </a>
+              <a
+                className={S.githubLink}
+                href="https://github.com/FRONTENDSCHOOL10/LEEKIM"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                github
+                <img src="/Icon/IconGithubArrow.svg" alt="" />
+              </a>
             </span>
             탄생했어요!
           </h2>
           <span>클라이언트 및 파트너 그리고 도움주신 기관</span>
           <figure className={S.aidagency}>
-            <img src={likelion} alt="" />
+            <img src={likelion} alt="멋쟁이 사자처럼 로고" />
             <p>EUID</p>
-            <img src={Subtract} alt="" />
-            <img src={yeongnam} alt="" />
+            <img src={Subtract} alt="계원예술대학교 로고" />
+            <img src={yeongnam} alt="영남대학교 로고" />
           </figure>
         </div>
         <figure className={S.secondcomponent}>

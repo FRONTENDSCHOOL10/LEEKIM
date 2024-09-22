@@ -12,7 +12,7 @@ function Text({ title, subtitle }: Textprops): ReactElement {
     <div className={S.warpper}>
       <p className={S.title}>{title}</p>
       <p className={S.subtitle}>{subtitle}</p>
-      <NavLink to="/" style={{ textDecoration: 'none' }}>
+      <NavLink to="/exhibition" style={{ textDecoration: 'none' }}>
         <p className={S.linktext}>전시 정보 바로가기</p>
       </NavLink>
     </div>
