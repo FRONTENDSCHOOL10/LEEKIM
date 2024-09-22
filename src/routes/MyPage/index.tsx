@@ -6,11 +6,8 @@ import ExhibitionInfo from '@/components/ExhibitionSlider/components/ExhibitionI
 import { getImageURL } from '@/utils';
 import { ExhibitionData } from '@/types/ExhibitionData';
 import { useIsLogin } from '@/stores/isLogin';
-import { tr } from 'date-fns/locale';
-import { log } from 'console';
 import toast, { Toaster } from 'react-hot-toast';
 import { UserData } from '@/types/UserData';
-import ExhibitionDate from '../ExhibitionDetail/components/exhibitionDate';
 import CommonHelmet from '@/components/CommonHelmet';
 import { useIsContentPage } from '@/stores/isContentPage';
 
@@ -46,7 +43,7 @@ export function Component() {
     let localUserData = null;
 
     const getRelationExhiData = async (RelationIdDataArray, setFunction) => {
-      if (!RelationIdDataArray.length > 0) return [];
+      if (!(RelationIdDataArray.length > 0)) return [];
 
       const dataArray = [];
 
