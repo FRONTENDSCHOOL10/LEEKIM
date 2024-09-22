@@ -86,8 +86,13 @@ function Description({ title, description, exhiId }: descriptionProps): ReactEle
 
       setIsBookmark(!isBookmark);
     } else if (isBookmark === false) {
-      const addBookmarkArray = bookmarkData;
-      addBookmarkArray.push(exhiId);
+      let addBookmarkArray = bookmarkData;
+
+      if (addBookmarkArray.includes(exhiId)) {
+        addBookmarkArray = addBookmarkArray.filter((item) => exhiId !== item);
+      }
+
+      addBookmarkArray.unshift(exhiId);
 
       try {
         toast.loading('로딩 중...');
@@ -117,7 +122,7 @@ function Description({ title, description, exhiId }: descriptionProps): ReactEle
 
   return (
     <div className={S.descriptions}>
-      <Toaster
+      {/* <Toaster
         position="top-center"
         reverseOrder={false}
         gutter={10}
@@ -137,7 +142,7 @@ function Description({ title, description, exhiId }: descriptionProps): ReactEle
             duration: 1500,
           },
         }}
-      />
+      /> */}
       <div className={S.titleWrapper}>
         <h1 className={S.title}>{title}</h1>
         <div className={S.bookmarkCheckBox} onClick={handleCheckboxChange} style={{ cursor: 'pointer' }}>

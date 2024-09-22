@@ -1,0 +1,14 @@
+.component {
+  border-radius: 6.25rem 6.25rem 0rem 0rem;
+  background: var(--mainblue);
+  height: 26.5rem;
+
+  .nickname {
+    font-size: 2.8125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    padding-top: 8.5rem;
+    padding-left: 3rem;
+  }
+}

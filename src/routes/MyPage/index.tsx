@@ -218,7 +218,7 @@ export function Component() {
             </div>
             <ul>
               {bookmarkData?.length > 0 ? (
-                bookmarkData?.slice(0, 2).map((item: ExhibitionData) => {
+                bookmarkData?.slice(0, 3).map((item: ExhibitionData) => {
                   return (
                     <li key={item.id}>
                       <NavLink to={`/exhibition/detail/${item.id}`}>
