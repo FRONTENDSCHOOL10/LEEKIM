@@ -54,6 +54,8 @@ function Description({ title, description, exhiId }: descriptionProps): ReactEle
         navigate('/login', {
           replace: true,
         });
+      } else {
+        return;
       }
     }
 
