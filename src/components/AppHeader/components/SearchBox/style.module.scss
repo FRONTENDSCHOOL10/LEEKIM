@@ -35,7 +35,7 @@
 
     height: 1.5rem;
     width: 1.5rem;
-    background: url('Icon/IconClearButton.svg') no-repeat center center;
+    background: url('/Icon/IconClearButton.svg') no-repeat center center;
   }
 
   // 자동완성 관련 스타일링
@@ -72,7 +72,7 @@
     color: transparent;
     border: transparent;
 
-    background: url('Icon/IconSearchButton.svg') no-repeat center center;
+    background: url('/Icon/IconSearchButton.svg') no-repeat center center;
     background-size: contain;
   }
 }
