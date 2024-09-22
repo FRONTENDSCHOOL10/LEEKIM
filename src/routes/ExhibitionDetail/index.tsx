@@ -8,7 +8,6 @@ import ExhibitionDate from './components/exhibitionDate';
 import ContactInfo from './components/contactinfo';
 import LocationInfo from './components/locationinfo';
 import Poster from './components/imagesection';
-import back from '/Icon/back.svg';
 import { getImageURL } from '@/utils';
 import TagList from './components/taglist';
 import { ExhibitionData } from '@/types/ExhibitionData';
@@ -160,7 +159,7 @@ export function Component() {
       <main className={S.main}>
         <div className={S.contentWrapper}>
           <button className={S.backButton} onClick={() => navigate(-1)}>
-            <img src={back} alt="뒤로 가기" />
+            <img src="/Icon/back.svg" alt="뒤로 가기" />
             뒤로가기
           </button>
           <TagList
