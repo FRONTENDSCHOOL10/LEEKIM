@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
 import S from './style.module.scss';
-import calendar from '/Icon/calendar.svg';
 import { format, parseISO, addHours } from 'date-fns';
 import { ko } from 'date-fns/locale';
 
@@ -24,7 +23,7 @@ function ExhibitionDate({ start, end, time }: DateProps): ReactElement {
   return (
     <div className={S.schedule}>
       <div className={S.header}>
-        <img src={calendar} alt="calendar" />
+        <img src="/Icon/calendar.svg" alt="calendar" />
         <h2>전시 일정</h2>
       </div>
       <p>{startDate}</p>

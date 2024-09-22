@@ -1,6 +1,5 @@
 import { ReactElement } from 'react';
 import S from './style.module.scss';
-import web from '/Icon/web.svg';
 
 interface PosterProps {
   url: string;
@@ -14,7 +13,7 @@ function Poster({ url, image }: PosterProps): ReactElement {
         <img src={image} alt="Exhibition Poster" className={S.posterImage} />
       </a>
       <div className={S.info}>
-        <img src={web} alt="" />
+        <img src="/Icon/web.svg" alt="" />
         <p>포스터를 누르면 웹사이트로 이동해요!</p>
       </div>
     </div>

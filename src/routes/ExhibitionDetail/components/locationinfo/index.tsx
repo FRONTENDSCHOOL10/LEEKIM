@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
 import S from './style.module.scss';
-import location from '/Icon/location.svg';
 import KakaoMap from '@/api/kakaoMap';
 
 interface LocationInfoProps {
@@ -11,7 +10,7 @@ function LocationInfo({ address }: LocationInfoProps): ReactElement {
   return (
     <div className={S.contact}>
       <div className={S.header}>
-        <img src={location} alt="" />
+        <img src="/Icon/location.svg" alt="" />
         <h2>전시 장소</h2>
       </div>
       <div className={S.map}>

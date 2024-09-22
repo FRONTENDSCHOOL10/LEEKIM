@@ -122,27 +122,6 @@ function Description({ title, description, exhiId }: descriptionProps): ReactEle
 
   return (
     <div className={S.descriptions}>
-      {/* <Toaster
-        position="top-center"
-        reverseOrder={false}
-        gutter={10}
-        containerClassName=""
-        containerStyle={{}}
-        toastOptions={{
-          // Define default options
-          className: '',
-          duration: 2000,
-          style: {
-            background: '#363636',
-            color: '#fff',
-          },
-
-          // Default options for specific types
-          success: {
-            duration: 1500,
-          },
-        }}
-      /> */}
       <div className={S.titleWrapper}>
         <h1 className={S.title}>{title}</h1>
         <div className={S.bookmarkCheckBox} onClick={handleCheckboxChange} style={{ cursor: 'pointer' }}>
