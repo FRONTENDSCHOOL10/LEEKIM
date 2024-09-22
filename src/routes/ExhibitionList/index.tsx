@@ -6,8 +6,9 @@ import axios from 'axios';
 import { ExhibitionData } from '@/types/ExhibitionData';
 import ExhibitionInfo from '@/components/ExhibitionSlider/components/ExhibitionInfo';
 import { getImageURL } from '@/utils';
-import FilterOptions from './components/FilterOptions/FilterOptions';
 import CommonHelmet from '@/components/CommonHelmet';
+import toast, { Toaster } from 'react-hot-toast';
+import FilterOptions from './components/FilterOptions/FilterOptions';
 
 const pocketbaseUrl = import.meta.env.VITE_DB_URL;
 
@@ -30,6 +31,9 @@ export const Component: React.FC = () => {
   // 더보기 기능 용 page 번호
   const [page, setPage] = useState<number>(1);
 
+  // 총 항목 수 - 더보기 버튼 알림 용
+  const [totalItems, setTotalItems] = useState<number>(0);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -40,9 +44,8 @@ export const Component: React.FC = () => {
         const locationFilters: string[] = [];
         const yearFilters: string[] = [];
 
-        // checkbox 필터 적용
+        // 온라인 전시 필터 적용
         if (isOnline) filters.push('IsOnline=true');
-        if (inProgress) filters.push(`Start<='${today}'%26%26End>='${today}'`);
 
         // 분야 필터 적용
         if (tagDepartmentArray.length > 0) {
@@ -72,10 +75,25 @@ export const Component: React.FC = () => {
 
         // API 요청
         const response = await axios.get(url);
+        let exhibitionsData = response.data.items;
+
+        // 현재 진행 중인 전시회만 선택
+        if (inProgress) {
+          const filteredExhibitions = exhibitionsData.filter((item: ExhibitionData) => {
+            const startDate = new Date(item.Start);
+            const endDate = new Date(item.End);
+            const todayDate = new Date(today); // YYYY-MM-DD
+            return startDate <= todayDate && endDate >= todayDate;
+          });
+          exhibitionsData = filteredExhibitions;
+        }
+
+        // 페이지에 따른 데이터 처리
         if (page === 1) {
-          setExhibitions(response.data.items);
+          setExhibitions(exhibitionsData);
+          setTotalItems(inProgress ? exhibitionsData.length : response.data.totalItems);
         } else {
-          setExhibitions((prevData) => [...prevData, ...response.data.items]);
+          setExhibitions((prevData) => [...prevData, ...exhibitionsData]);
         }
       } catch (err) {
         console.error('Error fetching data: ', err);
@@ -94,7 +112,13 @@ export const Component: React.FC = () => {
 
   // '더보기' 버튼 핸들러
   function handleLoadMore() {
-    setPage((prevPage) => prevPage + 1);
+    // 더 보여줄 데이터 유무 확인
+    if (exhibitions.length < totalItems) {
+      setPage((prevPage) => prevPage + 1);
+    } else {
+      // 데이터가 없을 때 표시
+      toast.error('더 이상 없습니다.');
+    }
   }
 
   if (error) return <div>{error}</div>;
@@ -102,6 +126,7 @@ export const Component: React.FC = () => {
   return (
     <main id="page" className={S.component}>
       <CommonHelmet pageTitle="전시 목록" pageDescription="졸업 전시회 목록 페이지" />
+      <Toaster position="top-center" toastOptions={{ duration: 2000 }} />
       <Banner />
       <FilterTag
         tagDepartmentArray={tagDepartmentArray}
@@ -148,7 +173,7 @@ export const Component: React.FC = () => {
             </div>
           </>
         ) : (
-          <p>해당하는 전시가 없습니다.</p>
+          <p className={S.noResult}>해당하는 전시가 없습니다.</p>
         )}
       </section>
     </main>
