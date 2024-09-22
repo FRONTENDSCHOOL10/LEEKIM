@@ -55,7 +55,7 @@ export function Component() {
         if (page === 1) setExhibitions(response.data.items);
         else setExhibitions((prevData) => [...prevData, ...response.data.items]);
 
-        if (response.data.items.length === 0) toast.error('더 이상 없습니다.');
+        if (response.data.items.length === 0) toast.error('전시회 데이터를 모두 불러왔습니다.');
       } catch (err) {
         console.error('Error fetching data: ', err);
         setError('문제 발생');
