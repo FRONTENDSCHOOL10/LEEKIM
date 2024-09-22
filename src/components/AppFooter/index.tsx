@@ -94,24 +94,24 @@ function AppFooter() {
 
   return (
     <footer className={S.component}>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        gutter={10}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          // Define default options
+          className: '',
+          duration: 2000,
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+        }}
+      />
       <div role="presentation" className={S.wrapperBox}>
         <div className={S.leftSide}>
-          <Toaster
-            position="top-center"
-            reverseOrder={false}
-            gutter={10}
-            containerClassName=""
-            containerStyle={{}}
-            toastOptions={{
-              // Define default options
-              className: '',
-              duration: 2000,
-              style: {
-                background: '#363636',
-                color: '#fff',
-              },
-            }}
-          />
           <form onSubmit={handleSubscribe}>
             <label htmlFor={subscribeInputId}>
               이메일을 등록하여
