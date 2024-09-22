@@ -1,6 +1,10 @@
 import { memo } from 'react';
 import S from './style.module.scss';
 import { NavLink } from 'react-router-dom';
+import recommendImg01 from '/src/routes/Home/assets/recommendImg01.png';
+import recommendImg02 from '/src/routes/Home/assets/recommendImg02.png';
+import recommendImg03 from '/src/routes/Home/assets/recommendImg03.png';
+import recommendImg04 from '/src/routes/Home/assets/recommendImg04.png';
 
 function RecommendBanner() {
   const handleClick = () => {
@@ -13,7 +17,7 @@ function RecommendBanner() {
       <div className={S.leftSide}>
         <figure className={S.top}>
           <NavLink to={'/'} onClick={() => handleClick()}>
-            <img src="/src/routes/Home/assets/recommendImg01.png" alt="" />
+            <img src={recommendImg01} alt="" />
             <figcaption>
               졸업 전시의
               <br />
@@ -23,7 +27,7 @@ function RecommendBanner() {
         </figure>
         <figure className={S.bottom}>
           <NavLink to={'/'} onClick={() => handleClick()}>
-            <img src="/src/routes/Home/assets/recommendImg02.png" alt="" />
+            <img src={recommendImg02} alt="" />
             <figcaption>
               예술 명문,
               <br />
@@ -35,7 +39,7 @@ function RecommendBanner() {
       <div className={S.rightSide}>
         <figure className={S.top}>
           <NavLink to={'/'} onClick={() => handleClick()}>
-            <img src="/src/routes/Home/assets/recommendImg03.png" alt="" />
+            <img src={recommendImg03} alt="" />
             <figcaption>
               지금 제일 인기 있는
               <br />
@@ -45,7 +49,7 @@ function RecommendBanner() {
         </figure>
         <figure className={S.bottom}>
           <NavLink to={'/'} onClick={() => handleClick()}>
-            <img src="/src/routes/Home/assets/recommendImg04.png" alt="" />
+            <img src={recommendImg04} alt="" />
             <figcaption>
               집에서도 관람 가능!
               <br />

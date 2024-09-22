@@ -83,7 +83,7 @@ function Slogan() {
             </motion.svg>
           </div>
           <div className={S.sloganImgWrapper}>
-            <img className={S.sloganImg} src="/src/routes/Home/assets/bigSloganImg.png" aria-hidden="true" />
+            <img className={S.sloganImg} src="/ImgAssets/mainBigSloganImg.png" aria-hidden="true" />
             <div className={S.sloganImgFilter}></div>
           </div>
           <div className={S.anker}>

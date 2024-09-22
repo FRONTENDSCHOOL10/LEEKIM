@@ -1,7 +1,4 @@
 import { FormEvent, ReactElement } from 'react';
-import github from '../../../../assets/github.svg';
-import mail from '../../../../assets/mail.svg';
-import contact2 from '../../../../assets/contact2.svg';
 import S from './style.module.scss';
 import toast from 'react-hot-toast';
 
@@ -39,13 +36,13 @@ function MemberLink({ githublink, maillink, contact }: MemberLinkProps): ReactEl
   return (
     <div className={S.link}>
       <a href={githublink} target="_blank" rel="noreferrer">
-        <img src={github} alt="깃허브 링크 이동 버튼" />
+        <img src="/ImgAssets/github.svg" alt="깃허브 링크 이동 버튼" />
       </a>
       <a href={maillink} onClick={handleEmailLink}>
-        <img src={mail} alt="메일 주소 복사 버튼" />
+        <img src="/ImgAssets/mail.svg" alt="메일 주소 복사 버튼" />
       </a>
       <a href={contact} onClick={handleContactLink}>
-        <img src={contact2} alt="연락처 및 개인 홈페이지 이동 버튼" />
+        <img src="/ImgAssets/contact.svg" alt="연락처 및 개인 홈페이지 이동 버튼" />
       </a>
     </div>
   );
