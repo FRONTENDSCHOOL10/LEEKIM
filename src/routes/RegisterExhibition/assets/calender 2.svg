@@ -1,0 +1,16 @@
+<svg width="28" height="30" viewBox="0 0 28 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 285">
+<path id="Vector 227" d="M7.04688 1L7.04688 7.6545" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
+<path id="Vector 228" d="M20.7529 1L20.7529 7.6545" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
+<g id="Subtract">
+<mask id="path-3-inside-1_421_5545" fill="white">
+<path d="M0.302734 9.87256H27.658V29.8361H0.302734V9.87256Z"/>
+</mask>
+<path d="M0.302734 9.87256H27.658V29.8361H0.302734V9.87256Z" fill="#333642"/>
+<path d="M0.302734 9.87256V8.62256H-0.947266V9.87256H0.302734ZM27.658 9.87256H28.908V8.62256H27.658V9.87256ZM27.658 29.8361V31.0861H28.908V29.8361H27.658ZM0.302734 29.8361H-0.947266V31.0861H0.302734V29.8361ZM0.302734 11.1226H27.658V8.62256H0.302734V11.1226ZM26.408 9.87256V29.8361H28.908V9.87256H26.408ZM27.658 28.5861H0.302734V31.0861H27.658V28.5861ZM1.55273 29.8361V9.87256H-0.947266V29.8361H1.55273Z" fill="white" mask="url(#path-3-inside-1_421_5545)"/>
+</g>
+<rect id="Rectangle 172" x="0.927734" y="3.54004" width="26.1053" height="25.75" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
+<path id="Vector 229" d="M7.39453 16H20.5656" stroke="white" stroke-linecap="round"/>
+<path id="Vector 230" d="M7.39453 22H20.5656" stroke="white" stroke-linecap="round"/>
+</g>
+</svg>

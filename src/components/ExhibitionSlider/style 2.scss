@@ -1,0 +1,11 @@
+.swiper-pagination-bullet {
+  background-color: var(--white); /* 페이지네이션 점 색상 */
+  width: 0.6rem; /* 페이지네이션 점 너비 */
+  height: 0.6rem; /* 페이지네이션 점 높이 */
+  margin: 0 1rem !important; /* 페이지네이션 간격 설정 */
+  opacity: 1; /* 불투명도 */
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--mainblue); /* 활성화된 페이지네이션 점 색상 */
+}

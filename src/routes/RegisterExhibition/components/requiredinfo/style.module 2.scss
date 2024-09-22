@@ -1,0 +1,109 @@
+.requireinfo {
+  display: flex;
+  flex-direction: column;
+  width: 795px;
+  color: #ffffff;
+  border-radius: 10px;
+  gap: 24px;
+
+  .formrow {
+    display: flex;
+    gap: 19px;
+  }
+
+  .formgroup {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    position: relative;
+
+    label {
+      position: absolute;
+      top: 15px;
+      left: 30px;
+      font-size: 18px;
+      font-weight: 500;
+      z-index: 10;
+    }
+
+    .input {
+      min-height: 87px;
+      border-radius: 30px;
+      background: #333642;
+      border: none;
+      padding-top: 15px;
+      padding-left: 30px;
+      padding-right: 26px;
+      color: #ffffff;
+      font-size: 20px;
+    }
+    textarea {
+      min-height: 157px;
+      border-radius: 30px;
+      background: #333642;
+      border: none;
+      padding-top: 50px;
+      padding-left: 30px;
+      padding-right: 26px;
+      color: #ffffff;
+      font-size: 20px;
+      resize: none;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
+.date {
+  min-height: 77px;
+  position: relative;
+  border: none;
+  border-radius: 30px;
+  padding-top: 25px;
+  font-size: 20px;
+  color: #fff;
+  padding-left: 30px;
+  padding-right: 26px;
+  background: url(../../assets/calender.svg) no-repeat right 30px center / 25px auto #333642;
+
+  &::-webkit-calendar-picker-indicator {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    color: transparent;
+    cursor: pointer;
+  }
+  &:not(:focus):invalid {
+    &::-webkit-datetime-edit-text,
+    &::-webkit-datetime-edit-month-field,
+    &::-webkit-datetime-edit-day-field,
+    &::-webkit-datetime-edit-year-field {
+      -webkit-appearance: none;
+      display: none;
+    }
+    &::before {
+      content: attr(placeholder);
+      width: 100%;
+      height: 100%;
+      line-height: 2;
+      color: gray;
+      text-align: left;
+    }
+
+    &:focus::before,
+    &:valid::before {
+      display: none;
+      &::-webkit-datetime-edit-text,
+      &::-webkit-datetime-edit-month-field,
+      &::-webkit-datetime-edit-day-field,
+      &::-webkit-datetime-edit-year-field {
+        -webkit-appearance: none;
+        display: none;
+      }
+    }
+  }
+}

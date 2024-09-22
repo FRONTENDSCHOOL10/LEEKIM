@@ -1,0 +1,17 @@
+.component {
+  display: flex;
+  justify-content: center;
+
+  .loadMoreButton {
+    background-color: var(--mainblue);
+    color: var(--white);
+    border: none;
+    border-radius: 3.125rem;
+    font-size: 1.5625rem;
+    font-weight: 600;
+    line-height: 150%;
+    width: 13.781rem;
+    height: 4.219rem;
+    margin-top: 8rem;
+  }
+}

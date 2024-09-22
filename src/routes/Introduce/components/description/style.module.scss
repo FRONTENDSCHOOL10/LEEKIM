@@ -5,29 +5,29 @@
   background-color: var(--mainblue);
   border-radius: 100px 100px 0px 0px;
   width: 100%;
-  min-height: 2433px;
+  min-height: 1933px;
   gap: 92px;
 
   .text {
-    width: 1555px;
-    margin-top: 314px;
-    font-size: 50px;
+    width: 1255px;
+    margin-top: 254px;
+    font-size: 40px;
     font-weight: 800;
     text-align: left;
   }
   .wrapper {
     display: flex;
     align-items: center;
-    width: 1555px;
-    height: 412px;
+    width: 1255px;
+    height: 312px;
     border-radius: 50px;
     background-color: var(--white);
     gap: 82px;
 
     img {
       margin-left: 46px;
-      width: 300px;
-      height: 300px;
+      width: 200px;
+      height: 200px;
     }
   }
 }
