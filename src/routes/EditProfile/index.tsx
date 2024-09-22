@@ -103,7 +103,7 @@ export function Component() {
 
       // 동일한 닉네임이 있는지 확인
       const existNameData = await axios.get(
-        `${dbApiUrl}collections/users/records?filter=(username='${inputNickname.current.value}'%26%26id!='${userData?.id}')`
+        `${dbApiUrl}collections/users/records?filter=(Nickname='${inputNickname.current.value}'%26%26id!='${userData?.id}')`
       );
 
       if (existNameData.data.items.length > 0) {
@@ -131,7 +131,7 @@ export function Component() {
 
         if (authUserData.data.record) {
           await axios.patch(`${dbApiUrl}collections/users/records/${userData.id}`, {
-            username: inputNickname.current.value,
+            Nickname: inputNickname.current.value,
             email: inputEmail.current.value,
           });
         }
@@ -189,7 +189,7 @@ export function Component() {
               type="text"
               id="editProfileNickname"
               required
-              defaultValue={userData?.username}
+              defaultValue={userData?.Nickname}
               ref={inputNickname}
             />
           </div>

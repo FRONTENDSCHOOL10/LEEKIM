@@ -120,9 +120,9 @@ export function Component() {
       />
       <div className={S.head}>
         <div className={S.headLeft}>
-          <p className="sr-only">{userData?.username}님 어서오세요!</p>
-          <span className={S.userName} aria-hidden="true">
-            {userData?.username}
+          <p className="sr-only">{userData?.Nickname}님 어서오세요!</p>
+          <span className={S.nickName} aria-hidden="true">
+            {userData?.Nickname}
           </span>
           <span className={S.welcome} aria-hidden="true">
             님 어서오세요!
