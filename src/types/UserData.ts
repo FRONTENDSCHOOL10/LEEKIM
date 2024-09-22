@@ -3,6 +3,7 @@ export interface UserData {
   collectionId: string;
   collectionName: string;
   username: string;
+  Nickname: string;
   verified: boolean;
   emailVisibility: boolean;
   email: string;

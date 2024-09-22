@@ -98,6 +98,15 @@ export function Component() {
     return passwordRegex.test(password);
   };
 
+  // 문자열의 @ 뒤의 부분을 자르는 함수
+  function cutAfterAtSymbol(input: string): string {
+    const atIndex = input.indexOf('@');
+    if (atIndex === -1) {
+      return input; // '@'가 없으면 원래 문자열 반환
+    }
+    return input.substring(0, atIndex);
+  }
+
   // 회원가입 할 때 세션 스토리지의 최근 본 전시 데이터를 서버의 유저 정보에 저장
   const setLoginedViewedExhibitionData = async () => {
     let sessionDataString = await sessionStorage.getItem('recentlyViewed');
@@ -196,7 +205,7 @@ export function Component() {
 
       // 동일한 닉네임이 있는지 확인
       const existNameData = await axios.get(
-        `${dbApiUrl}collections/users/records?filter=(username='${nameInput.current.value}')`
+        `${dbApiUrl}collections/users/records?filter=(Nickname='${nameInput.current.value}')`
       );
 
       if (existNameData.data.items.length > 0) {
@@ -219,7 +228,8 @@ export function Component() {
       const sessionStorageViewedArray = await setLoginedViewedExhibitionData();
 
       await axios.post(`${dbApiUrl}collections/users/records`, {
-        username: nameInput.current.value,
+        username: cutAfterAtSymbol(emailInput.current.value),
+        Nickname: nameInput.current.value,
         email: emailInput.current.value,
         emailVisibility: true,
         password: pwInput.current.value,
