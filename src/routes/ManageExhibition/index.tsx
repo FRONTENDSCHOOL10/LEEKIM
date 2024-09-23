@@ -8,6 +8,7 @@ import ManageExhibit from './components/ManageExhibit/ManageExhibit';
 import { ExhibitionData } from '@/types/ExhibitionData';
 import BackButton from './components/BackButton/BackButton';
 import { useIsContentPage } from '@/stores/isContentPage';
+import { AppSpinner } from '@/components';
 
 const pocketbaseUrl = import.meta.env.VITE_DB_URL;
 
@@ -66,8 +67,7 @@ export function Component() {
   }, [page]);
 
   if (error) return <div>{error}</div>;
-  if (exhibitions.length === 0) return <div>로딩 중⏳</div>;
-
+  if (exhibitions.length === 0) return <AppSpinner />;
   // '더보기' 버튼 핸들러
   function handleLoadMore() {
     // 더 보여줄 데이터 유무 확인

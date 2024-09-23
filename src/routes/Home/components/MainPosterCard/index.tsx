@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 import { getImageURL } from '@/utils';
 import { ExhibitionData } from '@/types/ExhibitionData';
+import { AppSpinner } from '@/components';
 
 const button = {
   rest: { opacity: 1, scale: 1 },
@@ -33,7 +34,7 @@ function MainPosterCard() {
     fetchExhibitionData();
   }, []);
 
-  if (!posterCardData) return <div>로딩 중</div>;
+  if (!posterCardData) return <AppSpinner />;
 
   return (
     <section className={S.component}>

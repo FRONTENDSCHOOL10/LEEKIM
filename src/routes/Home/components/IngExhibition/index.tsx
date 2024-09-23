@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import ExhibitionSlider from '@/components/ExhibitionSlider';
 import { ExhibitionData } from '@/types/ExhibitionData';
+import { AppSpinner } from '@/components';
 
 const dbApiUrl = import.meta.env.VITE_DB_API;
 
@@ -23,7 +24,7 @@ function IngExhibition() {
     getExhibitionData();
   }, []);
 
-  if (!ingExhibitionData) return <div>로딩 중</div>;
+  if (!ingExhibitionData) return <AppSpinner />;
 
   return (
     <section className={S.component}>

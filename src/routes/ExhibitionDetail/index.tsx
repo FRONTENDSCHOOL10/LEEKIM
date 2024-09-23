@@ -15,6 +15,7 @@ import { useIsLogin } from '@/stores/isLogin';
 import CommonHelmet from '@/components/CommonHelmet';
 import MoreExhibition from './components/moreExhibition';
 import { useIsContentPage } from '@/stores/isContentPage';
+import { AppSpinner } from '@/components';
 
 const pocketbaseUrl = import.meta.env.VITE_DB_URL;
 
@@ -133,7 +134,7 @@ export function Component() {
     fetchExhibitionData();
   }, [exhiId, navigate]);
 
-  if (isLoading) return <div className={S.loading}>로딩 중입니다</div>;
+  if (isLoading) return <AppSpinner />;
   if (error) return <div className={S.error}>{error}</div>;
   if (!exhibitionData) return <div className={S.error}>전시회 정보를 찾을 수 없습니다.</div>;
   if (!exhibitionData.IsApprove) return null;
