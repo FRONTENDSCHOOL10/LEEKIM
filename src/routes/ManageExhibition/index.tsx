@@ -16,6 +16,7 @@ export function Component() {
   const [exhibitions, setExhibitions] = useState<ExhibitionData[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState<number>(1);
+  const [totalItems, setTotalItems] = useState<number>(0);
   const navigate = useNavigate();
 
   const { enterContentPage } = useIsContentPage(({ enterContentPage }) => ({
@@ -55,7 +56,7 @@ export function Component() {
         if (page === 1) setExhibitions(response.data.items);
         else setExhibitions((prevData) => [...prevData, ...response.data.items]);
 
-        if (response.data.items.length === 0) toast.error('전시회 데이터를 모두 불러왔습니다.');
+        setTotalItems(response.data.totalItems);
       } catch (err) {
         console.error('Error fetching data: ', err);
         setError('문제 발생');
@@ -67,10 +68,17 @@ export function Component() {
   if (error) return <div>{error}</div>;
   if (exhibitions.length === 0) return <div>로딩 중⏳</div>;
 
+  // '더보기' 버튼 핸들러
   function handleLoadMore() {
-    setPage((prevPage) => prevPage + 1);
+    // 더 보여줄 데이터 유무 확인
+    if (exhibitions.length < totalItems) {
+      setPage((prevPage) => prevPage + 1);
+    } else {
+      // 데이터가 없을 때 표시
+      toast.remove();
+      toast.error('전시회 데이터를 모두 불러왔습니다.');
+    }
   }
-
   return (
     <main>
       <Toaster position="top-center" toastOptions={{ duration: 3000 }} />

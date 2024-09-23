@@ -124,6 +124,7 @@ export const Component: React.FC = () => {
       setPage((prevPage) => prevPage + 1);
     } else {
       // 데이터가 없을 때 표시
+      toast.remove();
       toast.error('전시회 데이터를 모두 불러왔습니다.');
     }
   }
