@@ -30,6 +30,8 @@ function MemberLink({ githublink, maillink, contact }: MemberLinkProps): ReactEl
 
     if (contact === '') {
       toast.error('해당 멤버의 추가 연락처가 존재하지 않습니다.😭');
+    } else {
+      window.open(contact);
     }
   };
 
