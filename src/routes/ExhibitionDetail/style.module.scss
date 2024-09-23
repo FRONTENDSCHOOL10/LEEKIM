@@ -49,14 +49,19 @@
   display: flex;
   gap: 100px;
   justify-content: space-between;
+
   .infoSection {
     display: flex;
     width: 763px;
     flex-direction: column;
     justify-content: space-between;
+    gap: 5rem;
+
+    font-size: 1.2rem;
+
     .wrapper {
       display: flex;
-      gap: 40px;
+      // gap: 40px;
       justify-content: space-between;
     }
   }

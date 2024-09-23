@@ -12,6 +12,7 @@ function ContactInfo({ tel }: contactProps): React.ReactElement {
         <img src="/Icon/home.svg" alt="" />
         <h2>전시 문의</h2>
       </div>
+      {tel === '' ? <div className={S.tel}>문의 정보가 없습니다.</div> : <div className={S.tel}>{tel}</div>}
       <div className={S.tel}>{tel}</div>
     </div>
   );

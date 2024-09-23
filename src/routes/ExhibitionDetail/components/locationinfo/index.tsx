@@ -16,7 +16,9 @@ function LocationInfo({ address }: LocationInfoProps): ReactElement {
       <div className={S.map}>
         <KakaoMap address={address} />
       </div>
-      <div className={S.address}>{address}</div>
+      <div className={S.address}>
+        <p>{address}</p>
+      </div>
     </div>
   );
 }

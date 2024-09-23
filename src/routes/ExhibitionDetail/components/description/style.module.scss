@@ -9,7 +9,10 @@
     justify-content: space-between;
 
     .title {
+      white-space: pre-line;
+
       max-width: 763px;
+      width: 90%;
       margin: 0;
       margin-left: 3px;
       font-size: 60px;
@@ -29,5 +32,7 @@
     max-width: 763px;
     font-size: 23px;
     margin: 0;
+
+    white-space: pre-line;
   }
 }
