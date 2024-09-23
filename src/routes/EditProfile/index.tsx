@@ -24,9 +24,9 @@ export function Component() {
   const inputPassword = useRef<HTMLInputElement>(null);
   const inputConfirmPassword = useRef<HTMLInputElement>(null);
 
-  const { isLogin, login } = useIsLogin(({ isLogin, login }) => ({
+  const { isLogin, logout } = useIsLogin(({ isLogin, logout }) => ({
     isLogin,
-    login,
+    logout,
   }));
 
   useEffect(() => {
@@ -160,6 +160,40 @@ export function Component() {
     }
   };
 
+  const handleWithdraw = async () => {
+    toast.remove();
+    const confirmation = prompt(
+      "회원탈퇴를 원하시면 '회원탈퇴’를 입력해주세요.\n탈퇴 후에는 모든 데이터가 삭제됩니다."
+    );
+
+    if (confirmation === '회원탈퇴') {
+      try {
+        toast.loading('회원탈퇴 진행 중...');
+        await axios.delete(`${dbApiUrl}collections/users/records/${sessionStorage.getItem('userId')}`);
+
+        toast.remove();
+        toast.success('회원탈퇴가 완료되었습니다.\n다음에 또 만나요! 😊 ');
+
+        // 토스트 창을 기다린 뒤 홈으로 이동
+        await setTimeout(() => {
+          sessionStorage.setItem('recentlyViewed', '');
+          sessionStorage.setItem('userId', '');
+          logout();
+          navigate('/', {
+            replace: true,
+          });
+          toast.remove();
+        }, 1500);
+      } catch {
+        toast.remove();
+        toast.error('회원탈퇴에 실패했습니다\n잠시 후 다시 시도해주세요.');
+      }
+    } else {
+      toast.remove();
+      toast.error('회원탈퇴가 취소되었습니다.');
+    }
+  };
+
   return (
     <main id="page" className={S.component}>
       <CommonHelmet pageTitle="프로필 편집" pageDescription="프로필 편집 페이지" />
@@ -220,10 +254,13 @@ export function Component() {
           </div>
 
           {/* 수정하기 버튼 */}
-          <button type="submit" className="btn-submit">
+          <button type="submit" className={S.submit}>
             수정하기
           </button>
         </form>
+        <button type="button" onClick={handleWithdraw} className={S.withdrawButton}>
+          탈퇴하기
+        </button>
       </div>
     </main>
   );
