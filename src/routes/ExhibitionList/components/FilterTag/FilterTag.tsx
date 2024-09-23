@@ -112,6 +112,14 @@ function FilterTag({
     setTagYearArray([...tagYearArray, tagYear]);
   };
 
+  const handelReset = (e) => {
+    e.preventDefault();
+
+    setTagDepartmentArray([]);
+    setTagLocationArray([]);
+    setTagYearArray([]);
+  };
+
   // Swiper 슬라이드 생성 함수
   const swiperCreater = (
     tagArray: TagData[],
@@ -195,7 +203,9 @@ function FilterTag({
           </div>
           {swiperCreater(tagYear, handleYearFilter, true, tagYearArray)}
         </fieldset>
-        <button className={S.resetButton}>초기화</button>
+        <button className={S.resetButton} onClick={handelReset}>
+          초기화
+        </button>
       </form>
     </section>
   );
