@@ -18,8 +18,8 @@ function Profile(): ReactElement {
           <img src={siwon} alt="" className={S.profileimage} />
           <Member
             Name="김시원"
-            job="Frontend Developer"
-            description="Here we goMake it make it dropYeah my heart is like KING KONG"
+            job="Frontend Developer & API Manager"
+            description="어려웠지만 완성해서 뿌듯합니다"
             githublink="https://github.com/chlyun"
             maillink="rkdmf1306@gmail.com"
             contact=""
@@ -29,11 +29,11 @@ function Profile(): ReactElement {
           <img src={jisoo} alt="" className={S.profileimage} />
           <Member
             Name="이지수"
-            job="Frontend Developer"
-            description="Here we goMake it make it dropYeah my heart is like KING KONG"
+            job="Frontend Developer & organize documents"
+            description="한 사람 몫을 할 때까지 오늘부로 정권 찌르기 93일차..."
             githublink="https://github.com/Jisoo0907"
             maillink="szjslee@gmail.com"
-            contact=""
+            contact="https://kellyjs.tistory.com/"
           />
         </div>
       </div>
@@ -42,22 +42,24 @@ function Profile(): ReactElement {
           <img src={jaerim} alt="" className={S.profileimage} />
           <Member
             Name="김재림"
-            job="Frontend Developer"
-            description="Here we goMake it make it dropYeah my heart is like KING KONG"
+            job="Frontend Developer & Designer"
+            description="좋은 팀원분들 덕에 프로젝트 잘 마무리한 것 같아서 감사합니다!
+            프로젝트는 끝나지만 우리 우정은 영원히~ >,< 졸전닷컴은 100억을 벌 수 있는 기획이다
+            "
             githublink="https://github.com/jaerim1102"
             maillink="jaerim1102@naver.com"
-            contact=""
+            contact="https://velog.io/@jaaerim/"
           />
         </div>
         <div className={S.profileWapper}>
           <img src={jinyon} alt="" className={S.profileimage} />
           <Member
             Name="이진용"
-            job="Frontend Developer"
-            description="Here we goMake it make it dropYeah my heart is like KING KONG"
+            job="Frontend Developer & Leader"
+            description="언젠가 코딩을 통한 일확천금을 노리는 주니어 개발자"
             githublink="https://github.com/Lee-Jinyong"
             maillink="yjy1480@gmail.com"
-            contact=""
+            contact="https://jinyon.tistory.com/"
           />
         </div>
       </div>
