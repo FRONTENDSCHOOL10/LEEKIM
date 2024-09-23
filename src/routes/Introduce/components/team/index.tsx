@@ -18,7 +18,7 @@ function Profile(): ReactElement {
           <img src={siwon} alt="" className={S.profileimage} />
           <Member
             Name="김시원"
-            job="Frontend Developer & API Handler"
+            job="Frontend Developer & API Manager"
             description="어려웠지만 완성해서 뿌듯합니다"
             githublink="https://github.com/chlyun"
             maillink="rkdmf1306@gmail.com"
