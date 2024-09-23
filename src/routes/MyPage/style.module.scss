@@ -178,6 +178,10 @@
               margin: 1.5rem 0;
 
               td {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+
                 font-size: 1.2rem;
                 font-weight: 400;
                 text-align: left;

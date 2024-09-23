@@ -57,8 +57,9 @@ export function Component() {
 
     const getRegisterData = async () => {
       const response = await axios.get(
-        `${dbApiUrl}collections/Exhibition/records?expand=School,Major&filter=(Author='${userId}')`
+        `${dbApiUrl}collections/Exhibition/records?expand=School,Major&filter=(Author='${userId}')&filter=(IsApprove=true)`
       );
+      console.log(response.data.items);
       setRegisterData(response.data.items);
     };
 
@@ -186,7 +187,7 @@ export function Component() {
                   </tr>
                 </thead>
                 <tbody>
-                  {registerData?.slice(0, 2).map((item: ExhibitionData) => {
+                  {registerData?.map((item: ExhibitionData) => {
                     return (
                       <tr key={item.id}>
                         <td>{item.Title}</td>
