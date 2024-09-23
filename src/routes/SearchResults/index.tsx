@@ -85,7 +85,7 @@ export function Component() {
       }
     };
     fetchData();
-  }, [isOnline, inProgress, today, sort, page, inputValue]);
+  }, [isOnline, inProgress, today, sort, page, inputValue, searchWord]);
 
   // 필터 변경 시 page 1로 reset
   useEffect(() => {
