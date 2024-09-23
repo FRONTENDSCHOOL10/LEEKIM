@@ -25,8 +25,8 @@ function CommonHelmet({
       <meta property="og:type" content="website" />
       <meta property="og:site:author" content="LEEKIM" />
       {/* <meta property="og:image" content="이미지" /> */}
-      {/* <meta property='og:url' content='배포주소' /> */}
-      {/* <link rel="canonical" href="배포주소" /> */}
+      <meta property="og:url" content="https://jjcom.netlify.app/" />
+      <link rel="canonical" href="https://jjcom.netlify.app/" />
     </Helmet>
   );
 }
