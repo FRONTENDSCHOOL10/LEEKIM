@@ -16,7 +16,7 @@ function IngExhibition() {
   useEffect(() => {
     const getExhibitionData = async () => {
       const response = await axios.get(
-        `${dbApiUrl}collections/Exhibition/records?sort=Start&filter=(Start<='${today}'%26%26End>='${today}'%26%26IsApprove=true)&expand=School,Major`
+        `${dbApiUrl}collections/Exhibition/records?sort=Start&filter=(Start<='${today}'%26%26End>='${today}'%26%26IsApprove=true)&expand=School,Major&page=1&perPage=10`
       );
       setIngExhibitionData(response.data.items);
     };
