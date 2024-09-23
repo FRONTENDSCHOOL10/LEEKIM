@@ -2,6 +2,7 @@ import useDocumentTitle from '@/hooks/useDocumentTitle';
 import S from './style.module.scss';
 import React, { useEffect } from 'react';
 import { useIsContentPage } from '@/stores/isContentPage';
+import BackButton from './components/BackButton/BackButton';
 
 export function Component() {
   useDocumentTitle('이용 약관 | JJ.com');
@@ -17,9 +18,11 @@ export function Component() {
   return (
     <main id="page" className={S.component}>
       <div>
-        <span>뒤로가기</span>
+        <BackButton />
 
-        <h1>졸전닷컴 이용약관</h1>
+        <h1>
+          <img src="/Icon/TextLogo.svg" alt="졸전 닷컴" /> 이용약관
+        </h1>
         <hr />
 
         <h2>제 1 조 (목적 및 범위)</h2>

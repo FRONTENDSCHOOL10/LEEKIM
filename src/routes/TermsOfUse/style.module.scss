@@ -1,12 +1,11 @@
 .component {
-  background-color: #02081a;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
+  min-width: 1080px;
+  max-width: 1440px;
 
   div {
-    margin-left: 180px;
-    margin-right: 180px;
-    color: #fff;
+    color: var(--white);
 
     hr {
       border: 0.75px solid;
@@ -15,15 +14,30 @@
 
     h1 {
       margin-bottom: 84px;
+      font-size: 50px;
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 220px;
+        height: 40px;
+        margin-right: 39.19px;
+      }
     }
 
     h2 {
       margin-bottom: 42px;
+      font-size: 40px;
+      font-weight: 700;
+      line-height: 150%;
     }
 
     ol,
     p {
       margin-bottom: 140px;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 150%;
     }
   }
 }
