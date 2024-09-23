@@ -68,8 +68,6 @@ function RecentlyViewedExhibition() {
     initialSlide: viewedExhibitionData.length > 3 ? (viewedExhibitionData.length > 4 ? 2 : 1) : 0,
   };
 
-  // if (!posterCardData) return <div>로딩 중</div>;
-
   return (
     <>
       {viewedExhibitionData.length > 0 ? (

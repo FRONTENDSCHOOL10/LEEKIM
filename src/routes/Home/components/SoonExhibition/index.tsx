@@ -23,8 +23,6 @@ function SoonExhibition() {
     getExhibitionData();
   }, []);
 
-  // if (!posterCardData) return <div>로딩 중</div>;
-
   return (
     <section className={S.component}>
       <div className={S.titleSection}>
